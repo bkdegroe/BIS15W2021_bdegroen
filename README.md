@@ -1,4 +1,4 @@
-# Berlin's BIS 15L Repository
+# Astrobeecal's BIS 15L Repository
 
 ![](Hello_there.gif)
 
@@ -6,7 +6,7 @@ This repository contains the coding mistakes and internal screaming of a BIS 15L
 
 ## Contact Info
 
-[Berlin DeGroen](mailto:bkdegroen@ucdavis.edu)
+[Email](mailto:bkdegroen@ucdavis.edu)
 
 ## Class Links  
 

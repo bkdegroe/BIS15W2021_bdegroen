@@ -1,6 +1,6 @@
 # Berlin's BIS 15L Repository
 
-Welcome! This repository includes the coding mistakes and internal screaming of a BIS 15L student at UC Davis who is praying that she's using this correctly.
+Hello there! This repository includes the coding mistakes and internal screaming of a BIS 15L student at UC Davis who is praying that she's using this correctly.
 
 ## Contact Info
 

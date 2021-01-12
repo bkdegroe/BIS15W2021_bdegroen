@@ -1732,170 +1732,10 @@ tail(fish, n = 10)</code></pre>
 ##  8 WS         180 3            403            3.04        11.0
 ##  9 WS         180 2            403            2.03        11.0
 ## 10 WS         180 1            403            1.19        11.0</code></pre>
-<pre class="r"><code>#Use variables that are categorical. Looking at something contious, then a table doesn&#39;t work out that well
-table(fish$scalelength)</code></pre>
-<pre><code>## 
-## 0.628151249 0.636516731 0.773093802 0.831563121 1.149311492 1.406561924 
-##           1           1           1           1           1           3 
-## 1.434064437 1.495554149  1.58589275 1.610975643 1.684025383 1.731233068 
-##           2           2           2           2           3           3 
-##  1.77335137 1.887673426  1.88900762 1.899827933 1.956718552 1.958226546 
-##           3           3           2           3           3           2 
-## 1.971127435 2.005243921 2.006052316 2.011999403 2.013384084  2.01984051 
-##           3           2           2           3           2           3 
-## 2.036940991 2.072127063 2.096885844 2.110308547   2.1432421 2.161087313 
-##           3           2           3           3           3           3 
-## 2.201024872 2.211094162 2.238618125  2.24510317 2.254546655 2.258668513 
-##           3           3           3           3           4           3 
-## 2.278322775 2.309860144 2.351964158 2.360921068  2.39555159 2.450808082 
-##           2           3           3           2           3           3 
-## 2.454148547 2.455295072 2.461392027 2.462071738 2.470817189 2.523331633 
-##           3           3           4           2           3           3 
-## 2.545394987 2.546162818 2.551073939 2.557863377 2.574023716 2.586442929 
-##           4           3           2           5           4           4 
-##  2.60138755 2.605975255 2.624540327 2.646581281 2.655819322 2.658253925 
-##           3           6           3           4           4           4 
-## 2.658640924 2.668376587 2.674057701 2.675454011 2.682918318 2.695586004 
-##           4           4           3           2           3           3 
-## 2.697132505 2.697442983 2.698180739 2.702413552 2.727573612 2.757779769 
-##           3           3           3           3           5           3 
-## 2.758069497 2.765616949 2.780134741 2.793024149 2.796890656 2.802833315 
-##           4           4           3           3           5           3 
-## 2.807880684 2.817653284 2.844255477 2.850511394 2.864524181   2.8755279 
-##           3           3           4           3           4           4 
-## 2.890862187 2.897278902 2.923823888 2.925881796 2.937448446 2.941509482 
-##           3           3           4           3           4           4 
-##  2.94296592 2.964261763 2.965323293 2.972643009 2.973960923 2.974395269 
-##           5           4           4           4           4           4 
-## 2.980789017 2.988498138 3.005358151 3.014440224 3.015477385  3.01882278 
-##           4           4           5           4           4           4 
-## 3.035957571 3.058853422 3.084104568 3.129810676 3.140903465 3.162062026 
-##           3           5           4           5           4           4 
-## 3.163436233 3.172529467 3.179084336 3.189512843 3.192469422 3.200424236 
-##           4           5           6           7           4           5 
-## 3.208750193  3.22653507 3.229873576 3.243768633 3.268240729 3.275981283 
-##           4           6           6           6           5           5 
-## 3.283597645 3.301820589 3.306645268 3.319721359 3.328152853 3.343855565 
-##           6           6           4           4           4           4 
-## 3.357750602 3.364914007 3.365051381 3.368417484 3.371104238 3.439350567 
-##           4           3           7           5           3           4 
-## 3.442494297 3.453230371  3.45723839 3.474478178  3.47501731 3.479905384 
-##           5           5           6           5           4           5 
-## 3.486728492 3.491605204 3.495271967  3.50124235 3.520569093 3.540724628 
-##           4           7           6           6           7           6 
-## 3.550433833 3.559325928 3.604008515  3.63570923 3.642083652 3.646839453 
-##           4           5           5           4           4           4 
-## 3.677409381 3.678517528 3.721535481  3.73596319 3.756916705 3.772060265 
-##           5           7           3           8           6           6 
-## 3.786643018 3.797454519 3.798121927 3.810008922 3.849398068 3.851885672 
-##           7           7           5           7           5           7 
-## 3.867392796 3.890632603 3.904376035 3.906124578  3.90894603 3.920177482 
-##           8           8           6           7           7          10 
-## 3.922384927 3.922668534 3.926782446 3.934043174 3.953296481 3.954971736 
-##          10           7           9          10           9           9 
-## 3.965876038 3.975724562 3.987345042 3.995967962   3.9990749 4.015998192 
-##           7           9           8           7           4           8 
-## 4.042230054 4.042932656 4.047510317 4.048551544 4.084877716 4.086815007 
-##           9           6           9           7           8           4 
-## 4.096814475 4.115171542 4.130059786 4.133062643 4.136123786 4.136356373 
-##           9           9           6           7           9           9 
-## 4.141406129 4.144791175  4.14568313 4.167911991 4.171900316 4.175101463 
-##           7           8           7           7          11           7 
-## 4.186116575 4.187736727 4.190666885 4.193688192 4.201559154   4.2017963 
-##          10           7           6           7           9           8 
-## 4.219361447 4.237364988 4.256269181 4.256711011  4.25727889  4.25955586 
-##           9          10           9           8          11           8 
-## 4.273209587  4.27417381 4.285892212 4.296282479 4.301657069 4.313148616 
-##           9           8          14          10           7           9 
-##  4.31438999 4.324112882  4.33257111 4.345026368 4.358907038 4.387797047 
-##          12           9          11           9           8          11 
-##  4.38840628 4.391777272 4.399993711 4.407958515 4.418797197 4.421411822 
-##           8          11           9          11           9           9 
-## 4.430097909 4.442500286 4.459633063 4.469366349 4.493225662 4.497550637 
-##          14          10          14           6          10           8 
-## 4.513005851 4.519317559 4.533865744 4.542219138  4.54253204 4.555577214 
-##          10          11           7           9          12           9 
-## 4.563966245 4.565284682 4.579928161 4.588780217  4.59641289 4.606302464 
-##           9           9           9          13           8           8 
-## 4.614444747 4.626093352 4.631277555 4.632666819 4.637879649 4.643203698 
-##           7          10           9          12           7           7 
-## 4.664314686 4.670751905 4.673330238 4.690118624 4.725462193 4.736675762 
-##           7           9          12          13           7          12 
-## 4.741689019 4.755765531 4.761219411 4.761400345 4.763088291 4.794547433 
-##           7           8           8          13           8           8 
-## 4.814216289 4.829933532 4.831537721 4.835507435 4.836792608 4.844292234 
-##          11           8           9           7          12          12 
-## 4.851237218 4.857894959 4.889790377 4.894276187 4.895239229  4.90439904 
-##           9           7           7          10           6          13 
-## 4.920116842 4.968445024 4.969806095  4.98657318 4.998061699 5.049813135 
-##          10           7          13          12          10           7 
-## 5.058001817 5.074995972 5.078278001  5.08110952 5.095811876 5.108669218 
-##          10           9           9           7          12          11 
-## 5.120097185 5.127988541 5.130323514 5.146631631 5.158432688 5.165661162 
-##           9          13           9          10          10           6 
-## 5.169415014 5.182832332 5.196862611  5.20016923 5.221786955 5.223966427 
-##          10          11          11          10          14          11 
-## 5.232478948 5.256454863 5.261481223 5.276443129 5.287393604 5.291036048 
-##           7           9           9          13           9           7 
-## 5.296091436 5.312409318 5.316778788  5.31995492 5.326940899 5.344842042 
-##          10           8           8          10           9          10 
-##  5.35532307 5.356719133 5.389440756 5.406208458 5.414998877 5.429056953 
-##           9           8           9           7          10          10 
-## 5.430090833  5.43384551 5.436126326 5.452250118 5.466752013 5.467984071 
-##          12           8          11          15           8          13 
-## 5.477850668 5.480088293  5.49107785 5.491501253 5.512869906 5.520867454 
-##          12          14           9          13           8          10 
-## 5.541056085 5.553558741  5.56865141 5.576282883 5.580494878 5.582184369 
-##          11          11          14          11          10          13 
-## 5.592688422 5.606168722 5.610120907 5.619783059 5.623967989 5.640412056 
-##          12          11          16          10          14          11 
-## 5.668774619 5.674127794 5.676594978 5.676999591 5.699643996 5.705491208 
-##          10          10          11          11           8          13 
-## 5.709048239 5.718807038 5.723596694 5.727239616 5.735551545 5.736142568 
-##           7          11          11          12          10          11 
-##  5.75912762 5.781149809 5.794595776 5.795387216 5.815159175 5.819691415 
-##           7          10           9          15          10          11 
-## 5.860261506 5.882788817 5.903222649 5.956542181 5.958780446  5.97285272 
-##          14          10           9          13          11          11 
-## 5.975534747  5.98002466 5.989046073   5.9977522 6.001830192 6.027043495 
-##           9          10          10          14          11          12 
-## 6.029992096 6.033123759  6.05230424 6.052987354 6.053672487 6.055954929 
-##          12          11          15          10           9          12 
-## 6.056170574 6.066157832 6.101336399 6.109809847  6.11391024 6.150263506 
-##          12          10          13           9          10          15 
-## 6.177317736 6.182458053 6.193214613 6.214131227 6.258504616 6.274249391 
-##          11          13          12          15          12          11 
-## 6.277193825 6.279830177 6.284072427 6.285793896 6.298104025 6.311789763 
-##          11          14          17          12          14          13 
-## 6.338165653 6.345184215 6.353846415  6.37294771 6.375861974 6.395392862 
-##          11          12          14           9          11          13 
-## 6.403095616 6.414541536 6.424188172 6.441943988 6.465514826 6.474934741 
-##          14          11          10          13          14          14 
-## 6.524849942 6.549720354 6.605461857 6.616776406 6.634477351 6.659110662 
-##          17          13          13          12          15          10 
-##  6.66580044 6.670866019 6.695904636 6.697042667 6.706873628 6.709544241 
-##          12          13          13          14          12          15 
-## 6.741251528 6.788956478 6.794421517 6.798118585 6.812158315 6.852408279 
-##          13          11          13          14          14          15 
-## 6.863162417 6.874686829 6.880847646 6.904229819 6.909389807 6.909813076 
-##          14          12          14          14          12          14 
-## 6.934103537 6.942168824 6.999547958 7.063296575 7.084481305 7.137441764 
-##           9          11          13          15          15          13 
-## 7.156012566 7.218420496 7.231674547 7.267399256 7.270902516 7.278518094 
-##          13          14          13          14          14          17 
-##  7.36282701 7.394288576 7.470900442 7.489310127 7.522447115 7.536659376 
-##          15          14          13          12          14          11 
-## 7.552002907 7.737192412 7.744726142 7.761399759  7.76898125 7.796736519 
-##          14          15          13          14          12          16 
-## 7.815564319 7.827613738  7.87621539 7.891747112 7.935605585 7.946451439 
-##          11          11          14          14          15          14 
-## 7.953012463   7.9665111 7.968914967  8.00243928 8.120045895 8.176395307 
-##          14          14          15          15          14          14 
-## 8.205798437  8.24928523 8.293392185 8.330674295 8.482999096  8.71283287 
-##          15          14          10          16          15          17 
-## 8.718544754 9.503263671  9.64031823 11.02582836 
-##          13          15          15          17</code></pre>
-<pre class="r"><code>#You get a mess because it&#39;s a continuous variable. Categorical variables work best with table value</code></pre>
+<pre class="r"><code>#Use variables that are categorical. Looking at something continuous, then a table doesn&#39;t work out that well
+#table(fish$scalelength)
+#You get a mess because it&#39;s a continuous variable. Categorical variables work best with table value
+#The table you get is very, very long since the values are continous</code></pre>
 <p><code>table()</code> is useful when you have a limited number of categorical variables. It produces fast counts of the number of observations in a variable. We will come back to this later…</p>
 <pre class="r"><code>#table(fish$lakeid)
 table(fish$lakeid)</code></pre>
@@ -1928,12 +1768,150 @@ little_fish</code></pre>
 <div id="practice-1" class="section level2">
 <h2>Practice</h2>
 <ol style="list-style-type: decimal">
-<li><p>Load the data <code>mammal_lifehistories_v2.csv</code> and place it into a new object called <code>mammals</code>.</p></li>
-<li><p>Provide the dimensions of the data frame.</p></li>
-<li><p>Check the column names in the data frame.</p></li>
-<li><p>Use <code>str()</code> to show the structure of the data frame and its individual columns; compare this to <code>glimpse()</code>.</p></li>
-<li><p>. Try the <code>table()</code> command to produce counts of mammal order, family, and genus.</p></li>
+<li>Load the data <code>mammal_lifehistories_v2.csv</code> and place it into a new object called <code>mammals</code>.</li>
 </ol>
+<pre class="r"><code>mammals &lt;- readr::read_csv(&quot;data/mammal_lifehistories_v2.csv&quot;)</code></pre>
+<pre><code>## Parsed with column specification:
+## cols(
+##   order = col_character(),
+##   family = col_character(),
+##   Genus = col_character(),
+##   species = col_character(),
+##   mass = col_double(),
+##   gestation = col_double(),
+##   newborn = col_double(),
+##   weaning = col_double(),
+##   `wean mass` = col_double(),
+##   AFR = col_double(),
+##   `max. life` = col_double(),
+##   `litter size` = col_double(),
+##   `litters/year` = col_double()
+## )</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>Provide the dimensions of the data frame.</li>
+</ol>
+<pre class="r"><code>dim(mammals)</code></pre>
+<pre><code>## [1] 1440   13</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>Check the column names in the data frame.</li>
+</ol>
+<pre class="r"><code>colnames(mammals)</code></pre>
+<pre><code>##  [1] &quot;order&quot;        &quot;family&quot;       &quot;Genus&quot;        &quot;species&quot;      &quot;mass&quot;        
+##  [6] &quot;gestation&quot;    &quot;newborn&quot;      &quot;weaning&quot;      &quot;wean mass&quot;    &quot;AFR&quot;         
+## [11] &quot;max. life&quot;    &quot;litter size&quot;  &quot;litters/year&quot;</code></pre>
+<pre class="r"><code>names(mammals)</code></pre>
+<pre><code>##  [1] &quot;order&quot;        &quot;family&quot;       &quot;Genus&quot;        &quot;species&quot;      &quot;mass&quot;        
+##  [6] &quot;gestation&quot;    &quot;newborn&quot;      &quot;weaning&quot;      &quot;wean mass&quot;    &quot;AFR&quot;         
+## [11] &quot;max. life&quot;    &quot;litter size&quot;  &quot;litters/year&quot;</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li>Use <code>str()</code> to show the structure of the data frame and its individual columns; compare this to <code>glimpse()</code>.</li>
+</ol>
+<pre class="r"><code>str(mammals)</code></pre>
+<pre><code>## tibble [1,440 × 13] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+##  $ order       : chr [1:1440] &quot;Artiodactyla&quot; &quot;Artiodactyla&quot; &quot;Artiodactyla&quot; &quot;Artiodactyla&quot; ...
+##  $ family      : chr [1:1440] &quot;Antilocapridae&quot; &quot;Bovidae&quot; &quot;Bovidae&quot; &quot;Bovidae&quot; ...
+##  $ Genus       : chr [1:1440] &quot;Antilocapra&quot; &quot;Addax&quot; &quot;Aepyceros&quot; &quot;Alcelaphus&quot; ...
+##  $ species     : chr [1:1440] &quot;americana&quot; &quot;nasomaculatus&quot; &quot;melampus&quot; &quot;buselaphus&quot; ...
+##  $ mass        : num [1:1440] 45375 182375 41480 150000 28500 ...
+##  $ gestation   : num [1:1440] 8.13 9.39 6.35 7.9 6.8 5.08 5.72 5.5 8.93 9.14 ...
+##  $ newborn     : num [1:1440] 3246 5480 5093 10167 -999 ...
+##  $ weaning     : num [1:1440] 3 6.5 5.63 6.5 -999 ...
+##  $ wean mass   : num [1:1440] 8900 -999 15900 -999 -999 ...
+##  $ AFR         : num [1:1440] 13.5 27.3 16.7 23 -999 ...
+##  $ max. life   : num [1:1440] 142 308 213 240 -999 251 228 255 300 324 ...
+##  $ litter size : num [1:1440] 1.85 1 1 1 1 1.37 1 1 1 1 ...
+##  $ litters/year: num [1:1440] 1 0.99 0.95 -999 -999 2 -999 1.89 1 1 ...
+##  - attr(*, &quot;spec&quot;)=
+##   .. cols(
+##   ..   order = col_character(),
+##   ..   family = col_character(),
+##   ..   Genus = col_character(),
+##   ..   species = col_character(),
+##   ..   mass = col_double(),
+##   ..   gestation = col_double(),
+##   ..   newborn = col_double(),
+##   ..   weaning = col_double(),
+##   ..   `wean mass` = col_double(),
+##   ..   AFR = col_double(),
+##   ..   `max. life` = col_double(),
+##   ..   `litter size` = col_double(),
+##   ..   `litters/year` = col_double()
+##   .. )</code></pre>
+<pre class="r"><code>#Hints that order and family are categorical data sets. Maybe not values like mass though.</code></pre>
+<pre class="r"><code>glimpse(mammals)</code></pre>
+<pre><code>## Rows: 1,440
+## Columns: 13
+## $ order          &lt;chr&gt; &quot;Artiodactyla&quot;, &quot;Artiodactyla&quot;, &quot;Artiodactyla&quot;, &quot;Artio…
+## $ family         &lt;chr&gt; &quot;Antilocapridae&quot;, &quot;Bovidae&quot;, &quot;Bovidae&quot;, &quot;Bovidae&quot;, &quot;Bo…
+## $ Genus          &lt;chr&gt; &quot;Antilocapra&quot;, &quot;Addax&quot;, &quot;Aepyceros&quot;, &quot;Alcelaphus&quot;, &quot;Am…
+## $ species        &lt;chr&gt; &quot;americana&quot;, &quot;nasomaculatus&quot;, &quot;melampus&quot;, &quot;buselaphus&quot;…
+## $ mass           &lt;dbl&gt; 45375.0, 182375.0, 41480.0, 150000.0, 28500.0, 55500.0…
+## $ gestation      &lt;dbl&gt; 8.13, 9.39, 6.35, 7.90, 6.80, 5.08, 5.72, 5.50, 8.93, …
+## $ newborn        &lt;dbl&gt; 3246.36, 5480.00, 5093.00, 10166.67, -999.00, 3810.00,…
+## $ weaning        &lt;dbl&gt; 3.00, 6.50, 5.63, 6.50, -999.00, 4.00, 4.04, 2.13, 10.…
+## $ `wean mass`    &lt;dbl&gt; 8900, -999, 15900, -999, -999, -999, -999, -999, 15750…
+## $ AFR            &lt;dbl&gt; 13.53, 27.27, 16.66, 23.02, -999.00, 14.89, 10.23, 20.…
+## $ `max. life`    &lt;dbl&gt; 142, 308, 213, 240, -999, 251, 228, 255, 300, 324, 300…
+## $ `litter size`  &lt;dbl&gt; 1.85, 1.00, 1.00, 1.00, 1.00, 1.37, 1.00, 1.00, 1.00, …
+## $ `litters/year` &lt;dbl&gt; 1.00, 0.99, 0.95, -999.00, -999.00, 2.00, -999.00, 1.8…</code></pre>
+<ol start="5" style="list-style-type: decimal">
+<li>. Try the <code>table()</code> command to produce counts of mammal order, family, and genus.</li>
+</ol>
+<pre class="r"><code>table(mammals$order)</code></pre>
+<pre><code>## 
+##   Artiodactyla      Carnivora        Cetacea     Dermoptera     Hyracoidea 
+##            161            197             55              2              4 
+##    Insectivora     Lagomorpha  Macroscelidea Perissodactyla      Pholidota 
+##             91             42             10             15              7 
+##       Primates    Proboscidea       Rodentia     Scandentia        Sirenia 
+##            156              2            665              7              5 
+##  Tubulidentata      Xenarthra 
+##              1             20</code></pre>
+<pre class="r"><code>#Says 161 Artiodactyla, 197 Carnivora, etc.</code></pre>
+<pre class="r"><code>table(mammals$family)</code></pre>
+<pre><code>## 
+##     Abrocomidae       Agoutidae    Anomaluridae  Antilocapridae    Aplodontidae 
+##               2               1               4               1               1 
+##      Balaenidae Balaenopteridae    Bathyergidae         Bovidae    Bradypodidae 
+##               3               6               8             103               3 
+##  Callitrichidae       Camelidae         Canidae     Capromyidae      Castoridae 
+##              18               6              31               6               2 
+##        Caviidae         Cebidae Cercopithecidae        Cervidae  Cheirogaleidae 
+##               9              27              58              30               6 
+##   Chinchillidae Chrysochloridae Ctenodactylidae     Ctenomyidae  Cynocephalidae 
+##               5               5               3               5               2 
+##     Dasypodidae   Dasyproctidae  Daubentoniidae     Delphinidae      Dinomyidae 
+##              12               4               1              23               1 
+##       Dipodidae      Dugongidae      Echimyidae    Elephantidae         Equidae 
+##              19               2               8               2               6 
+##  Erethizontidae     Erinaceidae  Eschrichtiidae         Felidae     Galagonidae 
+##               4              11               1              31               8 
+##       Geomyidae      Giraffidae     Herpestidae    Heteromyidae  Hippopotamidae 
+##              14               2              17              38               2 
+##       Hominidae       Hyaenidae  Hydrochaeridae     Hylobatidae     Hystricidae 
+##               4               4               1               7               7 
+##        Indridae       Lemuridae       Leporidae         Loridae Macroscelididae 
+##               5               9              31               5              10 
+##         Manidae   Megaladapidae  Megalonychidae    Monodontidae       Moschidae 
+##               7               3               2               2               3 
+##         Muridae      Mustelidae   Myocastoridae        Myoxidae Myrmecophagidae 
+##             376              46               1               9               3 
+##   Neobalaenidae     Ochotonidae    Octodontidae      Odobenidae Orycteropodidae 
+##               1              11               3               1               1 
+##       Otariidae       Pedetidae    Petromuridae        Phocidae     Phocoenidae 
+##              12               1               1              18               4 
+##    Physeteridae   Platanistidae     Procaviidae     Procyonidae  Rhinocerotidae 
+##               3               5               4               8               5 
+##       Sciuridae  Solenodontidae       Soricidae          Suidae        Talpidae 
+##             130               2              51               7              12 
+##       Tapiridae       Tarsiidae     Tayassuidae      Tenrecidae   Thryonomyidae 
+##               4               5               3              10               2 
+##      Tragulidae    Trichechidae       Tupaiidae         Ursidae      Viverridae 
+##               4               3               7               9              20 
+##       Ziphiidae 
+##               7</code></pre>
+<pre class="r"><code>#table(mammals$order,mammals$family)
+#Can do this, but have a TON of data to the point where it surpasses print number. Not super useful, there will be better ways to do this.</code></pre>
 </div>
 <div id="wrap-up" class="section level2">
 <h2>Wrap-up</h2>

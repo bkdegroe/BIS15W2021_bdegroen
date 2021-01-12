@@ -150,9 +150,10 @@ head(fish, n = 10)
 tail(fish, n = 10)
 ```
 ```{r}
-#Use variables that are categorical. Looking at something contious, then a table doesn't work out that well
-table(fish$scalelength)
+#Use variables that are categorical. Looking at something continuous, then a table doesn't work out that well
+#table(fish$scalelength)
 #You get a mess because it's a continuous variable. Categorical variables work best with table value
+#The table you get is very, very long since the values are continous
 ```
 
 `table()` is useful when you have a limited number of categorical variables. It produces fast counts of the number of observations in a variable. We will come back to this later... 
@@ -179,31 +180,44 @@ little_fish
 ## Practice
 1. Load the data `mammal_lifehistories_v2.csv` and place it into a new object called `mammals`.
 ```{r}
-
+mammals <- readr::read_csv("data/mammal_lifehistories_v2.csv")
 ```
 
 2. Provide the dimensions of the data frame.
 ```{r}
-
+dim(mammals)
 ```
 
 3. Check the column names in the data frame. 
 ```{r}
-
+colnames(mammals)
+```
+```{r}
+names(mammals)
 ```
 
 4. Use `str()` to show the structure of the data frame and its individual columns; compare this to `glimpse()`. 
 ```{r}
-
+str(mammals)
+#Hints that order and family are categorical data sets. Maybe not values like mass though.
 ```
 
 ```{r}
-
+glimpse(mammals)
 ```
 
 5. . Try the `table()` command to produce counts of mammal order, family, and genus.  
 ```{r}
+table(mammals$order)
+#Says 161 Artiodactyla, 197 Carnivora, etc.
 
+```
+```{r}
+table(mammals$family)
+```
+```{r}
+#table(mammals$order,mammals$family)
+#Can do this, but have a TON of data to the point where it surpasses print number. Not super useful, there will be better ways to do this.
 ```
 
 ## Wrap-up

@@ -2,7 +2,7 @@
 
 ![](Hello_there.gif)
 
-This repository contains the coding mistakes and internal screaming of a BIS 15L student at UC Davis who is praying that she's using this correctly.
+This repository contains the coding mistakes and internal screaming of a BIS 15L student who is praying that she's using this correctly.
 
 ## Contact Info
 

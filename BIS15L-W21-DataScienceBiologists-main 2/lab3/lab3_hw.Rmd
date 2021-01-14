@@ -12,6 +12,10 @@ output:
 Answer the following questions and complete the exercises in RMarkdown. Please embed all of your code and push your final work to your repository. Your final lab report should be organized, clean, and run free from errors. Remember, you must remove the `#` for the included code chunks to run. Be sure to add your name to the author header above.  
 
 Make sure to use the formatting conventions of RMarkdown to make your report neat and clean!  
+```{r}
+getwd()
+```
+
 
 ## Load the tidyverse
 ```{r message=FALSE, warning=FALSE}
@@ -21,17 +25,17 @@ library(tidyverse)
 ## Mammals Sleep
 1. For this assignment, we are going to use built-in data on mammal sleep patterns. From which publication are these data taken from? Since the data are built-in you can use the help function in R.
 ```{r}
-
+?msleep
 ```
 
 2. Store these data into a new data frame `sleep`.
 ```{r}
-
+sleep <- msleep
 ```
 
 3. What are the dimensions of this data frame (variables and observations)? How do you know? Please show the *code* that you used to determine this below.  
 ```{r}
-
+dim(sleep)
 ```
 
 4. Are there any NAs in the data? How did you determine this? Please show your code.  

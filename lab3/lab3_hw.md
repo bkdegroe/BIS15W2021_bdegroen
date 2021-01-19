@@ -96,6 +96,7 @@ table(sleep$vore)
 ##      19      32       5      20
 ```
 So 32 herbivores.
+
 7. We are interested in two groups; small and large mammals. Let's define small as less than or equal to 1kg body weight and large as greater than or equal to 200kg body weight. Make two new dataframes (large and small) based on these parameters.
 
 ```r

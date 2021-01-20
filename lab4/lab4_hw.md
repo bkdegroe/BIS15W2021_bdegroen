@@ -237,17 +237,245 @@ taxa
 
 **5. The variable `taxon` identifies the large, common name groups of the species represented in `homerange`. Make a table that shows the counts for each of these `taxon`.**  
 
+```r
+table(homerange$taxon)
+```
+
+```
+## 
+##         birds   lake fishes       lizards       mammals marine fishes 
+##           140             9            11           238            90 
+##  river fishes        snakes     tortoises       turtles 
+##            14            41            12            14
+```
 
 
-**6. The species in `homerange` are also classified into trophic guilds. How many species are represented in each trophic guild.**  
+**6. The species in `homerange` are also classified into trophic guilds. How many species are represented in each trophic guild.**
+
+```r
+table(homerange$trophic.guild)
+```
+
+```
+## 
+## carnivore herbivore 
+##       342       227
+```
+
 
 **7. Make two new data frames, one which is restricted to carnivores and another that is restricted to herbivores.**  
 
+Carnivores
+
+```r
+homerange_carnivores <- filter(homerange, trophic.guild=="carnivore")
+homerange_carnivores
+```
+
+```
+## # A tibble: 342 x 24
+##    taxon common.name class order family genus species primarymethod N    
+##    <fct> <chr>       <chr> <fct> <chr>  <chr> <chr>   <chr>         <chr>
+##  1 lake… american e… acti… angu… angui… angu… rostra… telemetry     16   
+##  2 rive… blacktail … acti… cypr… catos… moxo… poecil… mark-recaptu… <NA> 
+##  3 rive… central st… acti… cypr… cypri… camp… anomal… mark-recaptu… 20   
+##  4 rive… rosyside d… acti… cypr… cypri… clin… fundul… mark-recaptu… 26   
+##  5 rive… longnose d… acti… cypr… cypri… rhin… catara… mark-recaptu… 17   
+##  6 rive… muskellunge acti… esoc… esoci… esox  masqui… telemetry     5    
+##  7 mari… pollack     acti… gadi… gadid… poll… pollac… telemetry     2    
+##  8 mari… saithe      acti… gadi… gadid… poll… virens  telemetry     2    
+##  9 mari… giant trev… acti… perc… caran… cara… ignobi… telemetry     4    
+## 10 lake… rock bass   acti… perc… centr… ambl… rupest… mark-recaptu… 16   
+## # … with 332 more rows, and 15 more variables: mean.mass.g <dbl>,
+## #   log10.mass <dbl>, alternative.mass.reference <chr>, mean.hra.m2 <dbl>,
+## #   log10.hra <dbl>, hra.reference <chr>, realm <chr>, thermoregulation <chr>,
+## #   locomotion <chr>, trophic.guild <chr>, dimension <chr>, preymass <dbl>,
+## #   log10.preymass <dbl>, PPMR <dbl>, prey.size.reference <chr>
+```
+
+
+Herbivores
+
+```r
+homerange_herbivores <-filter(homerange, trophic.guild=="herbivore")
+homerange_herbivores
+```
+
+```
+## # A tibble: 227 x 24
+##    taxon common.name class order family genus species primarymethod N    
+##    <fct> <chr>       <chr> <fct> <chr>  <chr> <chr>   <chr>         <chr>
+##  1 mari… lined surg… acti… perc… acant… acan… lineat… direct obser… <NA> 
+##  2 mari… orangespin… acti… perc… acant… naso  litura… telemetry     8    
+##  3 mari… bluespine … acti… perc… acant… naso  unicor… telemetry     7    
+##  4 mari… redlip ble… acti… perc… blenn… ophi… atlant… direct obser… 20   
+##  5 mari… bermuda ch… acti… perc… kypho… kyph… sectat… telemetry     11   
+##  6 mari… cherubfish  acti… perc… pomac… cent… argi    direct obser… <NA> 
+##  7 mari… damselfish  acti… perc… pomac… chro… chromis direct obser… <NA> 
+##  8 mari… twinspot d… acti… perc… pomac… chry… biocel… direct obser… 18   
+##  9 mari… wards dams… acti… perc… pomac… poma… wardi   direct obser… <NA> 
+## 10 mari… australian… acti… perc… pomac… steg… apical… direct obser… <NA> 
+## # … with 217 more rows, and 15 more variables: mean.mass.g <dbl>,
+## #   log10.mass <dbl>, alternative.mass.reference <chr>, mean.hra.m2 <dbl>,
+## #   log10.hra <dbl>, hra.reference <chr>, realm <chr>, thermoregulation <chr>,
+## #   locomotion <chr>, trophic.guild <chr>, dimension <chr>, preymass <dbl>,
+## #   log10.preymass <dbl>, PPMR <dbl>, prey.size.reference <chr>
+```
+
 **8. Do herbivores or carnivores have, on average, a larger `mean.hra.m2`? Remove any NAs from the data.**  
+
+```r
+homerange_herbivores_noNA <- filter(homerange_herbivores, mean.hra.m2 !="NA")
+mean(homerange_herbivores_noNA$mean.hra.m2)
+```
+
+```
+## [1] 34137012
+```
+
+```r
+homerange_carnivores_noNA <- filter(homerange_carnivores, mean.hra.m2 !="NA")
+mean(homerange_carnivores_noNA$mean.hra.m2)
+```
+
+```
+## [1] 13039918
+```
+Herbivores, on average, have a larger mean.hra.m2.
 
 **9. Make a new dataframe `deer` that is limited to the mean mass, log10 mass, family, genus, and species of deer in the database. The family for deer is cervidae. Arrange the data in descending order by log10 mass. Which is the largest deer? What is its common name?**  
 
-**10. As measured by the data, which snake species has the smallest homerange? Show all of your work, please. Look this species up online and tell me about it!** **Snake is found in taxon column**    
+```r
+homerange_rename <- rename(homerange, log10_mass="log10.mass", mean_mass_g="mean.mass.g")
+homerange_rename
+```
+
+```
+## # A tibble: 569 x 24
+##    taxon common.name class order family genus species primarymethod N    
+##    <fct> <chr>       <chr> <fct> <chr>  <chr> <chr>   <chr>         <chr>
+##  1 lake… american e… acti… angu… angui… angu… rostra… telemetry     16   
+##  2 rive… blacktail … acti… cypr… catos… moxo… poecil… mark-recaptu… <NA> 
+##  3 rive… central st… acti… cypr… cypri… camp… anomal… mark-recaptu… 20   
+##  4 rive… rosyside d… acti… cypr… cypri… clin… fundul… mark-recaptu… 26   
+##  5 rive… longnose d… acti… cypr… cypri… rhin… catara… mark-recaptu… 17   
+##  6 rive… muskellunge acti… esoc… esoci… esox  masqui… telemetry     5    
+##  7 mari… pollack     acti… gadi… gadid… poll… pollac… telemetry     2    
+##  8 mari… saithe      acti… gadi… gadid… poll… virens  telemetry     2    
+##  9 mari… lined surg… acti… perc… acant… acan… lineat… direct obser… <NA> 
+## 10 mari… orangespin… acti… perc… acant… naso  litura… telemetry     8    
+## # … with 559 more rows, and 15 more variables: mean_mass_g <dbl>,
+## #   log10_mass <dbl>, alternative.mass.reference <chr>, mean.hra.m2 <dbl>,
+## #   log10.hra <dbl>, hra.reference <chr>, realm <chr>, thermoregulation <chr>,
+## #   locomotion <chr>, trophic.guild <chr>, dimension <chr>, preymass <dbl>,
+## #   log10.preymass <dbl>, PPMR <dbl>, prey.size.reference <chr>
+```
+
+
+```r
+deer_filter <- select(homerange_rename, "mean_mass_g", "log10_mass", "family", "genus", "species")
+deer_cervidae <- filter(deer_filter, family=="cervidae")
+deer <- arrange(deer_cervidae, desc(log10_mass))
+deer
+```
+
+```
+## # A tibble: 12 x 5
+##    mean_mass_g log10_mass family   genus      species    
+##          <dbl>      <dbl> <chr>    <chr>      <chr>      
+##  1     307227.       5.49 cervidae alces      alces      
+##  2     234758.       5.37 cervidae cervus     elaphus    
+##  3     102059.       5.01 cervidae rangifer   tarandus   
+##  4      87884.       4.94 cervidae odocoileus virginianus
+##  5      71450.       4.85 cervidae dama       dama       
+##  6      62823.       4.80 cervidae axis       axis       
+##  7      53864.       4.73 cervidae odocoileus hemionus   
+##  8      35000.       4.54 cervidae ozotoceros bezoarticus
+##  9      29450.       4.47 cervidae cervus     nippon     
+## 10      24050.       4.38 cervidae capreolus  capreolus  
+## 11      13500.       4.13 cervidae muntiacus  reevesi    
+## 12       7500.       3.88 cervidae pudu       puda
+```
+
+```r
+large_deer <- (deer$log10_mass)
+max(large_deer)
+```
+
+```
+## [1] 5.48746
+```
+
+```r
+largest_deer <- subset(deer, log10_mass==5.48746)
+largest_deer
+```
+
+```
+## # A tibble: 0 x 5
+## # … with 5 variables: mean_mass_g <dbl>, log10_mass <dbl>, family <chr>,
+## #   genus <chr>, species <chr>
+```
+(Don't know why no solution for the last command.)
+
+The largest deer is Alces alces with a log10.mass of 5.48746.
+
+**10. As measured by the data, which snake species has the smallest homerange? Show all of your work, please. Look this species up online and tell me about it!** **Snake is found in taxon column**   
+
+```r
+homerange_snake <- filter(homerange, taxon=="snakes")
+homerange_snake
+```
+
+```
+## # A tibble: 41 x 24
+##    taxon common.name class order family genus species primarymethod N    
+##    <fct> <chr>       <chr> <fct> <chr>  <chr> <chr>   <chr>         <chr>
+##  1 snak… western wo… rept… squa… colub… carp… vermis  radiotag      1    
+##  2 snak… eastern wo… rept… squa… colub… carp… viridis radiotag      10   
+##  3 snak… racer       rept… squa… colub… colu… constr… telemetry     15   
+##  4 snak… yellow bel… rept… squa… colub… colu… constr… telemetry     12   
+##  5 snak… ringneck s… rept… squa… colub… diad… puncta… mark-recaptu… <NA> 
+##  6 snak… eastern in… rept… squa… colub… drym… couperi telemetry     1    
+##  7 snak… great plai… rept… squa… colub… elap… guttat… telemetry     12   
+##  8 snak… western ra… rept… squa… colub… elap… obsole… telemetry     18   
+##  9 snak… hognose sn… rept… squa… colub… hete… platir… telemetry     8    
+## 10 snak… European w… rept… squa… colub… hier… viridi… telemetry     32   
+## # … with 31 more rows, and 15 more variables: mean.mass.g <dbl>,
+## #   log10.mass <dbl>, alternative.mass.reference <chr>, mean.hra.m2 <dbl>,
+## #   log10.hra <dbl>, hra.reference <chr>, realm <chr>, thermoregulation <chr>,
+## #   locomotion <chr>, trophic.guild <chr>, dimension <chr>, preymass <dbl>,
+## #   log10.preymass <dbl>, PPMR <dbl>, prey.size.reference <chr>
+```
+
+```r
+smoll_snek <- (homerange_snake$mean.hra.m2)
+min(smoll_snek)
+```
+
+```
+## [1] 200
+```
+
+```r
+smollest_snek <-subset(homerange_snake, mean.hra.m2==200)
+smollest_snek
+```
+
+```
+## # A tibble: 1 x 24
+##   taxon common.name class order family genus species primarymethod N    
+##   <fct> <chr>       <chr> <fct> <chr>  <chr> <chr>   <chr>         <chr>
+## 1 snak… namaqua dw… rept… squa… viper… bitis schnei… telemetry     11   
+## # … with 15 more variables: mean.mass.g <dbl>, log10.mass <dbl>,
+## #   alternative.mass.reference <chr>, mean.hra.m2 <dbl>, log10.hra <dbl>,
+## #   hra.reference <chr>, realm <chr>, thermoregulation <chr>, locomotion <chr>,
+## #   trophic.guild <chr>, dimension <chr>, preymass <dbl>, log10.preymass <dbl>,
+## #   PPMR <dbl>, prey.size.reference <chr>
+```
+
+The smallest snake species is schneideri. They are the smallest vipers in the world. In order to move, they use sidewinding, as well as typical serpentine movement. They live along the coast and hide in bushes or the sand, and normally do so at night.
+
 
 ## Push your final code to GitHub!
 Please be sure that you check the `keep md` file in the knit preferences.   

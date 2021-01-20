@@ -76,19 +76,82 @@ taxa
 
 **5. The variable `taxon` identifies the large, common name groups of the species represented in `homerange`. Make a table that shows the counts for each of these `taxon`.**  
 ```{r}
-
+table(homerange$taxon)
 ```
 
 
-**6. The species in `homerange` are also classified into trophic guilds. How many species are represented in each trophic guild.**  
+**6. The species in `homerange` are also classified into trophic guilds. How many species are represented in each trophic guild.**
+```{r}
+table(homerange$trophic.guild)
+```
+
 
 **7. Make two new data frames, one which is restricted to carnivores and another that is restricted to herbivores.**  
 
+Carnivores
+```{r}
+homerange_carnivores <- filter(homerange, trophic.guild=="carnivore")
+homerange_carnivores
+```
+
+
+Herbivores
+```{r}
+homerange_herbivores <-filter(homerange, trophic.guild=="herbivore")
+homerange_herbivores
+```
+
 **8. Do herbivores or carnivores have, on average, a larger `mean.hra.m2`? Remove any NAs from the data.**  
+```{r}
+homerange_herbivores_noNA <- filter(homerange_herbivores, mean.hra.m2 !="NA")
+mean(homerange_herbivores_noNA$mean.hra.m2)
+```
+```{r}
+homerange_carnivores_noNA <- filter(homerange_carnivores, mean.hra.m2 !="NA")
+mean(homerange_carnivores_noNA$mean.hra.m2)
+```
+Herbivores, on average, have a larger mean.hra.m2.
 
 **9. Make a new dataframe `deer` that is limited to the mean mass, log10 mass, family, genus, and species of deer in the database. The family for deer is cervidae. Arrange the data in descending order by log10 mass. Which is the largest deer? What is its common name?**  
+```{r}
+homerange_rename <- rename(homerange, log10_mass="log10.mass", mean_mass_g="mean.mass.g")
+homerange_rename
+```
 
-**10. As measured by the data, which snake species has the smallest homerange? Show all of your work, please. Look this species up online and tell me about it!** **Snake is found in taxon column**    
+```{r}
+deer_filter <- select(homerange_rename, "mean_mass_g", "log10_mass", "family", "genus", "species")
+deer_cervidae <- filter(deer_filter, family=="cervidae")
+deer <- arrange(deer_cervidae, desc(log10_mass))
+deer
+```
+```{r}
+large_deer <- (deer$log10_mass)
+max(large_deer)
+```
+```{r}
+largest_deer <- subset(deer, log10_mass==5.48746)
+largest_deer
+```
+(Don't know why no solution for the last command.)
+
+The largest deer is Alces alces with a log10.mass of 5.48746.
+
+**10. As measured by the data, which snake species has the smallest homerange? Show all of your work, please. Look this species up online and tell me about it!** **Snake is found in taxon column**   
+```{r}
+homerange_snake <- filter(homerange, taxon=="snakes")
+homerange_snake
+```
+```{r}
+smoll_snek <- (homerange_snake$mean.hra.m2)
+min(smoll_snek)
+```
+```{r}
+smollest_snek <-subset(homerange_snake, mean.hra.m2==200)
+smollest_snek
+```
+
+The smallest snake species is schneideri. They are the smallest vipers in the world. In order to move, they use sidewinding, as well as typical serpentine movement. They live along the coast and hide in bushes or the sand, and normally do so at night.
+
 
 ## Push your final code to GitHub!
 Please be sure that you check the `keep md` file in the knit preferences.   

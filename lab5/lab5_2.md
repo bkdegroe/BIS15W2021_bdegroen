@@ -20,6 +20,25 @@ Please take 5-8 minutes to check over your answers to the HW in your group. If y
 ## Instructions
 For the second part of lab 5 today, we are going to spend time practicing the dplyr functions we have learned and add a few new ones. We will spend most of the time in our breakout rooms. Your lab 5 homework will be to knit and push this file to your repository.  
 
+
+```r
+getwd()
+```
+
+```
+## [1] "/Users/Astrobeecal/Desktop/BIS15W2021_bdegroen/lab5"
+```
+
+
+```r
+getwd()
+```
+
+```
+## [1] "/Users/Astrobeecal/Desktop/BIS15W2021_bdegroen/lab5"
+```
+
+
 ## Load the tidyverse
 
 ```r
@@ -96,6 +115,7 @@ names(superhero_info)
 ##  [6] "Height"     "Publisher"  "Skin color" "Alignment"  "Weight"
 ```
 
+
 ```r
 superhero_info_rename <- rename(superhero_info, gender="Gender", eye_color="Eye color", race="Race", hair_color="Hair color", height="Height", publisher="Publisher", skin_color="Skin color", alignment="Alignment", weight="Weight")
 superhero_info_rename
@@ -117,11 +137,8 @@ superhero_info_rename
 ## 10 Agen… Male   brown     Human Brown         178 Marvel C… <NA>       good     
 ## # … with 724 more rows, and 1 more variable: weight <dbl>
 ```
-<<<<<<< HEAD
 
-=======
 -Remove # to run code data
->>>>>>> d7a304205eb487744aeb09a21780a44b4b44002c
 Yikes! `superhero_powers` has a lot of variables that are poorly named. We need some R superpowers...
 
 ```r
@@ -365,6 +382,7 @@ good_guys
 ## # … with 510 more rows, and 1 more variable: weight <dbl>
 ```
 
+
 ```r
 bad_guys <- superhero_info_rename %>% 
   filter(alignment !="good")
@@ -512,6 +530,7 @@ good_guys %>%
 ## # … with 30 more rows, and 1 more variable: weight <dbl>
 ```
 
+
 ```r
 bad_guys %>% 
   filter(hair_color == "No Hair")
@@ -534,7 +553,6 @@ bad_guys %>%
 ## # … with 28 more rows, and 1 more variable: weight <dbl>
 ```
 
-<<<<<<< HEAD
 There are more good guys than bad guys that have no hair.
 
 Tried to make a tableset without the hashtags, but this command wasn't working:
@@ -546,21 +564,15 @@ Tried to make a tableset without the hashtags, but this command wasn't working:
 ```
 
 
-=======
->>>>>>> d7a304205eb487744aeb09a21780a44b4b44002c
 10. Let's explore who the really "big" superheros are. In the `superhero_info` data, which have a height over 200 or weight over 300?
 
 ```r
 superhero_info_rename %>%
-<<<<<<< HEAD
-  select(name, height, weight) %>% 
-=======
->>>>>>> d7a304205eb487744aeb09a21780a44b4b44002c
+  select(name, height, weight) %>%
   filter(height > "200" | weight > "300")
 ```
 
 ```
-<<<<<<< HEAD
 ## # A tibble: 405 x 3
 ##    name              height weight
 ##    <chr>              <dbl>  <dbl>
@@ -575,29 +587,12 @@ superhero_info_rename %>%
 ##  9 Alan Scott           180     90
 ## 10 Alfred Pennyworth    178     72
 ## # … with 395 more rows
-=======
-## # A tibble: 405 x 10
-##    name  gender eye_color race  hair_color height publisher skin_color alignment
-##    <chr> <chr>  <chr>     <chr> <chr>       <dbl> <chr>     <chr>      <chr>    
-##  1 A-Bo… Male   yellow    Human No Hair       203 Marvel C… <NA>       good     
-##  2 Abe … Male   blue      Icth… No Hair       191 Dark Hor… blue       good     
-##  3 Abin… Male   blue      Unga… No Hair       185 DC Comics red        good     
-##  4 Abom… Male   green     Huma… No Hair       203 Marvel C… <NA>       bad      
-##  5 Adam… Male   blue      Human Blond         185 DC Comics <NA>       good     
-##  6 Agen… Female blue      <NA>  Blond         173 Marvel C… <NA>       good     
-##  7 Agen… Male   brown     Human Brown         178 Marvel C… <NA>       good     
-##  8 Ajax  Male   brown     Cybo… Black         193 Marvel C… <NA>       bad      
-##  9 Alan… Male   blue      <NA>  Blond         180 DC Comics <NA>       good     
-## 10 Alfr… Male   blue      Human Black         178 DC Comics <NA>       good     
-## # … with 395 more rows, and 1 more variable: weight <dbl>
->>>>>>> d7a304205eb487744aeb09a21780a44b4b44002c
 ```
 
 11. Just to be clear on the `|` operator,  have a look at the superheros over 300 in height...
 
 ```r
 superhero_info_rename %>% 
-<<<<<<< HEAD
   select(name, height) %>% 
   filter(height > "300")
 ```
@@ -648,35 +643,10 @@ superhero_info_rename %>%
 ```
 
 We do not have 16 rows in question #10 because it includes two factors that are being filtered: height or weight. The filters for questions 12 and 13 only filter one factor, therefore don't take any other "or" factors into consideration for filtering.
-=======
-  filter(weight >"300")
-```
-
-```
-## # A tibble: 365 x 10
-##    name  gender eye_color race  hair_color height publisher skin_color alignment
-##    <chr> <chr>  <chr>     <chr> <chr>       <dbl> <chr>     <chr>      <chr>    
-##  1 A-Bo… Male   yellow    Human No Hair       203 Marvel C… <NA>       good     
-##  2 Abe … Male   blue      Icth… No Hair       191 Dark Hor… blue       good     
-##  3 Abin… Male   blue      Unga… No Hair       185 DC Comics red        good     
-##  4 Abom… Male   green     Huma… No Hair       203 Marvel C… <NA>       bad      
-##  5 Adam… Male   blue      Human Blond         185 DC Comics <NA>       good     
-##  6 Agen… Female blue      <NA>  Blond         173 Marvel C… <NA>       good     
-##  7 Agen… Male   brown     Human Brown         178 Marvel C… <NA>       good     
-##  8 Ajax  Male   brown     Cybo… Black         193 Marvel C… <NA>       bad      
-##  9 Alan… Male   blue      <NA>  Blond         180 DC Comics <NA>       good     
-## 10 Alfr… Male   blue      Human Black         178 DC Comics <NA>       good     
-## # … with 355 more rows, and 1 more variable: weight <dbl>
-```
-
-12. ...and the superheros over 450 in weight. Bonus question! Why do we not have 16 rows in question #10?
-
->>>>>>> d7a304205eb487744aeb09a21780a44b4b44002c
 
 ## Height to Weight Ratio
 13. It's easy to be strong when you are heavy and tall, but who is heavy and short? Which superheros have the highest height to weight ratio?
 
-<<<<<<< HEAD
 ```r
 superhero_info_rename %>%
   mutate(superhero_info_rename_ratio=height/weight) %>% 
@@ -704,13 +674,10 @@ superhero_info_rename %>%
 ```r
 #Mutate adds a column. You name the column first, then = what it's calculcating.
 ```
-=======
->>>>>>> d7a304205eb487744aeb09a21780a44b4b44002c
 
 ## `superhero_powers`
 Have a quick look at the `superhero_powers` data frame.  
 
-<<<<<<< HEAD
 ```r
 data_frame(superhero_powers)
 ```
@@ -798,16 +765,10 @@ superhero_powers %>%
 ```
 
 Not sure why it's coming up with no rows :/
-=======
-
-14. How many superheros have a combination of accelerated healing, durability, and super strength?
-
->>>>>>> d7a304205eb487744aeb09a21780a44b4b44002c
 
 ## `kinesis`
 15. We are only interested in the superheros that do some kind of "kinesis". How would we isolate them from the `superhero_powers` data?
 
-<<<<<<< HEAD
 ```r
 #kinesis <- superhero_powers %>%
 #  select(hero_names, ends_with("kinesis")) %>%
@@ -885,11 +846,6 @@ superhero_powers %>%
 ## #   hypnokinesis <lgl>, light_control <lgl>, illusions <lgl>, cloaking <lgl>,
 ## #   the_force <lgl>
 ```
-=======
-
-16. Pick your favorite superhero and let's see their powers!
-
->>>>>>> d7a304205eb487744aeb09a21780a44b4b44002c
 
 ## Push your final code to GitHub!
 Please be sure that you check the `keep md` file in the knit preferences.  

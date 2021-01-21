@@ -20,6 +20,15 @@ Please take 5-8 minutes to check over your answers to the HW in your group. If y
 ## Instructions
 For the second part of lab 5 today, we are going to spend time practicing the dplyr functions we have learned and add a few new ones. We will spend most of the time in our breakout rooms. Your lab 5 homework will be to knit and push this file to your repository.  
 
+```{r}
+getwd()
+```
+
+```{r}
+getwd()
+```
+
+
 ## Load the tidyverse
 ```{r}
 library("tidyverse")
@@ -38,18 +47,13 @@ superhero_powers <- readr::read_csv("data/super_hero_powers.csv", na = c("", "-9
 1. Some of the names used in the `superhero_info` data are problematic so you should rename them here.  
 ```{r}
 names(superhero_info)
-<<<<<<< HEAD
 ```
-```{r}
-superhero_info_rename <- rename(superhero_info, gender="Gender", eye_color="Eye color", race="Race", hair_color="Hair color", height="Height", publisher="Publisher", skin_color="Skin color", alignment="Alignment", weight="Weight")
-superhero_info_rename
-=======
->>>>>>> d7a304205eb487744aeb09a21780a44b4b44002c
-```
+
 ```{r}
 superhero_info_rename <- rename(superhero_info, gender="Gender", eye_color="Eye color", race="Race", hair_color="Hair color", height="Height", publisher="Publisher", skin_color="Skin color", alignment="Alignment", weight="Weight")
 superhero_info_rename
 ```
+
 -Remove # to run code data
 Yikes! `superhero_powers` has a lot of variables that are poorly named. We need some R superpowers...
 ```{r}
@@ -102,6 +106,7 @@ good_guys <- superhero_info_rename %>%
   filter(alignment !="bad")
 good_guys
 ```
+
 ```{r}
 bad_guys <- superhero_info_rename %>% 
   filter(alignment !="good")
@@ -131,8 +136,8 @@ bad_guys %>%
 ```{r}
 good_guys %>%
   filter(hair_color == "No Hair")
-<<<<<<< HEAD
 ```
+
 ```{r}
 bad_guys %>% 
   filter(hair_color == "No Hair")
@@ -145,32 +150,21 @@ Tried to make a tableset without the hashtags, but this command wasn't working:
 #good_guys %>%
 #  filter(hair_color == "No Hair") %>% 
 #  table(good_guys$hair_color)
-=======
-bad_guys %>% 
-  filter(hair_color == "No Hair")
->>>>>>> d7a304205eb487744aeb09a21780a44b4b44002c
 ```
 
 
 10. Let's explore who the really "big" superheros are. In the `superhero_info` data, which have a height over 200 or weight over 300?
 ```{r}
 superhero_info_rename %>%
-<<<<<<< HEAD
-  select(name, height, weight) %>% 
-=======
->>>>>>> d7a304205eb487744aeb09a21780a44b4b44002c
+  select(name, height, weight) %>%
   filter(height > "200" | weight > "300")
 ```
 
 11. Just to be clear on the `|` operator,  have a look at the superheros over 300 in height...
 ```{r}
 superhero_info_rename %>% 
-<<<<<<< HEAD
   select(name, height) %>% 
   filter(height > "300")
-=======
-  filter(weight >"300")
->>>>>>> d7a304205eb487744aeb09a21780a44b4b44002c
 ```
 
 12. ...and the superheros over 450 in weight. Bonus question! Why do we not have 16 rows in question #10?

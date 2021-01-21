@@ -20,6 +20,15 @@ Please take 5-8 minutes to check over your answers to the HW in your group. If y
 ## Instructions
 For the second part of lab 5 today, we are going to spend time practicing the dplyr functions we have learned and add a few new ones. We will spend most of the time in our breakout rooms. Your lab 5 homework will be to knit and push this file to your repository.  
 
+```{r}
+getwd()
+```
+
+```{r}
+getwd()
+```
+
+
 ## Load the tidyverse
 ```{r}
 library("tidyverse")
@@ -39,10 +48,12 @@ superhero_powers <- readr::read_csv("data/super_hero_powers.csv", na = c("", "-9
 ```{r}
 names(superhero_info)
 ```
+
 ```{r}
 superhero_info_rename <- rename(superhero_info, gender="Gender", eye_color="Eye color", race="Race", hair_color="Hair color", height="Height", publisher="Publisher", skin_color="Skin color", alignment="Alignment", weight="Weight")
 superhero_info_rename
 ```
+
 -Remove # to run code data
 Yikes! `superhero_powers` has a lot of variables that are poorly named. We need some R superpowers...
 ```{r}
@@ -95,6 +106,7 @@ good_guys <- superhero_info_rename %>%
   filter(alignment !="bad")
 good_guys
 ```
+
 ```{r}
 bad_guys <- superhero_info_rename %>% 
   filter(alignment !="good")
@@ -124,53 +136,104 @@ bad_guys %>%
 ```{r}
 good_guys %>%
   filter(hair_color == "No Hair")
+```
+
+```{r}
 bad_guys %>% 
   filter(hair_color == "No Hair")
 ```
 
+There are more good guys than bad guys that have no hair.
+
+Tried to make a tableset without the hashtags, but this command wasn't working:
+```{r}
+#good_guys %>%
+#  filter(hair_color == "No Hair") %>% 
+#  table(good_guys$hair_color)
+```
+
+
 10. Let's explore who the really "big" superheros are. In the `superhero_info` data, which have a height over 200 or weight over 300?
 ```{r}
 superhero_info_rename %>%
+  select(name, height, weight) %>%
   filter(height > "200" | weight > "300")
 ```
 
 11. Just to be clear on the `|` operator,  have a look at the superheros over 300 in height...
 ```{r}
 superhero_info_rename %>% 
-  filter(weight >"300")
+  select(name, height) %>% 
+  filter(height > "300")
 ```
 
 12. ...and the superheros over 450 in weight. Bonus question! Why do we not have 16 rows in question #10?
 ```{r}
-
+superhero_info_rename %>% 
+  select(name, weight) %>% 
+  filter(weight >"450")
 ```
+
+We do not have 16 rows in question #10 because it includes two factors that are being filtered: height or weight. The filters for questions 12 and 13 only filter one factor, therefore don't take any other "or" factors into consideration for filtering.
 
 ## Height to Weight Ratio
 13. It's easy to be strong when you are heavy and tall, but who is heavy and short? Which superheros have the highest height to weight ratio?
 ```{r}
-
+superhero_info_rename %>%
+  mutate(superhero_info_rename_ratio=height/weight) %>% 
+  select(name, weight, height, superhero_info_rename_ratio) %>%
+  arrange(desc(superhero_info_rename_ratio))
+#Mutate adds a column. You name the column first, then = what it's calculcating.
 ```
 
 ## `superhero_powers`
 Have a quick look at the `superhero_powers` data frame.  
 ```{r}
-
+data_frame(superhero_powers)
 ```
 
 14. How many superheros have a combination of accelerated healing, durability, and super strength?
 ```{r}
-
+superhero_powers %>%
+  select(hero_names, accelerated_healing, durability, super_strength) %>%
+  filter(accelerated_healing == "TRUE" & durability == "TRUE" & super_strength == "TRUE")
 ```
+
+Not sure why it's coming up with no rows :/
 
 ## `kinesis`
 15. We are only interested in the superheros that do some kind of "kinesis". How would we isolate them from the `superhero_powers` data?
 ```{r}
-
+#kinesis <- superhero_powers %>%
+#  select(hero_names, ends_with("kinesis")) %>%
+#  filter(kinesis == "TRUE")
+#names(kinesis)
+#Not sure why this result isn't giving a table form that includes the hero names
+#Also tried knitting this and the code would stop at Line 194, so I "hashtagged" this and used the code below instead
 ```
+
+```{r}
+kinesis <- superhero_powers %>%
+  select(hero_names, ends_with("kinesis")) %>%
+  filter_all(any_vars(.=="TRUE"))
+kinesis
+#Make sure to use filter_all for this, not just filter
+```
+
+
+Tried this code without the hashtags, but not working:
+```{r}
+#kinesis <- superhero_powers %>%
+#  select(hero_names, ends_with(kinesis)) %>% 
+#  filter(kinesis == "TRUE")
+```
+
 
 16. Pick your favorite superhero and let's see their powers!
 ```{r}
-
+superhero_powers %>%
+  filter(hero_names == "Darth Vader") %>%
+  select_if(all_vars(.=="TRUE"))
 ```
 
 ## Push your final code to GitHub!

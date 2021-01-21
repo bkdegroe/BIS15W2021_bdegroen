@@ -20,6 +20,25 @@ Please take 5-8 minutes to check over your answers to the HW in your group. If y
 ## Instructions
 For the second part of lab 5 today, we are going to spend time practicing the dplyr functions we have learned and add a few new ones. We will spend most of the time in our breakout rooms. Your lab 5 homework will be to knit and push this file to your repository.  
 
+
+```r
+getwd()
+```
+
+```
+## [1] "/Users/Astrobeecal/Desktop/BIS15W2021_bdegroen/lab5"
+```
+
+
+```r
+getwd()
+```
+
+```
+## [1] "/Users/Astrobeecal/Desktop/BIS15W2021_bdegroen/lab5"
+```
+
+
 ## Load the tidyverse
 
 ```r
@@ -96,6 +115,7 @@ names(superhero_info)
 ##  [6] "Height"     "Publisher"  "Skin color" "Alignment"  "Weight"
 ```
 
+
 ```r
 superhero_info_rename <- rename(superhero_info, gender="Gender", eye_color="Eye color", race="Race", hair_color="Hair color", height="Height", publisher="Publisher", skin_color="Skin color", alignment="Alignment", weight="Weight")
 superhero_info_rename
@@ -117,6 +137,7 @@ superhero_info_rename
 ## 10 Agen… Male   brown     Human Brown         178 Marvel C… <NA>       good     
 ## # … with 724 more rows, and 1 more variable: weight <dbl>
 ```
+
 -Remove # to run code data
 Yikes! `superhero_powers` has a lot of variables that are poorly named. We need some R superpowers...
 
@@ -361,6 +382,7 @@ good_guys
 ## # … with 510 more rows, and 1 more variable: weight <dbl>
 ```
 
+
 ```r
 bad_guys <- superhero_info_rename %>% 
   filter(alignment !="good")
@@ -508,6 +530,7 @@ good_guys %>%
 ## # … with 30 more rows, and 1 more variable: weight <dbl>
 ```
 
+
 ```r
 bad_guys %>% 
   filter(hair_color == "No Hair")
@@ -530,74 +553,299 @@ bad_guys %>%
 ## # … with 28 more rows, and 1 more variable: weight <dbl>
 ```
 
+There are more good guys than bad guys that have no hair.
+
+Tried to make a tableset without the hashtags, but this command wasn't working:
+
+```r
+#good_guys %>%
+#  filter(hair_color == "No Hair") %>% 
+#  table(good_guys$hair_color)
+```
+
+
 10. Let's explore who the really "big" superheros are. In the `superhero_info` data, which have a height over 200 or weight over 300?
 
 ```r
 superhero_info_rename %>%
+  select(name, height, weight) %>%
   filter(height > "200" | weight > "300")
 ```
 
 ```
-## # A tibble: 405 x 10
-##    name  gender eye_color race  hair_color height publisher skin_color alignment
-##    <chr> <chr>  <chr>     <chr> <chr>       <dbl> <chr>     <chr>      <chr>    
-##  1 A-Bo… Male   yellow    Human No Hair       203 Marvel C… <NA>       good     
-##  2 Abe … Male   blue      Icth… No Hair       191 Dark Hor… blue       good     
-##  3 Abin… Male   blue      Unga… No Hair       185 DC Comics red        good     
-##  4 Abom… Male   green     Huma… No Hair       203 Marvel C… <NA>       bad      
-##  5 Adam… Male   blue      Human Blond         185 DC Comics <NA>       good     
-##  6 Agen… Female blue      <NA>  Blond         173 Marvel C… <NA>       good     
-##  7 Agen… Male   brown     Human Brown         178 Marvel C… <NA>       good     
-##  8 Ajax  Male   brown     Cybo… Black         193 Marvel C… <NA>       bad      
-##  9 Alan… Male   blue      <NA>  Blond         180 DC Comics <NA>       good     
-## 10 Alfr… Male   blue      Human Black         178 DC Comics <NA>       good     
-## # … with 395 more rows, and 1 more variable: weight <dbl>
+## # A tibble: 405 x 3
+##    name              height weight
+##    <chr>              <dbl>  <dbl>
+##  1 A-Bomb               203    441
+##  2 Abe Sapien           191     65
+##  3 Abin Sur             185     90
+##  4 Abomination          203    441
+##  5 Adam Strange         185     88
+##  6 Agent 13             173     61
+##  7 Agent Bob            178     81
+##  8 Ajax                 193     90
+##  9 Alan Scott           180     90
+## 10 Alfred Pennyworth    178     72
+## # … with 395 more rows
 ```
 
 11. Just to be clear on the `|` operator,  have a look at the superheros over 300 in height...
 
 ```r
 superhero_info_rename %>% 
-  filter(weight >"300")
+  select(name, height) %>% 
+  filter(height > "300")
 ```
 
 ```
-## # A tibble: 365 x 10
-##    name  gender eye_color race  hair_color height publisher skin_color alignment
-##    <chr> <chr>  <chr>     <chr> <chr>       <dbl> <chr>     <chr>      <chr>    
-##  1 A-Bo… Male   yellow    Human No Hair       203 Marvel C… <NA>       good     
-##  2 Abe … Male   blue      Icth… No Hair       191 Dark Hor… blue       good     
-##  3 Abin… Male   blue      Unga… No Hair       185 DC Comics red        good     
-##  4 Abom… Male   green     Huma… No Hair       203 Marvel C… <NA>       bad      
-##  5 Adam… Male   blue      Human Blond         185 DC Comics <NA>       good     
-##  6 Agen… Female blue      <NA>  Blond         173 Marvel C… <NA>       good     
-##  7 Agen… Male   brown     Human Brown         178 Marvel C… <NA>       good     
-##  8 Ajax  Male   brown     Cybo… Black         193 Marvel C… <NA>       bad      
-##  9 Alan… Male   blue      <NA>  Blond         180 DC Comics <NA>       good     
-## 10 Alfr… Male   blue      Human Black         178 DC Comics <NA>       good     
-## # … with 355 more rows, and 1 more variable: weight <dbl>
+## # A tibble: 14 x 2
+##    name            height
+##    <chr>            <dbl>
+##  1 Anti-Monitor      61  
+##  2 Fin Fang Foom    975  
+##  3 Galactus         876  
+##  4 Giganta           62.5
+##  5 Groot            701  
+##  6 Howard the Duck   79  
+##  7 Jack-Jack         71  
+##  8 Krypto            64  
+##  9 MODOK            366  
+## 10 Onslaught        305  
+## 11 Sasquatch        305  
+## 12 Wolfsbane        366  
+## 13 Ymir             305. 
+## 14 Yoda              66
 ```
 
 12. ...and the superheros over 450 in weight. Bonus question! Why do we not have 16 rows in question #10?
 
+```r
+superhero_info_rename %>% 
+  select(name, weight) %>% 
+  filter(weight >"450")
+```
+
+```
+## # A tibble: 339 x 2
+##    name              weight
+##    <chr>              <dbl>
+##  1 Abe Sapien            65
+##  2 Abin Sur              90
+##  3 Adam Strange          88
+##  4 Agent 13              61
+##  5 Agent Bob             81
+##  6 Ajax                  90
+##  7 Alan Scott            90
+##  8 Alfred Pennyworth     72
+##  9 Angel                 68
+## 10 Angel Dust            57
+## # … with 329 more rows
+```
+
+We do not have 16 rows in question #10 because it includes two factors that are being filtered: height or weight. The filters for questions 12 and 13 only filter one factor, therefore don't take any other "or" factors into consideration for filtering.
 
 ## Height to Weight Ratio
 13. It's easy to be strong when you are heavy and tall, but who is heavy and short? Which superheros have the highest height to weight ratio?
 
+```r
+superhero_info_rename %>%
+  mutate(superhero_info_rename_ratio=height/weight) %>% 
+  select(name, weight, height, superhero_info_rename_ratio) %>%
+  arrange(desc(superhero_info_rename_ratio))
+```
+
+```
+## # A tibble: 734 x 4
+##    name            weight height superhero_info_rename_ratio
+##    <chr>            <dbl>  <dbl>                       <dbl>
+##  1 Groot                4    701                      175.  
+##  2 Galactus            16    876                       54.8 
+##  3 Fin Fang Foom       18    975                       54.2 
+##  4 Longshot            36    188                        5.22
+##  5 Jack-Jack           14     71                        5.07
+##  6 Rocket Raccoon      25    122                        4.88
+##  7 Dash                27    122                        4.52
+##  8 Howard the Duck     18     79                        4.39
+##  9 Swarm               47    196                        4.17
+## 10 Yoda                17     66                        3.88
+## # … with 724 more rows
+```
+
+```r
+#Mutate adds a column. You name the column first, then = what it's calculcating.
+```
 
 ## `superhero_powers`
 Have a quick look at the `superhero_powers` data frame.  
 
+```r
+data_frame(superhero_powers)
+```
+
+```
+## Warning: `data_frame()` is deprecated as of tibble 1.1.0.
+## Please use `tibble()` instead.
+## This warning is displayed once every 8 hours.
+## Call `lifecycle::last_warnings()` to see where this warning was generated.
+```
+
+```
+## # A tibble: 667 x 168
+##    hero_names agility accelerated_hea… lantern_power_r… dimensional_awa…
+##    <chr>      <lgl>   <lgl>            <lgl>            <lgl>           
+##  1 3-D Man    TRUE    FALSE            FALSE            FALSE           
+##  2 A-Bomb     FALSE   TRUE             FALSE            FALSE           
+##  3 Abe Sapien TRUE    TRUE             FALSE            FALSE           
+##  4 Abin Sur   FALSE   FALSE            TRUE             FALSE           
+##  5 Abominati… FALSE   TRUE             FALSE            FALSE           
+##  6 Abraxas    FALSE   FALSE            FALSE            TRUE            
+##  7 Absorbing… FALSE   FALSE            FALSE            FALSE           
+##  8 Adam Monr… FALSE   TRUE             FALSE            FALSE           
+##  9 Adam Stra… FALSE   FALSE            FALSE            FALSE           
+## 10 Agent Bob  FALSE   FALSE            FALSE            FALSE           
+## # … with 657 more rows, and 163 more variables: cold_resistance <lgl>,
+## #   durability <lgl>, stealth <lgl>, energy_absorption <lgl>, flight <lgl>,
+## #   danger_sense <lgl>, underwater_breathing <lgl>, marksmanship <lgl>,
+## #   weapons_master <lgl>, power_augmentation <lgl>, animal_attributes <lgl>,
+## #   longevity <lgl>, intelligence <lgl>, super_strength <lgl>,
+## #   cryokinesis <lgl>, telepathy <lgl>, energy_armor <lgl>,
+## #   energy_blasts <lgl>, duplication <lgl>, size_changing <lgl>,
+## #   density_control <lgl>, stamina <lgl>, astral_travel <lgl>,
+## #   audio_control <lgl>, dexterity <lgl>, omnitrix <lgl>, super_speed <lgl>,
+## #   possession <lgl>, animal_oriented_powers <lgl>, weapon_based_powers <lgl>,
+## #   electrokinesis <lgl>, darkforce_manipulation <lgl>, death_touch <lgl>,
+## #   teleportation <lgl>, enhanced_senses <lgl>, telekinesis <lgl>,
+## #   energy_beams <lgl>, magic <lgl>, hyperkinesis <lgl>, jump <lgl>,
+## #   clairvoyance <lgl>, dimensional_travel <lgl>, power_sense <lgl>,
+## #   shapeshifting <lgl>, peak_human_condition <lgl>, immortality <lgl>,
+## #   camouflage <lgl>, element_control <lgl>, phasing <lgl>,
+## #   astral_projection <lgl>, electrical_transport <lgl>, fire_control <lgl>,
+## #   projection <lgl>, summoning <lgl>, enhanced_memory <lgl>, reflexes <lgl>,
+## #   invulnerability <lgl>, energy_constructs <lgl>, force_fields <lgl>,
+## #   self_sustenance <lgl>, anti_gravity <lgl>, empathy <lgl>,
+## #   power_nullifier <lgl>, radiation_control <lgl>, psionic_powers <lgl>,
+## #   elasticity <lgl>, substance_secretion <lgl>,
+## #   elemental_transmogrification <lgl>, technopath_cyberpath <lgl>,
+## #   photographic_reflexes <lgl>, seismic_power <lgl>, animation <lgl>,
+## #   precognition <lgl>, mind_control <lgl>, fire_resistance <lgl>,
+## #   power_absorption <lgl>, enhanced_hearing <lgl>, nova_force <lgl>,
+## #   insanity <lgl>, hypnokinesis <lgl>, animal_control <lgl>,
+## #   natural_armor <lgl>, intangibility <lgl>, enhanced_sight <lgl>,
+## #   molecular_manipulation <lgl>, heat_generation <lgl>, adaptation <lgl>,
+## #   gliding <lgl>, power_suit <lgl>, mind_blast <lgl>,
+## #   probability_manipulation <lgl>, gravity_control <lgl>, regeneration <lgl>,
+## #   light_control <lgl>, echolocation <lgl>, levitation <lgl>,
+## #   toxin_and_disease_control <lgl>, banish <lgl>, energy_manipulation <lgl>,
+## #   heat_resistance <lgl>, …
+```
 
 14. How many superheros have a combination of accelerated healing, durability, and super strength?
 
+```r
+superhero_powers %>%
+  select(hero_names, accelerated_healing, durability, super_strength) %>%
+  filter(accelerated_healing == "TRUE" & durability == "TRUE" & super_strength == "TRUE")
+```
+
+```
+## # A tibble: 97 x 4
+##    hero_names   accelerated_healing durability super_strength
+##    <chr>        <lgl>               <lgl>      <lgl>         
+##  1 A-Bomb       TRUE                TRUE       TRUE          
+##  2 Abe Sapien   TRUE                TRUE       TRUE          
+##  3 Angel        TRUE                TRUE       TRUE          
+##  4 Anti-Monitor TRUE                TRUE       TRUE          
+##  5 Anti-Venom   TRUE                TRUE       TRUE          
+##  6 Aquaman      TRUE                TRUE       TRUE          
+##  7 Arachne      TRUE                TRUE       TRUE          
+##  8 Archangel    TRUE                TRUE       TRUE          
+##  9 Ardina       TRUE                TRUE       TRUE          
+## 10 Ares         TRUE                TRUE       TRUE          
+## # … with 87 more rows
+```
+
+Not sure why it's coming up with no rows :/
 
 ## `kinesis`
 15. We are only interested in the superheros that do some kind of "kinesis". How would we isolate them from the `superhero_powers` data?
 
+```r
+#kinesis <- superhero_powers %>%
+#  select(hero_names, ends_with("kinesis")) %>%
+#  filter(kinesis == "TRUE")
+#names(kinesis)
+#Not sure why this result isn't giving a table form that includes the hero names
+#Also tried knitting this and the code would stop at Line 194, so I "hashtagged" this and used the code below instead
+```
+
+
+```r
+kinesis <- superhero_powers %>%
+  select(hero_names, ends_with("kinesis")) %>%
+  filter_all(any_vars(.=="TRUE"))
+kinesis
+```
+
+```
+## # A tibble: 112 x 10
+##    hero_names cryokinesis electrokinesis telekinesis hyperkinesis hypnokinesis
+##    <chr>      <lgl>       <lgl>          <lgl>       <lgl>        <lgl>       
+##  1 Alan Scott FALSE       FALSE          FALSE       FALSE        TRUE        
+##  2 Amazo      TRUE        FALSE          FALSE       FALSE        FALSE       
+##  3 Apocalypse FALSE       FALSE          TRUE        FALSE        FALSE       
+##  4 Aqualad    TRUE        FALSE          FALSE       FALSE        FALSE       
+##  5 Beyonder   FALSE       FALSE          TRUE        FALSE        FALSE       
+##  6 Bizarro    TRUE        FALSE          FALSE       FALSE        TRUE        
+##  7 Black Abb… FALSE       FALSE          TRUE        FALSE        FALSE       
+##  8 Black Adam FALSE       FALSE          TRUE        FALSE        FALSE       
+##  9 Black Lig… FALSE       TRUE           FALSE       FALSE        FALSE       
+## 10 Black Mam… FALSE       FALSE          FALSE       FALSE        TRUE        
+## # … with 102 more rows, and 4 more variables: thirstokinesis <lgl>,
+## #   biokinesis <lgl>, terrakinesis <lgl>, vitakinesis <lgl>
+```
+
+```r
+#Make sure to use filter_all for this, not just filter
+```
+
+
+Tried this code without the hashtags, but not working:
+
+```r
+#kinesis <- superhero_powers %>%
+#  select(hero_names, ends_with(kinesis)) %>% 
+#  filter(kinesis == "TRUE")
+```
+
 
 16. Pick your favorite superhero and let's see their powers!
 
+```r
+superhero_powers %>%
+  filter(hero_names == "Darth Vader") %>%
+  select_if(all_vars(.=="TRUE"))
+```
+
+```
+## Warning: The `.predicate` argument of `select_if()` can't contain quosures. as of dplyr 0.8.3.
+## Please use a one-sided formula, a function, or a function name.
+## This warning is displayed once every 8 hours.
+## Call `lifecycle::last_warnings()` to see where this warning was generated.
+```
+
+```
+## # A tibble: 1 x 26
+##   agility accelerated_hea… durability stealth danger_sense marksmanship
+##   <lgl>   <lgl>            <lgl>      <lgl>   <lgl>        <lgl>       
+## 1 TRUE    TRUE             TRUE       TRUE    TRUE         TRUE        
+## # … with 20 more variables: weapons_master <lgl>, intelligence <lgl>,
+## #   telepathy <lgl>, energy_blasts <lgl>, super_speed <lgl>,
+## #   electrokinesis <lgl>, enhanced_senses <lgl>, telekinesis <lgl>, jump <lgl>,
+## #   astral_projection <lgl>, reflexes <lgl>, force_fields <lgl>,
+## #   psionic_powers <lgl>, precognition <lgl>, enhanced_hearing <lgl>,
+## #   hypnokinesis <lgl>, light_control <lgl>, illusions <lgl>, cloaking <lgl>,
+## #   the_force <lgl>
+```
 
 ## Push your final code to GitHub!
 Please be sure that you check the `keep md` file in the knit preferences.  

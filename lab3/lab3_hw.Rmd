@@ -58,6 +58,12 @@ table(sleep$vore)
 ```
 So 32 herbivores.
 
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "blue">
+
+
 7. We are interested in two groups; small and large mammals. Let's define small as less than or equal to 1kg body weight and large as greater than or equal to 200kg body weight. Make two new dataframes (large and small) based on these parameters.
 ```{r}
 small <- subset(sleep, bodywt<= "1")
@@ -69,6 +75,14 @@ large
 ```
 For body weight with large, some data still show values below 200, what did I do wrong?
 
+</div>
+
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "blue">
+
+
 8. What is the mean weight for both the small and large mammals?
 ```{r}
 mean(small$bodywt)
@@ -77,6 +91,13 @@ mean(small$bodywt)
 ```{r}
 mean(large$bodywt)
 ```
+</div>
+
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "blue">
+
 
 9. Using a similar approach as above, do large or small animals sleep longer on average?  
 ```{r}
@@ -87,6 +108,9 @@ mean(small$sleep_total)
 mean(large$sleep_total)
 ```
 Small animals sleep longer on average.
+
+</div>
+
 
 10. Which animal is the sleepiest among the entire dataframe?
 The sleepiest animal is the Little brown bat.

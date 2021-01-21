@@ -54,6 +54,10 @@ sapply(homerange, class)
 summary(homerange)
 ```
 
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "blue">
 
 **3. Change the class of the variables `taxon` and `order` to factors and display their levels.**  
 ```{r}
@@ -67,6 +71,8 @@ class(homerange$order)
 ```{r}
 homerangerename <- rename(homerange, common_name="common.name")
 ```
+
+</div>
 
 **4. What taxa are represented in the `homerange` data frame? Make a new data frame `taxa` that is restricted to taxon, common name, class, order, family, genus, species.**  
 ```{r}

@@ -1615,7 +1615,11 @@ superhero_info_rename</code></pre>
 ##  9 Agen… Female blue      &lt;NA&gt;  Blond         173 Marvel C… &lt;NA&gt;       good     
 ## 10 Agen… Male   brown     Human Brown         178 Marvel C… &lt;NA&gt;       good     
 ## # … with 724 more rows, and 1 more variable: weight &lt;dbl&gt;</code></pre>
+<<<<<<< HEAD
 <p>Yikes! <code>superhero_powers</code> has a lot of variables that are poorly named. We need some R superpowers…</p>
+=======
+<p>-Remove # to run code data Yikes! <code>superhero_powers</code> has a lot of variables that are poorly named. We need some R superpowers…</p>
+>>>>>>> d7a304205eb487744aeb09a21780a44b4b44002c
 <pre class="r"><code>head(superhero_powers)</code></pre>
 <pre><code>## # A tibble: 6 x 168
 ##   hero_names Agility `Accelerated He… `Lantern Power … `Dimensional Aw…
@@ -1954,15 +1958,19 @@ bad_guys</code></pre>
 ##  9 Dark… Male   red       New … No Hair     267   DC Comics grey       bad      
 ## 10 Dart… Male   yellow    Cybo… No Hair     198   George L… &lt;NA&gt;       bad      
 ## # … with 28 more rows, and 1 more variable: weight &lt;dbl&gt;</code></pre>
+<<<<<<< HEAD
 <p>There are more good guys than bad guys that have no hair.</p>
 <p>Tried to make a tableset without the hashtags, but this command wasn’t working:</p>
 <pre class="r"><code>#good_guys %&gt;%
 #  filter(hair_color == &quot;No Hair&quot;) %&gt;% 
 #  table(good_guys$hair_color)</code></pre>
+=======
+>>>>>>> d7a304205eb487744aeb09a21780a44b4b44002c
 <ol start="10" style="list-style-type: decimal">
 <li>Let’s explore who the really “big” superheros are. In the <code>superhero_info</code> data, which have a height over 200 or weight over 300?</li>
 </ol>
 <pre class="r"><code>superhero_info_rename %&gt;%
+<<<<<<< HEAD
   select(name, height, weight) %&gt;% 
   filter(height &gt; &quot;200&quot; | weight &gt; &quot;300&quot;)</code></pre>
 <pre><code>## # A tibble: 405 x 3
@@ -1979,10 +1987,28 @@ bad_guys</code></pre>
 ##  9 Alan Scott           180     90
 ## 10 Alfred Pennyworth    178     72
 ## # … with 395 more rows</code></pre>
+=======
+  filter(height &gt; &quot;200&quot; | weight &gt; &quot;300&quot;)</code></pre>
+<pre><code>## # A tibble: 405 x 10
+##    name  gender eye_color race  hair_color height publisher skin_color alignment
+##    &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;      &lt;chr&gt;    
+##  1 A-Bo… Male   yellow    Human No Hair       203 Marvel C… &lt;NA&gt;       good     
+##  2 Abe … Male   blue      Icth… No Hair       191 Dark Hor… blue       good     
+##  3 Abin… Male   blue      Unga… No Hair       185 DC Comics red        good     
+##  4 Abom… Male   green     Huma… No Hair       203 Marvel C… &lt;NA&gt;       bad      
+##  5 Adam… Male   blue      Human Blond         185 DC Comics &lt;NA&gt;       good     
+##  6 Agen… Female blue      &lt;NA&gt;  Blond         173 Marvel C… &lt;NA&gt;       good     
+##  7 Agen… Male   brown     Human Brown         178 Marvel C… &lt;NA&gt;       good     
+##  8 Ajax  Male   brown     Cybo… Black         193 Marvel C… &lt;NA&gt;       bad      
+##  9 Alan… Male   blue      &lt;NA&gt;  Blond         180 DC Comics &lt;NA&gt;       good     
+## 10 Alfr… Male   blue      Human Black         178 DC Comics &lt;NA&gt;       good     
+## # … with 395 more rows, and 1 more variable: weight &lt;dbl&gt;</code></pre>
+>>>>>>> d7a304205eb487744aeb09a21780a44b4b44002c
 <ol start="11" style="list-style-type: decimal">
 <li>Just to be clear on the <code>|</code> operator, have a look at the superheros over 300 in height…</li>
 </ol>
 <pre class="r"><code>superhero_info_rename %&gt;% 
+<<<<<<< HEAD
   select(name, height) %&gt;% 
   filter(height &gt; &quot;300&quot;)</code></pre>
 <pre><code>## # A tibble: 14 x 2
@@ -2023,12 +2049,33 @@ bad_guys</code></pre>
 ## 10 Angel Dust            57
 ## # … with 329 more rows</code></pre>
 <p>We do not have 16 rows in question #10 because it includes two factors that are being filtered: height or weight. The filters for questions 12 and 13 only filter one factor, therefore don’t take any other “or” factors into consideration for filtering.</p>
+=======
+  filter(weight &gt;&quot;300&quot;)</code></pre>
+<pre><code>## # A tibble: 365 x 10
+##    name  gender eye_color race  hair_color height publisher skin_color alignment
+##    &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;      &lt;chr&gt;    
+##  1 A-Bo… Male   yellow    Human No Hair       203 Marvel C… &lt;NA&gt;       good     
+##  2 Abe … Male   blue      Icth… No Hair       191 Dark Hor… blue       good     
+##  3 Abin… Male   blue      Unga… No Hair       185 DC Comics red        good     
+##  4 Abom… Male   green     Huma… No Hair       203 Marvel C… &lt;NA&gt;       bad      
+##  5 Adam… Male   blue      Human Blond         185 DC Comics &lt;NA&gt;       good     
+##  6 Agen… Female blue      &lt;NA&gt;  Blond         173 Marvel C… &lt;NA&gt;       good     
+##  7 Agen… Male   brown     Human Brown         178 Marvel C… &lt;NA&gt;       good     
+##  8 Ajax  Male   brown     Cybo… Black         193 Marvel C… &lt;NA&gt;       bad      
+##  9 Alan… Male   blue      &lt;NA&gt;  Blond         180 DC Comics &lt;NA&gt;       good     
+## 10 Alfr… Male   blue      Human Black         178 DC Comics &lt;NA&gt;       good     
+## # … with 355 more rows, and 1 more variable: weight &lt;dbl&gt;</code></pre>
+<ol start="12" style="list-style-type: decimal">
+<li>…and the superheros over 450 in weight. Bonus question! Why do we not have 16 rows in question #10?</li>
+</ol>
+>>>>>>> d7a304205eb487744aeb09a21780a44b4b44002c
 </div>
 <div id="height-to-weight-ratio" class="section level2">
 <h2>Height to Weight Ratio</h2>
 <ol start="13" style="list-style-type: decimal">
 <li>It’s easy to be strong when you are heavy and tall, but who is heavy and short? Which superheros have the highest height to weight ratio?</li>
 </ol>
+<<<<<<< HEAD
 <pre class="r"><code>superhero_info_rename %&gt;%
   mutate(superhero_info_rename_ratio=height/weight) %&gt;% 
   select(name, weight, height, superhero_info_rename_ratio) %&gt;%
@@ -2048,10 +2095,13 @@ bad_guys</code></pre>
 ## 10 Yoda                17     66                        3.88
 ## # … with 724 more rows</code></pre>
 <pre class="r"><code>#Mutate adds a column. You name the column first, then = what it&#39;s calculcating.</code></pre>
+=======
+>>>>>>> d7a304205eb487744aeb09a21780a44b4b44002c
 </div>
 <div id="superhero_powers" class="section level2">
 <h2><code>superhero_powers</code></h2>
 <p>Have a quick look at the <code>superhero_powers</code> data frame.</p>
+<<<<<<< HEAD
 <pre class="r"><code>data_frame(superhero_powers)</code></pre>
 <pre><code>## Warning: `data_frame()` is deprecated as of tibble 1.1.0.
 ## Please use `tibble()` instead.
@@ -2125,10 +2175,16 @@ bad_guys</code></pre>
 ## 10 Ares         TRUE                TRUE       TRUE          
 ## # … with 87 more rows</code></pre>
 <p>Not sure why it’s coming up with no rows :/</p>
+=======
+<ol start="14" style="list-style-type: decimal">
+<li>How many superheros have a combination of accelerated healing, durability, and super strength?</li>
+</ol>
+>>>>>>> d7a304205eb487744aeb09a21780a44b4b44002c
 </div>
 <div id="kinesis" class="section level2">
 <h2><code>kinesis</code></h2>
 <ol start="15" style="list-style-type: decimal">
+<<<<<<< HEAD
 <li>We are only interested in the superheros that do some kind of “kinesis”. How would we isolate them from the <code>superhero_powers</code> data?</li>
 </ol>
 <pre class="r"><code>#kinesis &lt;- superhero_powers %&gt;%
@@ -2182,6 +2238,11 @@ kinesis</code></pre>
 ## #   psionic_powers &lt;lgl&gt;, precognition &lt;lgl&gt;, enhanced_hearing &lt;lgl&gt;,
 ## #   hypnokinesis &lt;lgl&gt;, light_control &lt;lgl&gt;, illusions &lt;lgl&gt;, cloaking &lt;lgl&gt;,
 ## #   the_force &lt;lgl&gt;</code></pre>
+=======
+<li><p>We are only interested in the superheros that do some kind of “kinesis”. How would we isolate them from the <code>superhero_powers</code> data?</p></li>
+<li><p>Pick your favorite superhero and let’s see their powers!</p></li>
+</ol>
+>>>>>>> d7a304205eb487744aeb09a21780a44b4b44002c
 </div>
 <div id="push-your-final-code-to-github" class="section level2">
 <h2>Push your final code to GitHub!</h2>

@@ -183,7 +183,7 @@ superhero_info_rename %>%
   mutate(superhero_info_rename_ratio=height/weight) %>% 
   select(name, weight, height, superhero_info_rename_ratio) %>%
   arrange(desc(superhero_info_rename_ratio))
-#Mutate adds a column. You name the column first, then = what it's calculcating.
+#Mutate adds a column. You name the column first, then = what it's calculating.
 ```
 
 ## `superhero_powers`

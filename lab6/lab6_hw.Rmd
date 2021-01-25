@@ -44,9 +44,6 @@ names(fisheries)
 dim(fisheries)
 ```
 ```{r}
-is.na(fisheries)
-```
-```{r}
 anyNA(fisheries)
 ```
 ```{r}
@@ -55,6 +52,8 @@ summary(fisheries)
 ```{r}
 class(fisheries)
 ```
+The class is character.
+
 
 
 2. Use `janitor` to rename the columns and make them easier to use. As part of this cleaning step, change `country`, `isscaap_group_number`, `asfis_species_number`, and `fao_major_fishing_area` to data class factor. 
@@ -129,6 +128,15 @@ refocus_fisheries_tidy %>%
   filter(year==2000) %>%
   summarize(max_catch = max(catch, na.rm = T))
 ```
+```{r}
+#Code a classmate suggested
+refocus_fisheries_tidy %>%
+  filter(year=="2000") %>% 
+  group_by(country) %>% 
+ summarize(sumcatch=sum(catch,na.rm=T),
+            totaln=n(),.groups= 'keep') %>% 
+  arrange(desc(sumcatch))
+```
 
 
 7. Which country caught the most sardines (_Sardina pilchardus_) between the years 1990-2000?
@@ -145,25 +153,47 @@ refocus_fisheries_tidy %>%
 
 8. Which five countries caught the most cephalopods between 2008-2012?
 ```{r}
-names(as.list(refocus_fisheries_tidy, all.names = T))
+refocus_fisheries_tidy %>%
+  filter(isscaap_taxonomic_group=="Squids, cuttlefishes, octopuses") %>% 
+  count(asfis_species_name, sort=T)
 ```
-
+```{r}
 refocus_fisheries_tidy %>%
   select(country, isscaap_taxonomic_group, year, catch) %>% 
-  filter(isscaap_taxonomic_group == "cephalopods") %>%
+  filter(isscaap_taxonomic_group == "Squids, cuttlefishes, octopuses") %>%
   filter(year >= 2000 & year <= 2012) %>%
   group_by(country) %>% 
   summarize(sum_max_catch = sum(catch, na.rm = T)) %>% 
   arrange(desc(sum_max_catch))
+```
+
 
 9. Which species had the highest catch total between 2008-2012? (hint: Osteichthyes is not a species)
 ```{r}
-
+refocus_fisheries_tidy %>% 
+  select(asfis_species_name, year, catch) %>%
+  filter(year >= 2000 & year <= 2012) %>%
+  group_by(asfis_species_name) %>%
+  summarize(sum_species_max_catch = sum(catch, na.rm = T)) %>% 
+  arrange(desc(sum_species_max_catch))
 ```
+Engraulis ringens had the highest catch total.
+
 
 10. Use the data to do at least one analysis of your choice.
 ```{r}
-
+refocus_fisheries_tidy %>%
+  filter(country == "Netherlands") %>% 
+  group_by(asfis_species_name) %>%
+  summarize(sum_max_catch = sum(catch, na.rm = T)) %>% 
+  arrange(desc(sum_max_catch))
+```
+```{r}
+refocus_fisheries_tidy %>%
+  filter(country == "Netherlands") %>% 
+  group_by(year) %>%
+  summarize(sum_max_catch = sum(catch, na.rm = T)) %>% 
+  arrange(desc(sum_max_catch))
 ```
 
 ## Push your final code to GitHub!

@@ -1,0 +1,181 @@
+---
+title: "Midterm 1"
+author: "Berlin DeGroen"
+date: "`r Sys.Date()`"
+output:
+  html_document: 
+    theme: spacelab
+    keep_md: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Instructions
+Answer the following questions and complete the exercises in RMarkdown. Please embed all of your code and push your final work to your repository. Your code should be organized, clean, and run free from errors. Be sure to **add your name** to the author header above. You may use any resources to answer these questions (including each other), but you may not post questions to Open Stacks or external help sites. There are 12 total questions.  
+
+Make sure to use the formatting conventions of RMarkdown to make your report neat and clean!  
+
+This exam is due by **12:00p on Thursday, January 28**.  
+
+## Load the tidyverse
+If you plan to use any other libraries to complete this assignment then you should load them here.
+```{r message=FALSE, warning=FALSE}
+library(tidyverse)
+```
+
+```{r}
+getwd()
+```
+
+
+## Questions
+**1. (2 points) Briefly explain how R, RStudio, and GitHub work together to make work flows in data science transparent and repeatable. What is the advantage of using RMarkdown in this context?**  
+
+R studio is mainly a more streamlined form of R programming. It is more user-friendly and less code intensive than R is, but the two programs still coordinate with each other to give the user.
+
+Github works with these two programs to make a more user-friendly coding platform whose code can be shared with others.
+
+R markdown is a tool that can be used to convert the information you typed into R into a specific type of output. It's important because it makes the data more clear to the viewer and is easier to share. 
+
+**2. (2 points) What are the three types of `data structures` that we have discussed? Why are we using data frames for BIS 15L?**
+
+The three types of data structures that we've discussed are numeric, logical values, and character values. We use these because sometimes, a number or object must be stored as a particular class in order to perform a certain function with it, so we do this by assigning the number or object to a class function.
+
+In the midterm 1 folder there is a second folder called `data`. Inside the `data` folder, there is a .csv file called `ElephantsMF`. These data are from Phyllis Lee, Stirling University, and are related to Lee, P., et al. (2013), "Enduring consequences of early experiences: 40-year effects on survival and success among African elephants (Loxodonta africana)," Biology Letters, 9: 20130011. [kaggle](https://www.kaggle.com/mostafaelseidy/elephantsmf).  
+
+**3. (2 points) Please load these data as a new object called `elephants`. Use the function(s) of your choice to get an idea of the structure of the data. Be sure to show the class of each variable.**
+
+```{r}
+elephants <- readr::read_csv("data/ElephantsMF.csv")
+```
+```{r}
+sapply(elephants, class)
+```
+```{r}
+glimpse(elephants)
+```
+```{r}
+summary(elephants)
+```
+
+(making vairables lawercase, mutate all. Used something else. REason why it wouldn't work?
+You're asking to change "every" cell from uppercase to lowercase. Might not be necessary nor something you'd want to do)
+
+
+**4. (2 points) Change the names of the variables to lower case and change the class of the variable `sex` to a factor.**
+```{r}
+library("janitor")
+```
+
+```{r}
+elephants <- janitor::clean_names(elephants)
+elephants
+```
+```{r}
+elephants$sex <- as.factor(elephants$sex)
+class(elephants$sex)
+```
+
+
+**5. (2 points) How many male and female elephants are represented in the data?**
+```{r}
+elephants %>% 
+  group_by(sex) %>%
+  summarize(n=n())
+```
+
+
+**6. (2 points) What is the average age all elephants in the data?**
+```{r}
+elephants %>%
+  summarize(average_elephant_age = mean(age),
+            n=n())
+```
+
+
+**7. (2 points) How does the average age and height of elephants compare by sex?**
+```{r}
+elephants %>%
+  group_by(sex) %>%
+  summarize(average_elephant_age = mean(age),
+            average_elephant_height = mean(height),
+            n=n())
+```
+
+
+**8. (2 points) How does the average height of elephants compare by sex for individuals over 25 years old. Include the min and max height as well as the number of individuals in the sample as part of your analysis.**
+```{r}
+elephants %>% 
+  group_by(sex) %>% 
+  filter(age > "25") %>%
+  summarize(average_elephant_height = mean(height),
+            min_elephant_height = min(height),
+            max_elephant_height = max(height),
+            n=n())
+```
+
+
+For the next series of questions, we will use data from a study on vertebrate community composition and impacts from defaunation in [Gabon, Africa](https://en.wikipedia.org/wiki/Gabon). One thing to notice is that the data include 24 separate transects. Each transect represents a path through different forest management areas.  
+
+Reference: Koerner SE, Poulsen JR, Blanchard EJ, Okouyi J, Clark CJ. Vertebrate community composition and diversity declines along a defaunation gradient radiating from rural villages in Gabon. _Journal of Applied Ecology_. 2016. This paper, along with a description of the variables is included inside the midterm 1 folder.  
+
+**9. (2 points) Load `IvindoData_DryadVersion.csv` and use the function(s) of your choice to get an idea of the overall structure. Change the variables `HuntCat` and `LandUse` to factors.**
+```{r}
+invidodata <- readr::read_csv("data/IvindoData_DryadVersion.csv")
+```
+```{r}
+sapply(invidodata, class)
+```
+
+```{r}
+glimpse(invidodata)
+```
+```{r}
+names(invidodata)
+```
+```{r}
+summary(invidodata)
+```
+
+```{r}
+invidodata$HuntCat <- as.factor(invidodata$HuntCat)
+class(invidodata$HuntCat)
+```
+```{r}
+invidodata$LandUse <- as.factor(invidodata$LandUse)
+class(invidodata$LandUse)
+```
+
+
+**10. (4 points) For the transects with high and moderate hunting intensity, how does the average diversity of birds and mammals compare?**
+```{r}
+invidodata %>% 
+  filter(HuntCat == "High" | HuntCat == "Moderate") %>% 
+  group_by(HuntCat) %>% 
+  summarize(average_diversity_birds = mean(Diversity_BirdSpecies),
+            average_diversity_mammals = mean(Diversity_MammalSpecies),
+            n=n())
+```
+
+(4 rows across, average bird, mammal, total just in case to see how many groups there are. Rows = high and moderate)
+
+**11. (4 points) One of the conclusions in the study is that the relative abundance of animals drops off the closer you get to a village. Let's try to reconstruct this (without the statistics). How does the relative abundance (RA) of apes, birds, elephants, monkeys, rodents, and ungulates compare between sites that are less than 5km from a village to sites that are greater than 20km from a village? The variable `Distance` measures the distance of the transect from the nearest village. Hint: try using the `across` operator.**
+```{r}
+invidodata %>% 
+  filter(Distance < "5" | Distance > "20") %>% 
+  group_by(Distance < "5" & Distance > "20") %>% 
+  summarize(across(c(RA_Apes, RA_Birds, RA_Elephant, RA_Monkeys, RA_Rodent), mean))
+```
+
+(If we're given a hint but we don't use it, could that negatively impact us or will that make it more difficult for ourselves?
+Hints pretty good, so if it's given, look through labs to see how to apply it)
+(Rows in final dataframe?
+Want to see if you can corroberate finding in the paper, so think about sites close versus far. Think about some kind of average relative abundance. Probably not the only way, but likely makes sense. Could be one row, could be more than one, but then the interpretation could be harder. We're also doing this without applying any stats)
+
+**12. (4 points) Based on your interest, do one exploratory analysis on the `gabon` data of your choice. This analysis needs to include a minimum of two functions in `dplyr.`**
+```{r}
+
+```
+

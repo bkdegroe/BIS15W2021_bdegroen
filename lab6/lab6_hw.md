@@ -1,7 +1,7 @@
 ---
 title: "Lab 6 Homework"
 author: "Please Add Your Name Here"
-date: "2021-01-24"
+date: "2021-01-26"
 output:
   html_document: 
     theme: spacelab
@@ -16,7 +16,7 @@ getwd()
 ```
 
 ```
-## [1] "/Users/Astrobeecal/Desktop/GitHub/BIS15W2021_bdegroen/lab6"
+## [1] "D:/TA files/Winter2021 BIS15L/students_rep/BIS15W2021_bdegroen/lab6"
 ```
 
 
@@ -43,13 +43,13 @@ fisheries <- readr::read_csv("data/FAO_1950to2012_111914.csv")
 
 ```
 ## 
-## ── Column specification ────────────────────────────────────────────────────────
+## -- Column specification --------------------------------------------------------
 ## cols(
 ##   .default = col_character(),
 ##   `ISSCAAP group#` = col_double(),
 ##   `FAO major fishing area` = col_double()
 ## )
-## ℹ Use `spec()` for the full column specifications.
+## i Use `spec()` for the full column specifications.
 ```
 
 1. Do an exploratory analysis of the data (your choice). What are the names of the variables, what are the dimensions, are there any NA's, what are the classes of the variables?  
@@ -297,16 +297,16 @@ glimpse(fisheries_tidy)
 ```
 ## Rows: 376,771
 ## Columns: 10
-## $ country                 <fct> Albania, Albania, Albania, Albania, Albania, …
-## $ common_name             <chr> "Angelsharks, sand devils nei", "Angelsharks,…
-## $ isscaap_group_number    <fct> 38, 38, 38, 38, 38, 38, 38, 38, 38, 38, 38, 3…
-## $ isscaap_taxonomic_group <chr> "Sharks, rays, chimaeras", "Sharks, rays, chi…
-## $ asfis_species_number    <fct> 10903XXXXX, 10903XXXXX, 10903XXXXX, 10903XXXX…
-## $ asfis_species_name      <chr> "Squatinidae", "Squatinidae", "Squatinidae", …
-## $ fao_major_fishing_area  <fct> 37, 37, 37, 37, 37, 37, 37, 37, 37, 37, 37, 3…
-## $ measure                 <chr> "Quantity (tonnes)", "Quantity (tonnes)", "Qu…
-## $ year                    <dbl> 1995, 1996, 1997, 1998, 1999, 2000, 2001, 200…
-## $ catch                   <dbl> NA, 53, 20, 31, 30, 30, 16, 79, 1, 4, 68, 55,…
+## $ country                 <fct> Albania, Albania, Albania, Albania, Albania...
+## $ common_name             <chr> "Angelsharks, sand devils nei", "Angelshark...
+## $ isscaap_group_number    <fct> 38, 38, 38, 38, 38, 38, 38, 38, 38, 38, 38,...
+## $ isscaap_taxonomic_group <chr> "Sharks, rays, chimaeras", "Sharks, rays, c...
+## $ asfis_species_number    <fct> 10903XXXXX, 10903XXXXX, 10903XXXXX, 10903XX...
+## $ asfis_species_name      <chr> "Squatinidae", "Squatinidae", "Squatinidae"...
+## $ fao_major_fishing_area  <fct> 37, 37, 37, 37, 37, 37, 37, 37, 37, 37, 37,...
+## $ measure                 <chr> "Quantity (tonnes)", "Quantity (tonnes)", "...
+## $ year                    <dbl> 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2...
+## $ catch                   <dbl> NA, 53, 20, 31, 30, 30, 16, 79, 1, 4, 68, 5...
 ```
 
 
@@ -341,7 +341,7 @@ fisheries_tidy %>%
 ##  8 Aruba              
 ##  9 Australia          
 ## 10 Bahamas            
-## # … with 193 more rows
+## # ... with 193 more rows
 ```
 
 4. Refocus the data only to include only: country, isscaap_taxonomic_group, asfis_species_name, asfis_species_number, year, catch.
@@ -354,19 +354,19 @@ refocus_fisheries_tidy
 
 ```
 ## # A tibble: 376,771 x 6
-##    country isscaap_taxonomic_g… asfis_species_na… asfis_species_num…  year catch
+##    country isscaap_taxonomic_g~ asfis_species_na~ asfis_species_num~  year catch
 ##    <fct>   <chr>                <chr>             <fct>              <dbl> <dbl>
-##  1 Albania Sharks, rays, chima… Squatinidae       10903XXXXX          1995    NA
-##  2 Albania Sharks, rays, chima… Squatinidae       10903XXXXX          1996    53
-##  3 Albania Sharks, rays, chima… Squatinidae       10903XXXXX          1997    20
-##  4 Albania Sharks, rays, chima… Squatinidae       10903XXXXX          1998    31
-##  5 Albania Sharks, rays, chima… Squatinidae       10903XXXXX          1999    30
-##  6 Albania Sharks, rays, chima… Squatinidae       10903XXXXX          2000    30
-##  7 Albania Sharks, rays, chima… Squatinidae       10903XXXXX          2001    16
-##  8 Albania Sharks, rays, chima… Squatinidae       10903XXXXX          2002    79
-##  9 Albania Sharks, rays, chima… Squatinidae       10903XXXXX          2003     1
-## 10 Albania Sharks, rays, chima… Squatinidae       10903XXXXX          2004     4
-## # … with 376,761 more rows
+##  1 Albania Sharks, rays, chima~ Squatinidae       10903XXXXX          1995    NA
+##  2 Albania Sharks, rays, chima~ Squatinidae       10903XXXXX          1996    53
+##  3 Albania Sharks, rays, chima~ Squatinidae       10903XXXXX          1997    20
+##  4 Albania Sharks, rays, chima~ Squatinidae       10903XXXXX          1998    31
+##  5 Albania Sharks, rays, chima~ Squatinidae       10903XXXXX          1999    30
+##  6 Albania Sharks, rays, chima~ Squatinidae       10903XXXXX          2000    30
+##  7 Albania Sharks, rays, chima~ Squatinidae       10903XXXXX          2001    16
+##  8 Albania Sharks, rays, chima~ Squatinidae       10903XXXXX          2002    79
+##  9 Albania Sharks, rays, chima~ Squatinidae       10903XXXXX          2003     1
+## 10 Albania Sharks, rays, chima~ Squatinidae       10903XXXXX          2004     4
+## # ... with 376,761 more rows
 ```
 
 5. Based on the asfis_species_number, how many distinct fish species were caught as part of these data?
@@ -384,6 +384,7 @@ refocus_fisheries_tidy %>%
 ## 1                          1551
 ```
 
+
 6. Which country had the largest overall catch in the year 2000?
 
 ```r
@@ -396,23 +397,17 @@ refocus_fisheries_tidy %>%
 ```
 
 ```
-## Warning in max(catch, na.rm = T): no non-missing arguments to max; returning -
-## Inf
+## Warning in max(catch, na.rm = T): max 中沒有無漏失的引數；回傳 -Inf
 
-## Warning in max(catch, na.rm = T): no non-missing arguments to max; returning -
-## Inf
+## Warning in max(catch, na.rm = T): max 中沒有無漏失的引數；回傳 -Inf
 
-## Warning in max(catch, na.rm = T): no non-missing arguments to max; returning -
-## Inf
+## Warning in max(catch, na.rm = T): max 中沒有無漏失的引數；回傳 -Inf
 
-## Warning in max(catch, na.rm = T): no non-missing arguments to max; returning -
-## Inf
+## Warning in max(catch, na.rm = T): max 中沒有無漏失的引數；回傳 -Inf
 
-## Warning in max(catch, na.rm = T): no non-missing arguments to max; returning -
-## Inf
+## Warning in max(catch, na.rm = T): max 中沒有無漏失的引數；回傳 -Inf
 
-## Warning in max(catch, na.rm = T): no non-missing arguments to max; returning -
-## Inf
+## Warning in max(catch, na.rm = T): max 中沒有無漏失的引數；回傳 -Inf
 ```
 
 ```
@@ -429,7 +424,7 @@ refocus_fisheries_tidy %>%
 ##  8 Japan                          988
 ##  9 Bangladesh                     977
 ## 10 Senegal                        970
-## # … with 183 more rows
+## # ... with 183 more rows
 ```
 
 ```r
@@ -472,7 +467,7 @@ refocus_fisheries_tidy %>%
 ##  8 India                        6351     98
 ##  9 Thailand                     6243    127
 ## 10 Korea, Republic of           6124    265
-## # … with 183 more rows
+## # ... with 183 more rows
 ```
 
 
@@ -502,12 +497,16 @@ refocus_fisheries_tidy %>%
 ##  8 Italy                           507
 ##  9 Serbia and Montenegro           478
 ## 10 Denmark                         477
-## # … with 27 more rows
+## # ... with 27 more rows
 ```
 
 ```r
 #Why isn't year or species name coming up? Is it because of the group_by?
 ```
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "blue">
 
 8. Which five countries caught the most cephalopods between 2008-2012?
 
@@ -531,7 +530,7 @@ refocus_fisheries_tidy %>%
 ##  8 Cephalopoda                   421
 ##  9 Illex argentinus              413
 ## 10 Loligo gahi                   281
-## # … with 25 more rows
+## # ... with 25 more rows
 ```
 
 ```r
@@ -558,7 +557,7 @@ refocus_fisheries_tidy %>%
 ##  8 Spain                             3194
 ##  9 Thailand                          3039
 ## 10 France                            2921
-## # … with 120 more rows
+## # ... with 120 more rows
 ```
 
 
@@ -587,10 +586,11 @@ refocus_fisheries_tidy %>%
 ##  8 Thunnus albacares                     50267
 ##  9 Scomber japonicus                     38611
 ## 10 Gadus morhua                          30475
-## # … with 1,510 more rows
+## # ... with 1,510 more rows
 ```
 Engraulis ringens had the highest catch total.
 
+</div>
 
 10. Use the data to do at least one analysis of your choice.
 
@@ -616,7 +616,7 @@ refocus_fisheries_tidy %>%
 ##  8 Solea solea                       1434
 ##  9 Osteichthyes                      1198
 ## 10 Gadus morhua                      1138
-## # … with 132 more rows
+## # ... with 132 more rows
 ```
 
 ```r
@@ -641,7 +641,7 @@ refocus_fisheries_tidy %>%
 ##  8  1999          1600
 ##  9  2005          1491
 ## 10  1997          1404
-## # … with 53 more rows
+## # ... with 53 more rows
 ```
 
 ## Push your final code to GitHub!

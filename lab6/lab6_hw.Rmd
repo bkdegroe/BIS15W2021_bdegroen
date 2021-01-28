@@ -112,6 +112,7 @@ refocus_fisheries_tidy %>%
   summarize(distinct_asfis_species_number = n_distinct(asfis_species_number))
 ```
 
+
 6. Which country had the largest overall catch in the year 2000?
 ```{r}
 refocus_fisheries_tidy %>%
@@ -150,6 +151,10 @@ refocus_fisheries_tidy %>%
   arrange(desc(sum_max_catch))
 #Why isn't year or species name coming up? Is it because of the group_by?
 ```
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "blue">
 
 8. Which five countries caught the most cephalopods between 2008-2012?
 ```{r}
@@ -179,6 +184,7 @@ refocus_fisheries_tidy %>%
 ```
 Engraulis ringens had the highest catch total.
 
+</div>
 
 10. Use the data to do at least one analysis of your choice.
 ```{r}

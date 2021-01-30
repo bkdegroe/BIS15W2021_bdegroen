@@ -1,6 +1,6 @@
 # Berlin's BIS 15L Repository
 
-![](name-of-giphy.gif)
+![](Hello there!.gif)
 
 This repository contains the coding mistakes and internal screaming of a BIS 15L student who is praying that she's using this correctly.
 

@@ -16,4 +16,4 @@ This repository contains the coding mistakes and internal screaming of a BIS 15L
 
 ## Thank You!  
 
-![](name-of-giphy.gif)
+![](Planetes.gif)

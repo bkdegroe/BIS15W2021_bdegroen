@@ -1,6 +1,6 @@
 # Berlin's BIS 15L Repository
 
-![](.Hello_there.gif)
+![](name-of-giphy.gif)
 
 This repository contains the coding mistakes and internal screaming of a BIS 15L student who is praying that she's using this correctly.
 
@@ -15,3 +15,5 @@ This repository contains the coding mistakes and internal screaming of a BIS 15L
 [College of Biological Sciences](https://biology.ucdavis.edu/)
 
 ## Thank You!  
+
+![](name-of-giphy.gif)

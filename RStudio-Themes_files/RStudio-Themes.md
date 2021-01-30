@@ -72,3 +72,20 @@ rstudioapi::removeTheme("Hacker green")
 ## NULL
 ```
 
+
+```r
+rstudioapi::addTheme("https://raw.githubusercontent.com/daylerees/colour-schemes/master/sublime/contrast/tron-contrast.tmTheme", apply = TRUE)
+```
+
+```
+## [1] "Tron Contrast"
+```
+
+```r
+rstudioapi::removeTheme("Tron Contrast")
+```
+
+```
+## NULL
+```
+

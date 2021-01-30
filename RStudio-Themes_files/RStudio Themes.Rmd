@@ -45,3 +45,10 @@ rstudioapi::addTheme("https://raw.githubusercontent.com/jsta/hacker_green/master
 rstudioapi::removeTheme("Hacker green")
 ```
 
+```{r}
+rstudioapi::addTheme("https://raw.githubusercontent.com/daylerees/colour-schemes/master/sublime/contrast/tron-contrast.tmTheme", apply = TRUE)
+```
+```{r}
+rstudioapi::removeTheme("Tron Contrast")
+```
+

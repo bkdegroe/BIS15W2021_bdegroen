@@ -1,7 +1,7 @@
 ---
 title: "Midterm 1"
 author: "Berlin DeGroen"
-date: "2021-01-26"
+date: "2021-01-29"
 output:
   html_document: 
     theme: spacelab
@@ -451,4 +451,38 @@ Want to see if you can corroberate finding in the paper, so think about sites cl
 
 **12. (4 points) Based on your interest, do one exploratory analysis on the `gabon` data of your choice. This analysis needs to include a minimum of two functions in `dplyr.`**
 
+```r
+invidodata %>%
+  tabyl(Distance, LandUse) %>% 
+  adorn_percentages() %>%
+  adorn_pct_formatting(digits = 1) %>%
+  adorn_ns()
+```
+
+```
+##  Distance    Logging    Neither       Park
+##      2.70   0.0% (0) 100.0% (1)   0.0% (0)
+##      2.92 100.0% (1)   0.0% (0)   0.0% (0)
+##      3.83   0.0% (0) 100.0% (1)   0.0% (0)
+##      5.13 100.0% (1)   0.0% (0)   0.0% (0)
+##      5.14   0.0% (0) 100.0% (1)   0.0% (0)
+##      5.33 100.0% (1)   0.0% (0)   0.0% (0)
+##      5.78   0.0% (0) 100.0% (1)   0.0% (0)
+##      6.10 100.0% (1)   0.0% (0)   0.0% (0)
+##      6.61 100.0% (2)   0.0% (0)   0.0% (0)
+##      7.14   0.0% (0)   0.0% (0) 100.0% (1)
+##      8.23 100.0% (1)   0.0% (0)   0.0% (0)
+##     11.21 100.0% (1)   0.0% (0)   0.0% (0)
+##     13.96 100.0% (1)   0.0% (0)   0.0% (0)
+##     15.02 100.0% (1)   0.0% (0)   0.0% (0)
+##     15.95   0.0% (0)   0.0% (0) 100.0% (1)
+##     17.31   0.0% (0)   0.0% (0) 100.0% (1)
+##     17.47   0.0% (0)   0.0% (0) 100.0% (1)
+##     18.32   0.0% (0)   0.0% (0) 100.0% (1)
+##     18.85 100.0% (1)   0.0% (0)   0.0% (0)
+##     19.81 100.0% (1)   0.0% (0)   0.0% (0)
+##     20.85 100.0% (1)   0.0% (0)   0.0% (0)
+##     24.06   0.0% (0)   0.0% (0) 100.0% (1)
+##     26.76   0.0% (0)   0.0% (0) 100.0% (1)
+```
 

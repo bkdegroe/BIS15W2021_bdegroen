@@ -11,7 +11,7 @@
 
 <meta name="author" content="Berlin DeGroen" />
 
-<meta name="date" content="2021-01-26" />
+<meta name="date" content="2021-01-29" />
 
 <title>Midterm 1</title>
 
@@ -399,7 +399,7 @@ summary {
 
 <h1 class="title toc-ignore">Midterm 1</h1>
 <h4 class="author">Berlin DeGroen</h4>
-<h4 class="date">2021-01-26</h4>
+<h4 class="date">2021-01-29</h4>
 
 </div>
 
@@ -675,6 +675,35 @@ class(invidodata$LandUse)</code></pre>
 ## 2 TRUE                            5.40     47.8       0.418       39.5      2.81</code></pre>
 <p>(If we’re given a hint but we don’t use it, could that negatively impact us or will that make it more difficult for ourselves? Hints pretty good, so if it’s given, look through labs to see how to apply it) (Rows in final dataframe? Want to see if you can corroberate finding in the paper, so think about sites close versus far. Think about some kind of average relative abundance. Probably not the only way, but likely makes sense. Could be one row, could be more than one, but then the interpretation could be harder. We’re also doing this without applying any stats)</p>
 <p><strong>12. (4 points) Based on your interest, do one exploratory analysis on the <code>gabon</code> data of your choice. This analysis needs to include a minimum of two functions in <code>dplyr.</code></strong></p>
+<pre class="r"><code>invidodata %&gt;%
+  tabyl(Distance, LandUse) %&gt;% 
+  adorn_percentages() %&gt;%
+  adorn_pct_formatting(digits = 1) %&gt;%
+  adorn_ns()</code></pre>
+<pre><code>##  Distance    Logging    Neither       Park
+##      2.70   0.0% (0) 100.0% (1)   0.0% (0)
+##      2.92 100.0% (1)   0.0% (0)   0.0% (0)
+##      3.83   0.0% (0) 100.0% (1)   0.0% (0)
+##      5.13 100.0% (1)   0.0% (0)   0.0% (0)
+##      5.14   0.0% (0) 100.0% (1)   0.0% (0)
+##      5.33 100.0% (1)   0.0% (0)   0.0% (0)
+##      5.78   0.0% (0) 100.0% (1)   0.0% (0)
+##      6.10 100.0% (1)   0.0% (0)   0.0% (0)
+##      6.61 100.0% (2)   0.0% (0)   0.0% (0)
+##      7.14   0.0% (0)   0.0% (0) 100.0% (1)
+##      8.23 100.0% (1)   0.0% (0)   0.0% (0)
+##     11.21 100.0% (1)   0.0% (0)   0.0% (0)
+##     13.96 100.0% (1)   0.0% (0)   0.0% (0)
+##     15.02 100.0% (1)   0.0% (0)   0.0% (0)
+##     15.95   0.0% (0)   0.0% (0) 100.0% (1)
+##     17.31   0.0% (0)   0.0% (0) 100.0% (1)
+##     17.47   0.0% (0)   0.0% (0) 100.0% (1)
+##     18.32   0.0% (0)   0.0% (0) 100.0% (1)
+##     18.85 100.0% (1)   0.0% (0)   0.0% (0)
+##     19.81 100.0% (1)   0.0% (0)   0.0% (0)
+##     20.85 100.0% (1)   0.0% (0)   0.0% (0)
+##     24.06   0.0% (0)   0.0% (0) 100.0% (1)
+##     26.76   0.0% (0)   0.0% (0) 100.0% (1)</code></pre>
 </div>
 
 

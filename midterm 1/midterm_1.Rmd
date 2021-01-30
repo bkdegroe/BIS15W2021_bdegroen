@@ -176,6 +176,10 @@ Want to see if you can corroberate finding in the paper, so think about sites cl
 
 **12. (4 points) Based on your interest, do one exploratory analysis on the `gabon` data of your choice. This analysis needs to include a minimum of two functions in `dplyr.`**
 ```{r}
-
+invidodata %>%
+  tabyl(Distance, LandUse) %>% 
+  adorn_percentages() %>%
+  adorn_pct_formatting(digits = 1) %>%
+  adorn_ns()
 ```
 

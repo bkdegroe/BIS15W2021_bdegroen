@@ -1,8 +1,8 @@
 # Berlin's BIS 15L Repository
 
-![](Hello there!.gif)
+![](Heyo.gif)
 
-This repository contains the coding mistakes and internal screaming of a BIS 15L student who is praying that she's using this correctly.
+Welcome! This repository contains the coding mistakes and internal screaming of a BIS 15L student who is praying that she's using this correctly.
 
 ## Contact Info
 
@@ -14,6 +14,6 @@ This repository contains the coding mistakes and internal screaming of a BIS 15L
 [BIS15-W21-DataScienceBiologists](https://github.com/jmledford3115/BIS15L-W21-DataScienceBiologists)  
 [College of Biological Sciences](https://biology.ucdavis.edu/)
 
-## Thank You!  
+## Thank you, and take care!  
 
 ![](Planetes.gif)

@@ -104,6 +104,10 @@ elephants %>%
             n=n())
 ```
 
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "blue">
 
 **8. (2 points) How does the average height of elephants compare by sex for individuals over 25 years old. Include the min and max height as well as the number of individuals in the sample as part of your analysis.**
 ```{r}
@@ -116,6 +120,7 @@ elephants %>%
             n=n())
 ```
 
+</div>
 
 For the next series of questions, we will use data from a study on vertebrate community composition and impacts from defaunation in [Gabon, Africa](https://en.wikipedia.org/wiki/Gabon). One thing to notice is that the data include 24 separate transects. Each transect represents a path through different forest management areas.  
 
@@ -161,6 +166,11 @@ invidodata %>%
 
 (4 rows across, average bird, mammal, total just in case to see how many groups there are. Rows = high and moderate)
 
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "blue">
+
 **11. (4 points) One of the conclusions in the study is that the relative abundance of animals drops off the closer you get to a village. Let's try to reconstruct this (without the statistics). How does the relative abundance (RA) of apes, birds, elephants, monkeys, rodents, and ungulates compare between sites that are less than 5km from a village to sites that are greater than 20km from a village? The variable `Distance` measures the distance of the transect from the nearest village. Hint: try using the `across` operator.**
 ```{r}
 invidodata %>% 
@@ -168,6 +178,7 @@ invidodata %>%
   group_by(Distance < "5" & Distance > "20") %>% 
   summarize(across(c(RA_Apes, RA_Birds, RA_Elephant, RA_Monkeys, RA_Rodent), mean))
 ```
+</div>
 
 (If we're given a hint but we don't use it, could that negatively impact us or will that make it more difficult for ourselves?
 Hints pretty good, so if it's given, look through labs to see how to apply it)

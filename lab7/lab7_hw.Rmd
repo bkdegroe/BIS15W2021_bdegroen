@@ -3,9 +3,9 @@ title: "Lab 7 Homework"
 author: "Please Add Your Name Here"
 date: "`r Sys.Date()`"
 output:
-  html_document:
+  html_document: 
     theme: spacelab
-    toc: no
+    keep_md: yes
 ---
 
 ```{r setup, include=FALSE}
@@ -69,12 +69,20 @@ amniota_no_nas <- amniota %>%
   na_if("-999")
 summary(amniota_no_nas)
 ```
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "blue">
+
 ```{r}
 #Trying to figure out what -30258.71100 is
-amniota_no_nas %>% 
-  filter(female_maturity_d >= "50") %>% 
-  tabyl(amniota_no_nas$female_maturity_d)
+amniota_no_nas %>%
+  filter(female_maturity_d >= 50) %>%
+  tabyl(female_maturity_d)
+#this might be what you were trying to do?
 ```
+</div>
+
 
 
 **3. Do some exploratory analysis of the `amphibio` data set. Use the function(s) of your choice. Try to get an idea of how NA's are represented in the data.**  
@@ -93,6 +101,11 @@ hist(amphibio$Aqu)
 ```
 
 Uh oh...
+
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "blue">
 
 **4. How many total NA's are in each data set? Do these values make sense? Are NA's represented by values?**   
 
@@ -138,6 +151,7 @@ Uh oh...
 ```{r}
 
 ```
+</div>
 
 ## Push your final code to GitHub!
 Please be sure that you check the `keep md` file in the knit preferences.  

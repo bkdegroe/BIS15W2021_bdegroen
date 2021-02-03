@@ -43,9 +43,15 @@ Github works with these two programs to make a more user-friendly coding platfor
 
 R markdown is a tool that can be used to convert the information you typed into R into a specific type of output. It's important because it makes the data more clear to the viewer and is easier to share. 
 
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "blue">
+
 **2. (2 points) What are the three types of `data structures` that we have discussed? Why are we using data frames for BIS 15L?**
 
 The three types of data structures that we've discussed are numeric, logical values, and character values. We use these because sometimes, a number or object must be stored as a particular class in order to perform a certain function with it, so we do this by assigning the number or object to a class function.
+</div>
 
 In the midterm 1 folder there is a second folder called `data`. Inside the `data` folder, there is a .csv file called `ElephantsMF`. These data are from Phyllis Lee, Stirling University, and are related to Lee, P., et al. (2013), "Enduring consequences of early experiences: 40-year effects on survival and success among African elephants (Loxodonta africana)," Biology Letters, 9: 20130011. [kaggle](https://www.kaggle.com/mostafaelseidy/elephantsmf).  
 

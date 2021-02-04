@@ -2,10 +2,11 @@
 title: "Data Visualization: `ggplot` part 1"
 date: "`r Sys.Date()`"
 output:
-  html_document:
+  html_document: 
     theme: spacelab
     toc: yes
     toc_float: yes
+    keep_md: yes
   pdf_document:
     toc: yes
 ---
@@ -49,7 +50,7 @@ The syntax used by ggplot takes some practice to get used to, especially for cus
 
 In short, **plot= data + geom_ + aesthetics**.  
 
-We start by calling the ggplot function, identifying the data, and specifying the axes. We then add the `geom` type to describe how we want our data represented. Each `geom_` works with specific types of data and R is capable of building plots of single variables, multiple variables, and even maps. Lastly, we add aesthetics.
+We start by calling the ggplot function, identifying the data, and specifying the axes. We then add the `geom` type to describe how we want our data represented. Each `geom_` works with specific types of data and R is capable of building plots of single variables, multiple variables, and even maps and 3D plots. Lastly, we add aesthetics.
 
 ## Example
 To make things easy, let's start with some built in data.
@@ -64,8 +65,12 @@ glimpse(iris)
 
 To make a plot, we need to first specify the data and map the aesthetics. The aesthetics include how each variable in our data set will be used. In the example below, I am using the aes() function to identify the x and y variables in the plot.
 ```{r}
-ggplot(data=iris, mapping=aes(x=Species, y=Petal.Length))
+ggplot(data=iris, mapping=aes(x=Species, y=Petal.Length)) 
+#Data is iris
+#Function called mapping. aes, x axis is species, y axis is petal length
 ```
+
+-You end up with a blank plot, but things are already where they need to be! You have a ranged of petal length, etc. You're just missing the kind of plot you want to make, which is the geom type. 
 
 Notice that we have a nice background, labeled axes, and even a value range of our variables on the y-axis- but no plot. This is because we need to tell ggplot how we want our data represented. This is called the geometry or `geom()`. There are many types of `geom`, see the ggplot [cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf).
 
@@ -83,6 +88,7 @@ names(iris)
 ```{r}
 ggplot(data=iris, mapping=aes(x= Sepal.Width, y=Sepal.Length, ))+
   geom_point()
+#You can switch X and Y axis by respecifying x and y values
 ```
 
 
@@ -95,6 +101,7 @@ Reference: Tamburello N, Cote IM, Dulvy NK (2015) Energy and the scaling of anim
 Data: http://datadryad.org/resource/doi:10.5061/dryad.q5j65/1  
 ```{r}
 homerange <- read_csv(here("lab9", "data", "Tamburelloetal_HomeRangeDatabase.csv"))
+#Notice the here function
 ```
 
 ## Practice
@@ -105,6 +112,8 @@ glimpse(homerange)
 
 ```{r}
 naniar::miss_var_summary(homerange)
+#Shows proportion of missing data
+#Know how NAs are represented and where they are concentrated
 ```
 
 
@@ -116,9 +125,13 @@ In the case below, we are exploring whether or not there is a relationship betwe
 names(homerange)
 ```
 
+-log10.mass is because there's a lot of animals in the data, and the range gets so different (ex. mouse vs. elephant) that log function is used
+
 ```{r}
-ggplot(data = homerange, mapping = aes(x = log10.mass, y = log10.hra)) + geom_point()
+ggplot(data = homerange, mapping = aes(x = log10.mass, y = log10.hra)) + geom_point() #Notice it's a +, not a %>% 
 ```
+
+-This shows the bigger you are, the larger your homerange. Positive trend/correlation!
 
 In big data sets with lots of overlapping values, over-plotting can be an issue. `geom_jitter()` is similar to `geom_point()` but it helps with over plotting by adding some random noise to the data and separating some of the individual points.
 ```{r}
@@ -126,11 +139,16 @@ ggplot(data = homerange, mapping = aes(x = log10.mass, y = log10.hra)) +
   geom_jitter()
 ```
 
+-Somewhat minor difference in this example, but this can be useful for other data!
+
 To add a regression (best of fit) line, we just add another layer.
 ```{r}
 ggplot(data=homerange, mapping=aes(x=log10.mass, y=log10.hra)) +
   geom_point()+
   geom_smooth(method=lm, se=T) #adds the regression line, `se=TRUE` will add standard error
+#Geom smooth is adding another layer
+#Smoothing is a smoothing function
+#SE is standard regression error
 ```
 
 ### Practice
@@ -141,11 +159,16 @@ names(homerange)
 
 ```{r}
 ggplot(data=homerange, mapping=aes(x=log10.hra, y=log10.preymass))+geom_point(na.rm=T)
+#You can leave data= out, as it will read as the same thing, it's just to make what the command is doing clearer
+#Same thing with mapping=
 ```
+
+-SHOULD be an alert where it says there are 502 rows that contain missing (geom_point). It shows up if na.rm=T wasn't inserted
 
 ### Bar Plot: `geom_bar()`
 The simplest type of bar plot counts the number of observations in a categorical variable. In this case, we want to know how many observations are present in the variable `trophic.guild`. Notice that we do not specify a y-axis because it is count by default.  
 
+-Only counts the number of times it sees a certain category in a categorical variable. You would not use this with a continuous variable
 ```{r}
 names(homerange)
 ```
@@ -158,17 +181,20 @@ homerange %>%
 Also notice that we can use pipes! The `mapping=` function is implied by `aes` and so is often left out. 
 ```{r}
 homerange %>% 
-  ggplot(aes(x=trophic.guild)) + 
+  ggplot(aes(x=trophic.guild)) + #Don't need to call the data again, don't have to do data=, rather go straight to aes
   geom_bar()
+#Common error is that you put a pipe rather than a +. This is so common, the error will tell you!
 ```
+
+-A good practice is to always provide the table with the graph. Make the analysis of the data clear to the reader
 
 ### Bar Plot: `geom_col()`
 Unlike `geom_bar()`, `geom_col()` allows us to specify an x-axis and a y-axis.
 ```{r}
 homerange %>% 
   filter(family=="salmonidae") %>% 
-  ggplot(aes(x=common.name, y=log10.mass))+
-  geom_col()
+  ggplot(aes(x=common.name, y=log10.mass))+ #Common name of members of salmonidae, then log mass on y axis
+  geom_col() #Not geom_bar() in this case. The next example shows you how you can if you want to though!
 ```
 
 `geom_bar()` with `stat="identity"`
@@ -180,11 +206,20 @@ homerange %>%
   geom_bar(stat="identity")
 ```
 
+-Important that you use geom_bar for counts, and geom_col for specifying an x and y axis
+
 The plot below is the same but uses `geom_col()`
 ```{r}
 homerange %>% 
   group_by(class) %>% 
-  summarize(mean_body_wt=mean(log10.mass)) %>% 
+  summarize(mean_body_wt=mean(log10.mass)) #This gives you mean body weight of log10.mass of classes in data
+```
+
+
+```{r}
+homerange %>% 
+  group_by(class) %>% 
+  summarize(mean_body_wt=mean(log10.mass)) %>%
   ggplot(aes(x=class, y=mean_body_wt))+
   geom_col()
 ```
@@ -203,7 +238,7 @@ glimpse(homerange)
 homerange %>% 
   filter(class=="mammalia")
 ```
-
+-If you ever get lost, you can use summary functions like names(homerange) or glimpse(homerange) to remember what is called what!
 
 2. Are there more herbivores or carnivores in mammals? Make a bar plot that shows their relative numbers.
 ```{r}
@@ -217,23 +252,32 @@ homerange %>%
   filter(class=="mammalia") %>% 
   group_by(trophic.guild) %>% 
   count() %>% 
-  ggplot(aes(y=trophic.guild, x=n))+
+  ggplot(aes(x=trophic.guild, y=n))+
   geom_col()
 ```
-
+-If x and y are flipped, it just flips graph, which can be helpful depending on how you want things arranged
 
 3. Make a bar plot that shows the masses of the top 10 smallest mammals.
 ```{r}
 names(homerange)
 ```
+```{r}
+homerange %>% 
+  filter(class=="mammalia") %>% 
+  top_n(-10, log10.mass) #top_n, you want in this case bottom 10 (-) of log10.mass
+```
+
+
 
 ```{r}
 homerange %>% 
   filter(class=="mammalia") %>% 
-  top_n(-10, log10.mass) %>% 
+  top_n(-10, log10.mass) %>%
   ggplot(aes(x=common.name, y=log10.mass))+
-  geom_col()
+  geom_col() #Since you want to add 2 variables specified, needs to be geom_col
 ```
+
+-Some of this looks messy, so what can you do? Do below!
 
 ```{r}
 homerange %>% 
@@ -241,9 +285,10 @@ homerange %>%
   top_n(-10, log10.mass) %>% 
   ggplot(aes(x=common.name, y=log10.mass))+
   geom_col()+
-  coord_flip()
+  coord_flip() #Coordinates flip: flips X and Y axis
 ```
-
+-Nice if you can see data in an orderly way, so do this by adding in x=reorder
+-x=reorder, common name reordered by log10.mass
 ```{r}
 homerange %>% 
   filter(class=="mammalia") %>% 

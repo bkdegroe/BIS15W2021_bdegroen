@@ -163,7 +163,13 @@ naniar::miss_var_summary(amphibio_na)
 **8. For the `amniota` data, calculate the number of NAs in the `egg_mass_g` column sorted by taxonomic class; i.e. how many NA's are present in the `egg_mass_g` column in birds, mammals, and reptiles? Does this results make sense biologically? How do these results affect your interpretation of NA's?**  
 
 ```{r}
-
+names(amniota)
+```
+```{r}
+amniota %>% 
+  group_by(egg_mass_g) %>% 
+  select("birds", "mammals", "remptiles") %>%
+  
 ```
 
 **9. The `amphibio` data have variables that classify species as fossorial (burrowing), terrestrial, aquatic, or arboreal.Calculate the number of NA's in each of these variables. Do you think that the authors intend us to think that there are NA's in these columns or could they represent something else? Explain.**

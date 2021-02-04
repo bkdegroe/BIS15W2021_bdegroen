@@ -1,7 +1,7 @@
 ---
 title: "Midterm 1"
 author: "Berlin DeGroen"
-date: "2021-01-29"
+date: "2021-02-02"
 output:
   html_document: 
     theme: spacelab
@@ -30,7 +30,7 @@ getwd()
 ```
 
 ```
-## [1] "/Users/Astrobeecal/Desktop/GitHub/BIS15W2021_bdegroen/midterm 1"
+## [1] "D:/TA files/Winter2021 BIS15L/students_rep/BIS15W2021_bdegroen/midterm 1"
 ```
 
 
@@ -43,9 +43,15 @@ Github works with these two programs to make a more user-friendly coding platfor
 
 R markdown is a tool that can be used to convert the information you typed into R into a specific type of output. It's important because it makes the data more clear to the viewer and is easier to share. 
 
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "blue">
+
 **2. (2 points) What are the three types of `data structures` that we have discussed? Why are we using data frames for BIS 15L?**
 
 The three types of data structures that we've discussed are numeric, logical values, and character values. We use these because sometimes, a number or object must be stored as a particular class in order to perform a certain function with it, so we do this by assigning the number or object to a class function.
+</div>
 
 In the midterm 1 folder there is a second folder called `data`. Inside the `data` folder, there is a .csv file called `ElephantsMF`. These data are from Phyllis Lee, Stirling University, and are related to Lee, P., et al. (2013), "Enduring consequences of early experiences: 40-year effects on survival and success among African elephants (Loxodonta africana)," Biology Letters, 9: 20130011. [kaggle](https://www.kaggle.com/mostafaelseidy/elephantsmf).  
 
@@ -58,7 +64,7 @@ elephants <- readr::read_csv("data/ElephantsMF.csv")
 
 ```
 ## 
-## ── Column specification ────────────────────────────────────────────────────────
+## -- Column specification --------------------------------------------------------
 ## cols(
 ##   Age = col_double(),
 ##   Height = col_double(),
@@ -82,9 +88,9 @@ glimpse(elephants)
 ```
 ## Rows: 288
 ## Columns: 3
-## $ Age    <dbl> 1.40, 17.50, 12.75, 11.17, 12.67, 12.67, 12.25, 12.17, 28.17, …
-## $ Height <dbl> 120.00, 227.00, 235.00, 210.00, 220.00, 189.00, 225.00, 204.00…
-## $ Sex    <chr> "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M…
+## $ Age    <dbl> 1.40, 17.50, 12.75, 11.17, 12.67, 12.67, 12.25, 12.17, 28.17...
+## $ Height <dbl> 120.00, 227.00, 235.00, 210.00, 220.00, 189.00, 225.00, 204....
+## $ Sex    <chr> "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", ...
 ```
 
 ```r
@@ -142,7 +148,7 @@ elephants
 ##  8  12.2   204  M    
 ##  9  28.2   266. M    
 ## 10  11.7   233  M    
-## # … with 278 more rows
+## # ... with 278 more rows
 ```
 
 ```r
@@ -206,6 +212,10 @@ elephants %>%
 ## 2 M                     8.95                    185.   138
 ```
 
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "blue">
 
 **8. (2 points) How does the average height of elephants compare by sex for individuals over 25 years old. Include the min and max height as well as the number of individuals in the sample as part of your analysis.**
 
@@ -227,6 +237,7 @@ elephants %>%
 ## 2 M                        195.                136.                304.    63
 ```
 
+</div>
 
 For the next series of questions, we will use data from a study on vertebrate community composition and impacts from defaunation in [Gabon, Africa](https://en.wikipedia.org/wiki/Gabon). One thing to notice is that the data include 24 separate transects. Each transect represents a path through different forest management areas.  
 
@@ -240,13 +251,13 @@ invidodata <- readr::read_csv("data/IvindoData_DryadVersion.csv")
 
 ```
 ## 
-## ── Column specification ────────────────────────────────────────────────────────
+## -- Column specification --------------------------------------------------------
 ## cols(
 ##   .default = col_double(),
 ##   HuntCat = col_character(),
 ##   LandUse = col_character()
 ## )
-## ℹ Use `spec()` for the full column specifications.
+## i Use `spec()` for the full column specifications.
 ```
 
 ```r
@@ -282,32 +293,32 @@ glimpse(invidodata)
 ```
 ## Rows: 24
 ## Columns: 26
-## $ TransectID              <dbl> 1, 2, 2, 3, 4, 5, 6, 7, 8, 9, 13, 14, 15, 16,…
-## $ Distance                <dbl> 7.14, 17.31, 18.32, 20.85, 15.95, 17.47, 24.0…
-## $ HuntCat                 <chr> "Moderate", "None", "None", "None", "None", "…
-## $ NumHouseholds           <dbl> 54, 54, 29, 29, 29, 29, 29, 54, 25, 73, 46, 5…
-## $ LandUse                 <chr> "Park", "Park", "Park", "Logging", "Park", "P…
-## $ Veg_Rich                <dbl> 16.67, 15.75, 16.88, 12.44, 17.13, 16.50, 14.…
-## $ Veg_Stems               <dbl> 31.20, 37.44, 32.33, 29.39, 36.00, 29.22, 31.…
-## $ Veg_liana               <dbl> 5.78, 13.25, 4.75, 9.78, 13.25, 12.88, 8.38, …
-## $ Veg_DBH                 <dbl> 49.57, 34.59, 42.82, 36.62, 41.52, 44.07, 51.…
-## $ Veg_Canopy              <dbl> 3.78, 3.75, 3.43, 3.75, 3.88, 2.50, 4.00, 4.0…
-## $ Veg_Understory          <dbl> 2.89, 3.88, 3.00, 2.75, 3.25, 3.00, 2.38, 2.7…
-## $ RA_Apes                 <dbl> 1.87, 0.00, 4.49, 12.93, 0.00, 2.48, 3.78, 6.…
-## $ RA_Birds                <dbl> 52.66, 52.17, 37.44, 59.29, 52.62, 38.64, 42.…
-## $ RA_Elephant             <dbl> 0.00, 0.86, 1.33, 0.56, 1.00, 0.00, 1.11, 0.4…
-## $ RA_Monkeys              <dbl> 38.59, 28.53, 41.82, 19.85, 41.34, 43.29, 46.…
-## $ RA_Rodent               <dbl> 4.22, 6.04, 1.06, 3.66, 2.52, 1.83, 3.10, 1.2…
-## $ RA_Ungulate             <dbl> 2.66, 12.41, 13.86, 3.71, 2.53, 13.75, 3.10, …
-## $ Rich_AllSpecies         <dbl> 22, 20, 22, 19, 20, 22, 23, 19, 19, 19, 21, 2…
-## $ Evenness_AllSpecies     <dbl> 0.793, 0.773, 0.740, 0.681, 0.811, 0.786, 0.8…
-## $ Diversity_AllSpecies    <dbl> 2.452, 2.314, 2.288, 2.006, 2.431, 2.429, 2.5…
-## $ Rich_BirdSpecies        <dbl> 11, 10, 11, 8, 8, 10, 11, 11, 11, 9, 11, 11, …
-## $ Evenness_BirdSpecies    <dbl> 0.732, 0.704, 0.688, 0.559, 0.799, 0.771, 0.8…
-## $ Diversity_BirdSpecies   <dbl> 1.756, 1.620, 1.649, 1.162, 1.660, 1.775, 1.9…
-## $ Rich_MammalSpecies      <dbl> 11, 10, 11, 11, 12, 12, 12, 8, 8, 10, 10, 11,…
-## $ Evenness_MammalSpecies  <dbl> 0.736, 0.705, 0.650, 0.619, 0.736, 0.694, 0.7…
-## $ Diversity_MammalSpecies <dbl> 1.764, 1.624, 1.558, 1.484, 1.829, 1.725, 1.9…
+## $ TransectID              <dbl> 1, 2, 2, 3, 4, 5, 6, 7, 8, 9, 13, 14, 15, 1...
+## $ Distance                <dbl> 7.14, 17.31, 18.32, 20.85, 15.95, 17.47, 24...
+## $ HuntCat                 <chr> "Moderate", "None", "None", "None", "None",...
+## $ NumHouseholds           <dbl> 54, 54, 29, 29, 29, 29, 29, 54, 25, 73, 46,...
+## $ LandUse                 <chr> "Park", "Park", "Park", "Logging", "Park", ...
+## $ Veg_Rich                <dbl> 16.67, 15.75, 16.88, 12.44, 17.13, 16.50, 1...
+## $ Veg_Stems               <dbl> 31.20, 37.44, 32.33, 29.39, 36.00, 29.22, 3...
+## $ Veg_liana               <dbl> 5.78, 13.25, 4.75, 9.78, 13.25, 12.88, 8.38...
+## $ Veg_DBH                 <dbl> 49.57, 34.59, 42.82, 36.62, 41.52, 44.07, 5...
+## $ Veg_Canopy              <dbl> 3.78, 3.75, 3.43, 3.75, 3.88, 2.50, 4.00, 4...
+## $ Veg_Understory          <dbl> 2.89, 3.88, 3.00, 2.75, 3.25, 3.00, 2.38, 2...
+## $ RA_Apes                 <dbl> 1.87, 0.00, 4.49, 12.93, 0.00, 2.48, 3.78, ...
+## $ RA_Birds                <dbl> 52.66, 52.17, 37.44, 59.29, 52.62, 38.64, 4...
+## $ RA_Elephant             <dbl> 0.00, 0.86, 1.33, 0.56, 1.00, 0.00, 1.11, 0...
+## $ RA_Monkeys              <dbl> 38.59, 28.53, 41.82, 19.85, 41.34, 43.29, 4...
+## $ RA_Rodent               <dbl> 4.22, 6.04, 1.06, 3.66, 2.52, 1.83, 3.10, 1...
+## $ RA_Ungulate             <dbl> 2.66, 12.41, 13.86, 3.71, 2.53, 13.75, 3.10...
+## $ Rich_AllSpecies         <dbl> 22, 20, 22, 19, 20, 22, 23, 19, 19, 19, 21,...
+## $ Evenness_AllSpecies     <dbl> 0.793, 0.773, 0.740, 0.681, 0.811, 0.786, 0...
+## $ Diversity_AllSpecies    <dbl> 2.452, 2.314, 2.288, 2.006, 2.431, 2.429, 2...
+## $ Rich_BirdSpecies        <dbl> 11, 10, 11, 8, 8, 10, 11, 11, 11, 9, 11, 11...
+## $ Evenness_BirdSpecies    <dbl> 0.732, 0.704, 0.688, 0.559, 0.799, 0.771, 0...
+## $ Diversity_BirdSpecies   <dbl> 1.756, 1.620, 1.649, 1.162, 1.660, 1.775, 1...
+## $ Rich_MammalSpecies      <dbl> 11, 10, 11, 11, 12, 12, 12, 8, 8, 10, 10, 1...
+## $ Evenness_MammalSpecies  <dbl> 0.736, 0.705, 0.650, 0.619, 0.736, 0.694, 0...
+## $ Diversity_MammalSpecies <dbl> 1.764, 1.624, 1.558, 1.484, 1.829, 1.725, 1...
 ```
 
 ```r
@@ -366,7 +377,7 @@ summary(invidodata)
 ##   RA_Ungulate     Rich_AllSpecies Evenness_AllSpecies Diversity_AllSpecies
 ##  Min.   : 0.000   Min.   :15.00   Min.   :0.6680      Min.   :1.966       
 ##  1st Qu.: 1.232   1st Qu.:19.00   1st Qu.:0.7542      1st Qu.:2.248       
-##  Median : 2.545   Median :20.00   Median :0.7760      Median :2.317       
+##  Median : 2.545   Median :20.00   Median :0.7760      Median :2.316       
 ##  Mean   : 4.166   Mean   :20.21   Mean   :0.7699      Mean   :2.310       
 ##  3rd Qu.: 5.157   3rd Qu.:22.00   3rd Qu.:0.8083      3rd Qu.:2.429       
 ##  Max.   :13.860   Max.   :24.00   Max.   :0.8330      Max.   :2.566       
@@ -427,6 +438,11 @@ invidodata %>%
 
 (4 rows across, average bird, mammal, total just in case to see how many groups there are. Rows = high and moderate)
 
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "blue">
+
 **11. (4 points) One of the conclusions in the study is that the relative abundance of animals drops off the closer you get to a village. Let's try to reconstruct this (without the statistics). How does the relative abundance (RA) of apes, birds, elephants, monkeys, rodents, and ungulates compare between sites that are less than 5km from a village to sites that are greater than 20km from a village? The variable `Distance` measures the distance of the transect from the nearest village. Hint: try using the `across` operator.**
 
 ```r
@@ -438,11 +454,12 @@ invidodata %>%
 
 ```
 ## # A tibble: 2 x 6
-##   `Distance < "5" & Distance … RA_Apes RA_Birds RA_Elephant RA_Monkeys RA_Rodent
+##   `Distance < "5" & Distance ~ RA_Apes RA_Birds RA_Elephant RA_Monkeys RA_Rodent
 ## * <lgl>                          <dbl>    <dbl>       <dbl>      <dbl>     <dbl>
 ## 1 FALSE                           1.37     60.8       0.570       29.7      3.37
 ## 2 TRUE                            5.40     47.8       0.418       39.5      2.81
 ```
+</div>
 
 (If we're given a hint but we don't use it, could that negatively impact us or will that make it more difficult for ourselves?
 Hints pretty good, so if it's given, look through labs to see how to apply it)

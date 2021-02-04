@@ -69,10 +69,7 @@ amniota_no_nas <- amniota %>%
   na_if("-999")
 summary(amniota_no_nas)
 ```
-<style>
-div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
-</style>
-<div class = "blue">
+
 
 ```{r}
 #Trying to figure out what -30258.71100 is
@@ -81,7 +78,16 @@ amniota_no_nas %>%
   tabyl(female_maturity_d)
 #this might be what you were trying to do?
 ```
-</div>
+```{r}
+#What Min-Yao suggested for getting rid of that one negative value:
+amniota_na <- amniota %>% 
+  na_if("-999") %>% #converts all -999 values to NA
+  mutate(female_maturity_d_new = ifelse(female_maturity_d < 0, NA, female_maturity_d)) %>% 
+  select(-female_maturity_d)
+
+amniota_na %>% 
+  summarize(number_nas = sum(is.na(amniota_na)))
+```
 
 
 
@@ -107,33 +113,51 @@ div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
 </style>
 <div class = "blue">
 
+```{r}
+naniar::miss_var_summary(amphibio)
+```
+
+
 **4. How many total NA's are in each data set? Do these values make sense? Are NA's represented by values?**   
 
 ```{r}
-
+amniota %>% 
+  summarize(number_nas = sum(is.na(amniota)))
 ```
-
+No, the values don't make sense for amniota.
 ```{r}
-
+amphibio %>% 
+  summarize(number_nas = sum(is.na(amphibio)))
 ```
+Yes, in the case of amphibio. (Or it might be a bit big for the dataset? There were 0s in that and someone on Discord suggested the 0s were included as literally "not applicable" values as well)
 
 **5. Make any necessary replacements in the data such that all NA's appear as "NA".**   
 ```{r}
+#What Min-Yao suggested for getting rid of that one negative value:
+amniota_na <- amniota %>% 
+  na_if("-999") %>% #converts all -999 values to NA
+  mutate(female_maturity_d_new = ifelse(female_maturity_d < 0, NA, female_maturity_d)) %>% 
+  select(-female_maturity_d)
 
+amniota_na %>% 
+  summarize(number_nas = sum(is.na(amniota_na)))
 ```
 
 ```{r}
-
+amphibio_na <- amphibio %>%
+  na_if("0")
+amphibio_na %>% 
+  summarize(number_nas = sum(is.na(amphibio_na)))
 ```
 
 **6. Use the package `naniar` to produce a summary, including percentages, of missing data in each column for the `amniota` data.**  
 ```{r}
-
+naniar::miss_var_summary(amniota_na)
 ```
 
 **7. Use the package `naniar` to produce a summary, including percentages, of missing data in each column for the `amphibio` data.**
 ```{r}
-
+naniar::miss_var_summary(amphibio_na)
 ```
 
 **8. For the `amniota` data, calculate the number of NAs in the `egg_mass_g` column sorted by taxonomic class; i.e. how many NA's are present in the `egg_mass_g` column in birds, mammals, and reptiles? Does this results make sense biologically? How do these results affect your interpretation of NA's?**  

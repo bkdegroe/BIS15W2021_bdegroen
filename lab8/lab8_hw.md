@@ -1,16 +1,14 @@
 ---
 title: "Lab 8 Homework"
 author: "Please Add Your Name Here"
-date: "`r Sys.Date()`"
+date: "2021-02-08"
 output:
   html_document: 
     theme: spacelab
     keep_md: yes
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
+
 
 ## Instructions
 Answer the following questions and complete the exercises in RMarkdown. Please embed all of your code and push your final work to your repository. Your final lab report should be organized, clean, and run free from errors. Remember, you must remove the `#` for the included code chunks to run. Be sure to add your name to the author header above.  
@@ -18,14 +16,16 @@ Answer the following questions and complete the exercises in RMarkdown. Please e
 Make sure to use the formatting conventions of RMarkdown to make your report neat and clean!  
 
 ## Load the libraries
-```{r message=FALSE, warning=FALSE}
+
+```r
 library(tidyverse)
 library(janitor)
-``` 
+```
 
 ## Install `here`
 The package `here` is a nice option for keeping directories clear when loading files. I will demonstrate below and let you decide if it is something you want to use.  
-```{r}
+
+```r
 #install.packages("here")
 ```
 
@@ -40,18 +40,37 @@ div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
 <div class = "blue">
 
 1. Start by loading the data `sydneybeaches`. Do some exploratory analysis to get an idea of the data structure.
-```{r}
 
-```
 
 If you want to try `here`, first notice the output when you load the `here` library. It gives you information on the current working directory. You can then use it to easily and intuitively load files.
-```{r}
+
+```r
 library(here)
 ```
 
+```
+## here() starts at D:/TA files/Winter2021 BIS15L/students_rep/BIS15W2021_bdegroen
+```
+
 The quotes show the folder structure from the root directory.
-```{r}
+
+```r
 sydneybeaches <-read_csv(here("lab8", "data", "sydneybeaches.csv")) %>% janitor::clean_names()
+```
+
+```
+## 
+## -- Column specification --------------------------------------------------------
+## cols(
+##   BeachId = col_double(),
+##   Region = col_character(),
+##   Council = col_character(),
+##   Site = col_character(),
+##   Longitude = col_double(),
+##   Latitude = col_double(),
+##   Date = col_character(),
+##   `Enterococci (cfu/100ml)` = col_double()
+## )
 ```
 
 2. Are these data "tidy" per the definitions of the tidyverse? How do you know? Are they in wide or long format?

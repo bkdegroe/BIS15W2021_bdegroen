@@ -163,23 +163,28 @@ naniar::miss_var_summary(amphibio_na)
 **8. For the `amniota` data, calculate the number of NAs in the `egg_mass_g` column sorted by taxonomic class; i.e. how many NA's are present in the `egg_mass_g` column in birds, mammals, and reptiles? Does this results make sense biologically? How do these results affect your interpretation of NA's?**  
 
 ```{r}
-names(amniota)
-```
-```{r}
-amniota %>% 
-  group_by(egg_mass_g) %>% 
-  select("birds", "mammals", "remptiles") %>%
-  
+amniota_na %>% 
+  select(class, egg_mass_g) %>%
+  naniar::miss_var_summary(order=T)
 ```
 
-**9. The `amphibio` data have variables that classify species as fossorial (burrowing), terrestrial, aquatic, or arboreal.Calculate the number of NA's in each of these variables. Do you think that the authors intend us to think that there are NA's in these columns or could they represent something else? Explain.**
-```{r}
 
+**9. The `amphibio` data have variables that classify species as fossorial (burrowing), terrestrial, aquatic, or arboreal. Calculate the number of NA's in each of these variables. Do you think that the authors intend us to think that there are NA's in these columns or could they represent something else? Explain.**
+```{r}
+amphibio
 ```
+```{r}
+amphibio_na %>% 
+  select(Fos, Ter, Aqu, Arb) %>%
+  naniar::miss_var_summary(order=T)
+```
+
+I think that the NAs could also mean exactly that: 'Not applicable." Some species aren't aquatic, others aren't terrestrial and so on, so they don't apply to certain classifications.
 
 **10. Now that we know how NA's are represented in the `amniota` data, how would you load the data such that the values which represent NA's are automatically converted?**
 ```{r}
-
+amniota_converted_na <- 
+  readr::read_csv(file = "data/amniota.csv", na = c("-999"))
 ```
 </div>
 

@@ -3,9 +3,9 @@ title: "Lab 9 Homework"
 author: "Berlin DeGroen"
 date: "`r Sys.Date()`"
 output:
-  html_document:
+  html_document: 
     theme: spacelab
-    toc: no
+    keep_md: yes
 ---
 
 ```{r setup, include=FALSE}
@@ -46,67 +46,105 @@ PFTFTUG1_EF: Percentage of undergraduate students who are first-time, full-time 
 
 1. Use your preferred function(s) to have a look at the data and get an idea of its structure. Make sure you summarize NA's and determine whether or not the data are tidy. You may also consider dealing with any naming issues.
 ```{r}
-colleges <- janitor::clean_names(colleges)
-colleges
+colleges_clean <- janitor::clean_names(colleges)
+colleges_clean
 ```
 
 ```{r}
-glimpse(colleges)
+glimpse(colleges_clean)
 ```
 
 ```{r}
-naniar::miss_var_summary(colleges)
+naniar::miss_var_summary(colleges_clean)
 ```
 
 1) Each variable has its own column.
 
-
+True
 
 2) Each observation has its own row.
 
-
+True
 
 3) Each value has its own cell.
 
-No.
+True
 
 
 
 2. Which cities in California have the highest number of colleges?
 ```{r}
-colleges %>% 
+colleges_clean %>% 
+  select(city, instnm) %>% 
   group_by(city) %>%
-  
+  summarize(n=n(), .groups= 'keep') %>% 
+  arrange(desc(n=n()))
+#Not sure why arrange isn't working
 ```
+```{r}
+colleges_clean %>%
+  count(instnm, city, sort = T)
+```
+
+```{r}
+colleges %>% 
+  count(city) %>% 
+  arrange(desc(n))
+```
+
 
 3. Based on your answer to #2, make a plot that shows the number of colleges in the top 10 cities.
 ```{r}
-
+colleges_clean %>%
+  count(city) %>% 
+  arrange(desc(n)) %>%
+  top_n(10, n) %>% 
+  ggplot(aes(x=reorder(city, n), y=n))+
+  geom_col()+
+  coord_flip()
 ```
 
 4. The column `COSTT4_A` is the annual cost of each institution. Which city has the highest average cost? Where is it located?
 ```{r}
-
+colleges_clean %>%
+  group_by(city, stabbr) %>% 
+  summarize(max_average_cost = max(costt4_a),
+            na.rm=TRUE) %>% 
+  arrange(desc(max_average_cost))
 ```
+
+Malibu has the highest rated cost, and it's located in CA.
 
 5. Based on your answer to #4, make a plot that compares the cost of the individual colleges in the most expensive city. Bonus! Add UC Davis here to see how it compares :>).
 ```{r}
-
+colleges_clean %>% 
+  filter(city=="Malibu") %>% 
+  group_by(city) %>% 
+  ggplot(aes(x=reorder(instnm, costt4_a), y=costt4_a))+
+  geom_col()+
+  coord_flip()
 ```
 
 6. The column `ADM_RATE` is the admissions rate by college and `C150_4_POOLED` is the four-year completion rate. Use a scatterplot to show the relationship between these two variables. What do you think this means?
 ```{r}
-
+ggplot(data=colleges_clean, mapping=aes(x=adm_rate, y=c150_4_pooled))+
+  geom_point(na.rm=T)
 ```
+
+There is a negative correlation between the admission rates into colleges and how many students complete their 4 year admission rate.
 
 7. Is there a relationship between cost and four-year completion rate? (You don't need to do the stats, just produce a plot). What do you think this means?
 ```{r}
-
+ggplot(data=colleges_clean, mapping=aes(x=adm_rate, y=c150_4_pooled)) +
+  geom_point(na.rm = T)+
+  geom_smooth(method=lm, se=T)
 ```
 
 8. The column titled `INSTNM` is the institution name. We are only interested in the University of California colleges. Make a new data frame that is restricted to UC institutions. You can remove `Hastings College of Law` and `UC San Francisco` as we are only interested in undergraduate institutions.
 ```{r}
-
+colleges_clean_UCs <- colleges_clean %>%
+  filter(instnm=="UC")
+colleges_clean_UCs
 ```
 
 Remove `Hastings College of Law` and `UC San Francisco` and store the final data frame as a new object `univ_calif_final`.

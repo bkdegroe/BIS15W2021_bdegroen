@@ -105,10 +105,10 @@ deserts %>%
 ```{r}
 deserts %>% 
   filter(genus=="Dipodomys" & species=="merriami") %>% 
-  ggplot(aes(x=year, y=species)) + geom_point() + geom_smooth(method=lm, se=F) +
-  labs(title = "Dipodomys merriami observations vs. Year",
+  ggplot(aes(x = year, fill = species)) + geom_bar() + scale_y_log10() +
+  labs(title = "Observations of Dipodomys merriami over time",
        x = "Year",
-       y = "Dipodomys merriami") +
+       fill = "Dipodomys merriami")
   theme(plot.title = element_text(size = rel(1.5), hjust = 0.5))
 ```
 

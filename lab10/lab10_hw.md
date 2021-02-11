@@ -250,18 +250,37 @@ deserts %>%
 ```r
 deserts %>% 
   filter(genus=="Dipodomys" & species=="merriami") %>% 
-  ggplot(aes(x=year, y=species)) + geom_point() + geom_smooth(method=lm, se=F) +
-  labs(title = "Dipodomys merriami observations vs. Year",
+  ggplot(aes(x = year, fill = species)) + geom_bar() + scale_y_log10() +
+  labs(title = "Observations of Dipodomys merriami over time",
        x = "Year",
-       y = "Dipodomys merriami") +
+       fill = "Dipodomys merriami")
+```
+
+![](lab10_hw_files/figure-html/unnamed-chunk-13-1.png)<!-- -->
+
+```r
   theme(plot.title = element_text(size = rel(1.5), hjust = 0.5))
 ```
 
 ```
-## `geom_smooth()` using formula 'y ~ x'
+## List of 1
+##  $ plot.title:List of 11
+##   ..$ family       : NULL
+##   ..$ face         : NULL
+##   ..$ colour       : NULL
+##   ..$ size         : 'rel' num 1.5
+##   ..$ hjust        : num 0.5
+##   ..$ vjust        : NULL
+##   ..$ angle        : NULL
+##   ..$ lineheight   : NULL
+##   ..$ margin       : NULL
+##   ..$ debug        : NULL
+##   ..$ inherit.blank: logi FALSE
+##   ..- attr(*, "class")= chr [1:2] "element_text" "element"
+##  - attr(*, "class")= chr [1:2] "theme" "gg"
+##  - attr(*, "complete")= logi FALSE
+##  - attr(*, "validate")= logi TRUE
 ```
-
-![](lab10_hw_files/figure-html/unnamed-chunk-13-1.png)<!-- -->
 
 
 8. What is the relationship between `weight` and `hindfoot` length? Consider whether or not over plotting is an issue.

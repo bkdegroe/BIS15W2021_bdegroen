@@ -71,6 +71,10 @@ True
 True
 
 
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "blue">
 
 2. Which cities in California have the highest number of colleges?
 ```{r}
@@ -87,10 +91,11 @@ colleges_clean %>%
 ```
 
 ```{r}
-colleges %>% 
+colleges_clean %>% # incorrect name
   count(city) %>% 
   arrange(desc(n))
 ```
+</div>
 
 
 3. Based on your answer to #2, make a plot that shows the number of colleges in the top 10 cities.
@@ -103,6 +108,10 @@ colleges_clean %>%
   geom_col()+
   coord_flip()
 ```
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "blue">
 
 4. The column `COSTT4_A` is the annual cost of each institution. Which city has the highest average cost? Where is it located?
 ```{r}
@@ -124,6 +133,7 @@ colleges_clean %>%
   geom_col()+
   coord_flip()
 ```
+</div>
 
 6. The column `ADM_RATE` is the admissions rate by college and `C150_4_POOLED` is the four-year completion rate. Use a scatterplot to show the relationship between these two variables. What do you think this means?
 ```{r}
@@ -139,6 +149,10 @@ ggplot(data=colleges_clean, mapping=aes(x=adm_rate, y=c150_4_pooled)) +
   geom_point(na.rm = T)+
   geom_smooth(method=lm, se=T)
 ```
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "blue">
 
 8. The column titled `INSTNM` is the institution name. We are only interested in the University of California colleges. Make a new data frame that is restricted to UC institutions. You can remove `Hastings College of Law` and `UC San Francisco` as we are only interested in undergraduate institutions.
 ```{r}
@@ -174,5 +188,6 @@ Use `separate()` to separate institution name into two new columns "UNIV" and "C
 ```{r}
 
 ```
+</div>
 
 ## Knit Your Output and Post to [GitHub](https://github.com/FRS417-DataScienceBiologists)

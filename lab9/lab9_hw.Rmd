@@ -46,16 +46,16 @@ PFTFTUG1_EF: Percentage of undergraduate students who are first-time, full-time 
 
 1. Use your preferred function(s) to have a look at the data and get an idea of its structure. Make sure you summarize NA's and determine whether or not the data are tidy. You may also consider dealing with any naming issues.
 ```{r}
-colleges_clean <- janitor::clean_names(colleges)
-colleges_clean
+colleges <- janitor::clean_names(colleges)
+colleges
 ```
 
 ```{r}
-glimpse(colleges_clean)
+glimpse(colleges)
 ```
 
 ```{r}
-naniar::miss_var_summary(colleges_clean)
+naniar::miss_var_summary(colleges)
 ```
 
 1) Each variable has its own column.
@@ -78,20 +78,21 @@ div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
 
 2. Which cities in California have the highest number of colleges?
 ```{r}
-colleges_clean %>% 
+colleges%>% 
   select(city, instnm) %>% 
   group_by(city) %>%
   summarize(n=n(), .groups= 'keep') %>% 
   arrange(desc(n=n()))
 #Not sure why arrange isn't working
 ```
+
 ```{r}
-colleges_clean %>%
+colleges %>%
   count(instnm, city, sort = T)
 ```
 
 ```{r}
-colleges_clean %>% # incorrect name
+colleges %>% 
   count(city) %>% 
   arrange(desc(n))
 ```
@@ -100,7 +101,7 @@ colleges_clean %>% # incorrect name
 
 3. Based on your answer to #2, make a plot that shows the number of colleges in the top 10 cities.
 ```{r}
-colleges_clean %>%
+colleges %>%
   count(city) %>% 
   arrange(desc(n)) %>%
   top_n(10, n) %>% 
@@ -115,21 +116,21 @@ div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
 
 4. The column `COSTT4_A` is the annual cost of each institution. Which city has the highest average cost? Where is it located?
 ```{r}
-colleges_clean %>%
+colleges %>%
   group_by(city, stabbr) %>% 
-  summarize(max_average_cost = max(costt4_a),
-            na.rm=TRUE) %>% 
+  summarize(max_average_cost = mean(costt4_a, na.rm=T),
+            total=n()) %>% 
   arrange(desc(max_average_cost))
 ```
 
-Malibu has the highest rated cost, and it's located in CA.
+Claremont has the highest rated cost, and it's located in CA.
 
 5. Based on your answer to #4, make a plot that compares the cost of the individual colleges in the most expensive city. Bonus! Add UC Davis here to see how it compares :>).
 ```{r}
-colleges_clean %>% 
-  filter(city=="Malibu") %>% 
+colleges %>% 
+  filter(city=="Claremont" & costt4_a!="NA") %>% 
   group_by(city) %>% 
-  ggplot(aes(x=reorder(instnm, costt4_a), y=costt4_a))+
+  ggplot(aes(x=instnm, y=costt4_a))+
   geom_col()+
   coord_flip()
 ```
@@ -137,7 +138,7 @@ colleges_clean %>%
 
 6. The column `ADM_RATE` is the admissions rate by college and `C150_4_POOLED` is the four-year completion rate. Use a scatterplot to show the relationship between these two variables. What do you think this means?
 ```{r}
-ggplot(data=colleges_clean, mapping=aes(x=adm_rate, y=c150_4_pooled))+
+ggplot(data=colleges, mapping=aes(x=adm_rate, y=c150_4_pooled))+
   geom_point(na.rm=T)
 ```
 
@@ -145,7 +146,7 @@ There is a negative correlation between the admission rates into colleges and ho
 
 7. Is there a relationship between cost and four-year completion rate? (You don't need to do the stats, just produce a plot). What do you think this means?
 ```{r}
-ggplot(data=colleges_clean, mapping=aes(x=adm_rate, y=c150_4_pooled)) +
+ggplot(data=colleges, mapping=aes(x=adm_rate, y=c150_4_pooled)) +
   geom_point(na.rm = T)+
   geom_smooth(method=lm, se=T)
 ```
@@ -156,37 +157,63 @@ div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
 
 8. The column titled `INSTNM` is the institution name. We are only interested in the University of California colleges. Make a new data frame that is restricted to UC institutions. You can remove `Hastings College of Law` and `UC San Francisco` as we are only interested in undergraduate institutions.
 ```{r}
-colleges_clean_UCs <- colleges_clean %>%
-  filter(instnm=="UC")
-colleges_clean_UCs
+colleges_UCs <- colleges %>%
+  filter_all(any_vars(str_detect(., pattern = "University of California"))) 
+colleges_UCs
+#filter_all: filter within a selection of variables
+#any_vars: apply predicate to all variables
+#str_detect: detect the precense or absence of a pattern in a string
+#Ask difference between filter_all vs filter
+#Why dot?
 ```
 
 Remove `Hastings College of Law` and `UC San Francisco` and store the final data frame as a new object `univ_calif_final`.
 ```{r}
-
+colleges_UCs_final <- colleges_UCs %>%
+  filter(city !="San Francisco")
+colleges_UCs_final
 ```
 
 Use `separate()` to separate institution name into two new columns "UNIV" and "CAMPUS".
 ```{r}
-
+colleges_UCs_final <-colleges_UCs_final %>% 
+  separate(instnm, into= c("university", "campus"), sep="-")
+colleges_UCs_final
+#Remember to apply this to dataframe!
 ```
 
 9. The column `ADM_RATE` is the admissions rate by campus. Which UC has the lowest and highest admissions rates? Produce a numerical summary and an appropriate plot.
 ```{r}
-
+colleges_UCs_final %>%
+  select(adm_rate, campus) %>% 
+  group_by(adm_rate) %>% 
+  arrange(adm_rate)
 ```
 
 ```{r}
-
+colleges_UCs_final %>% 
+  group_by(adm_rate) %>% 
+  arrange(adm_rate) %>%
+  ggplot(aes(x=reorder(campus, adm_rate), y=adm_rate))+
+  geom_col()+
+  coord_flip()
 ```
 
 10. If you wanted to get a degree in biological or biomedical sciences, which campus confers the majority of these degrees? Produce a numerical summary and an appropriate plot.
 ```{r}
-
+colleges_UCs_final %>%
+  select(pcip26, campus) %>% 
+  group_by(pcip26) %>% 
+  arrange(desc(pcip26))
 ```
 
 ```{r}
-
+colleges_UCs_final %>% 
+  group_by(pcip26) %>% 
+  arrange(desc(pcip26)) %>%
+  ggplot(aes(x=reorder(campus, pcip26), y=pcip26))+
+  geom_col()+
+  coord_flip()
 ```
 </div>
 

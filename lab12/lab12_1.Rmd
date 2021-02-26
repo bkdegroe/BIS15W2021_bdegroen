@@ -1,0 +1,322 @@
+---
+title: "Joins and Lubridate"
+date: "`r Sys.Date()`"
+output:
+  html_document: 
+    theme: spacelab
+    toc: yes
+    toc_float: yes
+    keep_md: yes
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Learning Goals
+*At the end of this exercise, you will be able to:*  
+1. List and join multiple files from a directory.  
+2. Format dates in a data frame. 
+
+## Listing Files in Folder
+Often, the data we need is split up into multiple files, either by some geographical variable such as county, or by a time constituent such as months or weeks. The best method to deal with data in multiple files will be quick and also reproducible. We want to avoid doing anything by hand (besides very minor editing) to the original files someone sends us. We want everything to be reproducible so we can easily track any problems or errors that may crop up and prevent us from making careless errors ourselves.  
+
+So copying/pasting multiple files together isn't an option for us. Let's see how we can do this in R. In the `data/spiders` folder there are 32 files, each named for a county in California. Each file contains a record of an observation of a species of cave spider. Each observation contains a unique ID for each spider as well as some other important information such as date and location name. Let's use R to list all the `.csv` files in the `spiders` folder.  
+
+But first, load the tidyverse and the other packages we have been using.
+```{r, message = FALSE}
+library(tidyverse)
+library(here)
+library(janitor)
+library(lubridate)
+```
+
+Now we can list all of the files in a directory. This is very helpful when you are working with multiple files at once.
+```{r}
+files <- list.files(path = "data/spiders", pattern = ".csv") #Inside data, then spiders folder. Look for any files that are .csv
+files
+```
+
+We can also get the full path names with `full.names = TRUE`.
+```{r}
+files <- list.files(path = "data/spiders", pattern = ".csv", full.names = TRUE)
+files
+```
+
+Now we want to read each of these files into R without having to do them one at a time because there are quite a few. There are several ways to do this, but a quick and straightforward way is to import them as a list. A list in R is an object which can store multiple other objects of the same or differing types. Lists are common in R so it's useful to be comfortable with them. Let's import our .csv files into a list. The `lapply()` function is a part of the `apply` family of functions. It will iterate over elements of an object, apply a function we specify, and return a list. We have a character vector of file paths, so we want to iterate over all the path names and apply `read_csv()`.  
+
+```{r, message = FALSE}
+spider_list <- lapply(files, read_csv) #Importing files into a list using lapply
+#Applying read_csv to all files in spider_list
+#Result only shows you dimensions
+```
+
+We can view elements in our list with double brackets. Let's view the data for Butte county.
+```{r}
+spider_list[[3]] #Look at object 3, so all records for Butte county
+class(spider_list[[3]])
+#data.frame is class of object
+```
+
+## Practice
+1. What are the names of our list elements?
+```{r}
+names(spider_list[[3]])
+#All column names for object 3
+#Can check to see that names match up
+names(spider_list[[1]])
+```
+
+## Naming List Elements
+We don't need to here, but for demonstration purposes we can name the elements in our list. We will first get the names of each file, but we only want the county part. We will use `strsplit()` for that, which creates a nested list of strings. We want to keep the first element of each list element. Because there is only one element in each nested list element, we can use `unlist()`.
+```{r}
+names <- list.files(path = "data/spiders", pattern = ".csv") #Removing .csv from names
+names_list <- strsplit(names, split = " .csv") #Only one element in each
+names_list
+```
+
+```{r}
+names_vec <- unlist(names_list) #Removed names from list, now simply names.
+names_vec
+```
+
+```{r}
+names(spider_list) <- names_vec #Putting these names into spider list
+names(spider_list)
+```
+
+## Practice
+1. Now that our list elements are named, how could we access the Butte County data by name?
+```{r}
+spider_list$Butte
+```
+
+## Merging Files
+We are fortunate here in that all of our data frames have the same column names. This makes it easy to merge the data together with `bind_rows()` from`dplyr`. `bind_rows()` matches columns by name.
+```{r}
+spiders_all <- bind_rows(spider_list) #Matches up all the columns by name and stick everything together
+spiders_all #All dataframes in spider list are smashed together
+```
+
+## Joining Files
+Sometimes data we need is stored in a separate file or becomes available later and we need to join it to our existing data in order to work with it. Let's use an easy example to explore some of the different types of joins. This section was based on the excellent example provided by [Holly Emblem](https://hollyemblem.medium.com/joining-data-with-dplyr-in-r-874698eb8898).  
+
+Let's assume we have a database of customers and their purchases.
+```{r}
+table_A <- read_csv(here("lab12", "data", "table_A.csv"))
+table_B <- read_csv(here("lab12", "data", "table_B.csv"))
+```
+
+Table A and B have different variables, and they only have one column in commmon. Some of the fields overlap, so merging tables together will likely help for analysis.
+
+The general syntax for joins is...
+```{r}
+#join_type(firstTable, secondTable, by=columnTojoinOn) 
+#Name of first table, second table, then tell by what column they want things to be joined by.
+```
+
+`inner_join`  
+Where did customers 3 and 4 go?
+```{r}
+inner_exampleDF <- inner_join(table_A, table_B, by="customer_ID") #Joining data by the one column they have in common, "customer_ID"
+inner_exampleDF
+```
+
+Because there wasn't a match for customer 3 and 4, those values were dropped out, so experiment with various kinds of joins and see which is appropriate for the data you're working with. Ex. left or right join.
+
+`left_join`
+Where did customer 4 go? Notice the missing data for customer 3.
+```{r}
+left_exampleDF <- left_join(table_A, table_B, by="customer_ID") #Left means your making matches to the table on the left, which is the first table you're listing. Table A is left table, and matching everything in table B to that table. But there's still things missing between the two. 
+left_exampleDF
+```
+
+Customer 4 still not there because they weren't present in the left most table (table_A), so try out right_join.
+
+`right_join`
+Where did customer 3 go? Notice the missing data for customer 4.
+```{r}
+right_exampleDF <- right_join(table_A, table_B, by="customer_ID")
+right_exampleDF
+```
+
+Now the opposite is true. Customer 3 is no longer there, but customer 4 now is.
+
+It's important to practice these, because they're not always intuitive.
+
+`full_join`
+```{r}
+full_exampleDF <- full_join(table_A, table_B, by="customer_ID")
+full_exampleDF
+#This can make data messy down the line because of so many NAs
+```
+
+Now you see customer 3 and 4 there. Everything is retained. For anything not present, you get N/A values. This helps maximize retention that are in tables.
+
+`semi_join`
+Both customers 3 and 4 are dropped. This join only finds matches to the first (left) table.
+```{r}
+semi_exampleDF <- semi_join(table_A, table_B, by="customer_ID")
+semi_exampleDF
+#If any are missing, it is dropped out. A lot like inner join, but only going to the left table
+```
+
+`anti_join`
+Provides the rows in the first table for which there are not matching values in the second table.
+```{r}
+anti_exampleDF <- anti_join(table_A, table_B, by="customer_ID")
+anti_exampleDF
+#We see customer 3, but not in table B, so that's why it's anti. It's not able to join because it's not present in the second table.
+```
+## Joining the spider data
+Here, the latitude and longitude for each spider were recorded from the field records at a later date, and now we need to join it to our `spiders_all` data frame. The lat/long were recorded into one single file for each observation. Let's read in the lat/long data.
+```{r, message = FALSE}
+spiders_locs <- read_csv("data/spiders locations/spiders_locations.csv")
+spiders_locs
+#Accession number provided in first graph, want to merge the data to the original first table
+```
+
+We will use a join here to merge lat/long to our data frame. Both files contain a unique identifier called `Accession` which we will use to join.  
+
+## Practice
+1. Which type of join is most appropriate in this case?  
+```{r}
+spiders_with_locs <- left_join(spiders_all, spiders_locs, by = c("Accession"))
+spiders_with_locs
+#Often use left_join, so did so for this case
+#spiders_all because that's the merged data from our list
+#Second data to merge with is spiders_with_locs
+#Merge by Accession (make sure you spell this right!)
+#Latitude and Longitude in very last couple columns now
+```
+
+As a side note, joining data can highlight problems or typos with the data when the join does not go as expected.  
+
+## Formatting Dates
+We now have a single data frame with all of our spider data including locations. That was a lot of work, even with R. But remember, now we have a reproducible work flow starting from the original files. This work flow serves as a record of what we did, keeps the original files untouched, and can make it easier to track down problems later in our analysis. Most importantly, everyone who uses our R script will know exactly what we did!  
+
+There is one last thing to change. Did you notice the date column? It seems to be in the format Day/Month/Year. 
+```{r}
+class(spiders_with_locs$Date)
+```
+
+Do we want dates listed as characters, or as actual dates? The latter, and package lubridate (did not read that correctly) does this.   
+
+The `lubridate` package was specifically created to deal with dates of all types. There are many useful functions in `lubridate` for working with dates. Please see the excellent tutorial provided by [RichardOnData](https://www.youtube.com/watch?v=VYAo69WdJZg&ab_channel=RichardOnData).
+```{r}
+day <- today()
+str(day)
+#str is structure
+```
+
+```{r}
+datetime <- now()
+datetime
+#Useful for time stamps to show when you were working on certain things
+```
+
+We want to change our date column to the standard "YEAR-MO-DA" format that R will recognize as a date. Right now it is listed as day-month-year. We can use the base R function `as.Date()` or the lubridate function `dmy` for this. 
+```{r}
+dmy(spiders_with_locs$Date)
+#dmy = day, month, year
+```
+
+If you want to use base R, then here is the format.
+```{r}
+as.Date(spiders_with_locs$Date, format = "%d/%m/%y")
+```
+`
+There are many different options for working with dates and datetimes in lubridate including `ymd`, `mdy`, `dmy`, `mdy_hms`, `ymd_hms`.
+```{r}
+dateformat1 <- "20200922"
+dateformat2 <- "09-22-2020"
+dateformat3 <- "22/09/2020"
+dateformat4 <- "09-22-2020 17:00:00"
+dateformat5 <- "20200922 170000"
+```
+
+## Practice 
+1. Convert each of the examples above using lubridate.
+```{r}
+ymd(dateformat1)
+```
+
+```{r}
+mdy(dateformat2)
+```
+
+```{r}
+dmy(dateformat3)
+```
+
+```{r}
+mdy_hms(dateformat4)
+```
+
+```{r}
+ymd_hms(dateformat5)
+```
+
+Have a look at these options.
+```{r}
+year(datetime)
+month(datetime)
+day(datetime)
+hour(datetime)
+minute(datetime)
+second(datetime)
+wday(datetime, label=T) #Tells you weekday
+```
+
+## Export for part 2  
+We need to save our final data to a `.csv` so we can use it in part 2. 
+```{r}
+write.csv(spiders_with_locs, file = "spiders_with_locs.csv", row.names = FALSE)
+#Row names false because you don't want those names to be included
+```
+
+## Installs for part 2  
+It will be very helpful if you can install the following packages before the next lab. Please install them in order!
+`devtools` and `ggmap`
+```{r}
+#install.packages("devtools")
+#library(devtools)
+#devtools::install_github("dkahle/ggmap")
+```
+
+```{r}
+#install.packages("remotes")
+```
+
+```{r}
+library(remotes)
+```
+
+
+```{r}
+library(remotes)
+library(devtools)
+```
+
+```{r}
+#remotes::install_gitlab("hrbrmstr/albersusa")
+```
+
+```{r}
+library(albersusa)
+```
+
+
+`rgeos`, `rgdal`, and `albersusa`
+```{r, message = FALSE}
+#install.packages("albersusa")
+```
+
+
+
+## That's it! Take a break and I will see you on Zoom!  
+
+-->[Home](https://jmledford3115.github.io/datascibiol/)

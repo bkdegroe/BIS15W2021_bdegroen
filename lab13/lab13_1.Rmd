@@ -16,6 +16,7 @@ knitr::opts_chunk$set(
 )
 ```
 
+
 ## Learning Goals
 *At the end of this exercise, you will be able to:*  
 1. Understand the basic building blocks of a shiny app.  

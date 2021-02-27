@@ -69,7 +69,6 @@ ui <- fluidPage(
     )
     )
     )
-
 server <- function(input, output, session) {
   session$onSessionEnded(stopApp)
   output$taxonPlot <- renderPlot({
@@ -79,7 +78,6 @@ server <- function(input, output, session) {
     geom_density(color="black", fill="steelblue", alpha=0.6)
   })
 }
-
 shinyApp(ui, server)
 ```
 

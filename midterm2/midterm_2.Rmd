@@ -118,6 +118,10 @@ life_expecancy_tidy %>%
 
 
 ## Life Expectancy  
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "blue">
 
 3. (2 points) Let's limit the data to the past 100 years (1920-2020). For these years, which country has the highest life expectancy? How about the lowest life expectancy?  
 
@@ -172,6 +176,7 @@ life_expecancy_tidy %>%
   top_n(5, delta) %>% 
   arrange(desc(delta))
 ```
+</div>
 
 5. (3 points) Make a plot that shows the change over the past 100 years for the country with the biggest improvement in life expectancy. Be sure to add appropriate aesthetics to make the plot clean and clear. Once you have made the plot, do a little internet searching and see if you can discover what historical event may have contributed to this remarkable change.  
 

@@ -38,7 +38,7 @@ library("palmerpenguins")
 ```
 
 ```{r}
-if (!require("tidyverse")) install.packages('tidyverse')
+#if (!require("tidyverse")) install.packages('tidyverse')
 #Very helpful code to add to standalone version of app. This is helpful because instead of only using library, do require
 #require(janitor)
 #BUT if janitor isn't installed, require will install and library call that app for people.

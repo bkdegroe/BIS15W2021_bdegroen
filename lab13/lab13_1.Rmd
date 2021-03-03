@@ -94,7 +94,7 @@ server <- function(input, output) {
 shinyApp(ui, server)
 ```
 
-SelectInupt is the dropdown menu choices. We're naming x "Select X Variable", the latter is what the user will see as the menu. All of the continouus data is in the c
+SelectInupt is the drop-down menu choices. We're naming x "Select X Variable", the latter is what the user will see as the menu. All of the continuous data is in the c
 
 Let's repeat the process for the y variable input. Remember to hit stop after each app run to close the app. 
 ```{r, eval=F, echo=T}

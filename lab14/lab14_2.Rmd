@@ -156,15 +156,20 @@ data(grav)
 ## Practice
 1. Get a quick summary of the grav data. 
 ```{r}
-
+summary(grav)
 ```
 2. Make an genetic map of markers for the grav data.
 ```{r}
-
+plotMap(grav)
 ```
+```{r}
+iplotMap(grav)
+```
+
 3. Plot a heat map of the correlation matrix for the phenotype at all pairs of times, linked to scatterplots of the phenotypes.
 ```{r}
-
+head(grav$pheno)
+iplotCorr(grav$pheno)
 ```
 
 ## iplotCurves

@@ -79,19 +79,20 @@ UC_admit %>%
 div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
 </style>
 <div class = "blue">
+## The original code doen't work. Please take a look at this fixed version.
 ```{r}
 library(shiny)
 UC_admit$academic_yr <- as.factor(UC_admit$academic_yr)
 ui <- fluidPage(titlePanel("Admissions By Ethnicity For UC Campuses"), 
-                radioButtons("x", "Select Fill Variable", choices = c("ethnicity", "filtered_count_fr", "campus"), selected = "ethnicity"),
+                radioButtons("x", "Select Fill Variable", choices = c("ethnicity", "academic_yr", "campus"), selected = "ethnicity"),
                 plotOutput("plot", width = "600px", height = "500px")
   
 )
 
 server <- function(input, output, session) {
   output$plot <- renderPlot({
-    ggplot(UC_admit, aes_string(x = "ethnicity", y = "filtered_count_fr", fill = input$x))+
-      geom_col(position = "dodge", alpha = 0.8, color = "black")+
+    ggplot(UC_admit, aes_string(x = input$x, y = "filtered_count_fr", fill = "category"))+
+      geom_col(position = "dodge", alpha = 0.8)+
       theme_light(base_size = 18)+
       labs(x=NULL, y=NULL, fill = "Fill Variable")
   })

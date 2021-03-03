@@ -6,6 +6,7 @@ output:
   html_document:
     theme: spacelab
     toc: no
+runtime: shiny
 ---
 
 ```{r setup, include=FALSE}
@@ -62,7 +63,6 @@ UC_admit %>%
 ```
 There are NAs in the data, and they are treated as "NA".   
 
-
 **2. The president of UC has asked you to build a shiny app that shows admissions by ethnicity across all UC campuses. Your app should allow users to explore year, campus, and admit category as interactive variables. Use shiny dashboard and try to incorporate the aesthetics you have learned in ggplot to make the app neat and clean.**
 
 ```{r}
@@ -75,9 +75,13 @@ UC_admit %>%
 ```
 
 
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "blue">
 ```{r}
 library(shiny)
-
+UC_admit$academic_yr <- as.factor(UC_admit$academic_yr)
 ui <- fluidPage(titlePanel("Admissions By Ethnicity For UC Campuses"), 
                 radioButtons("x", "Select Fill Variable", choices = c("ethnicity", "filtered_count_fr", "campus"), selected = "ethnicity"),
                 plotOutput("plot", width = "600px", height = "500px")
@@ -86,8 +90,8 @@ ui <- fluidPage(titlePanel("Admissions By Ethnicity For UC Campuses"),
 
 server <- function(input, output, session) {
   output$plot <- renderPlot({
-    ggplot(UC_admit, aes_string(x = "ethnicity", fill = input$x))+
-      geom_bar(position = "dodge", alpha = 0.8, color = "black")+
+    ggplot(UC_admit, aes_string(x = "ethnicity", y = "filtered_count_fr", fill = input$x))+
+      geom_col(position = "dodge", alpha = 0.8, color = "black")+
       theme_light(base_size = 18)+
       labs(x=NULL, y=NULL, fill = "Fill Variable")
   })
@@ -96,6 +100,7 @@ server <- function(input, output, session) {
 
 shinyApp(ui, server)
 ```
+</div>
 
 ```{r, eval=F, echo=T}
 ui <- fluidPage(    
@@ -177,9 +182,14 @@ server <- function(input, output, session) {
 shinyApp(ui, server)
 ```
 
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "blue">
 
 **3. Make alternate version of your app above by tracking enrollment at a campus over all of the represented years while allowing users to interact with campus, category, and ethnicity.**
 
+</div>
 
 ## Push your final code to GitHub!
 Please be sure that you check the `keep md` file in the knit preferences. 

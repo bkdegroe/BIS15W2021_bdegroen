@@ -1,7 +1,7 @@
 ---
 title: "Lab 14 Homework"
 author: "Please Add Your Name Here"
-date: "`r Sys.Date()`"
+date: "`r Sys.time()`"
 output: 
   html_document: 
     keep_md: yes
@@ -23,6 +23,11 @@ library(qtlcharts)
 library(tidyverse)
 library(ggmap)
 ```
+
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "blue">
 
 **1. We have a satellite collars on a number of different individuals and want to be able to quickly look at all of their recent movements at once. Please load all the data files from `us_individual_collar_data` and use for loop to create plots for all different individuals of the path they move on longitude and latitude.**
 ```{r}
@@ -80,6 +85,7 @@ drop.nullmarkers(hyper)
 ```{r}
 
 ```
+</div>
 
 ## Push your final code to GitHub!
 Please be sure that you check the `keep md` file in the knit preferences. 

@@ -98,6 +98,13 @@ colleges %>%
 ```
 </div>
 
+What professor's key had:
+```{r}
+colleges %>% 
+  count(city) %>% 
+  arrange(desc(n))
+```
+
 
 3. Based on your answer to #2, make a plot that shows the number of colleges in the top 10 cities.
 ```{r}
@@ -125,6 +132,16 @@ colleges %>%
 
 Claremont has the highest rated cost, and it's located in CA.
 
+This is what the professor's key had:
+```{r}
+colleges %>% 
+  group_by(city) %>% 
+  summarize(mean_cost_yr=mean(costt4_a, na.rm=TRUE),
+            total=n()) %>% 
+  arrange(desc(mean_cost_yr))
+```
+
+
 5. Based on your answer to #4, make a plot that compares the cost of the individual colleges in the most expensive city. Bonus! Add UC Davis here to see how it compares :>).
 ```{r}
 colleges %>% 
@@ -136,6 +153,16 @@ colleges %>%
 ```
 </div>
 
+This is what the professor's key had:
+```{r}
+colleges %>% 
+  filter(instnm== "University of California-Davis" | city=="Claremont" & costt4_a!="NA") %>% 
+  ggplot(aes(x=instnm, y=costt4_a)) + 
+  geom_col()+
+  coord_flip()
+```
+
+
 6. The column `ADM_RATE` is the admissions rate by college and `C150_4_POOLED` is the four-year completion rate. Use a scatterplot to show the relationship between these two variables. What do you think this means?
 ```{r}
 ggplot(data=colleges, mapping=aes(x=adm_rate, y=c150_4_pooled))+
@@ -144,12 +171,31 @@ ggplot(data=colleges, mapping=aes(x=adm_rate, y=c150_4_pooled))+
 
 There is a negative correlation between the admission rates into colleges and how many students complete their 4 year admission rate.
 
+This is what the professor's key had:
+```{r}
+colleges %>% 
+  ggplot(aes(x=adm_rate, y=c150_4_pooled))+
+  geom_point(na.rm=T)+
+  geom_smooth(method=lm, se=F, na.rm=T)
+```
+
+
 7. Is there a relationship between cost and four-year completion rate? (You don't need to do the stats, just produce a plot). What do you think this means?
 ```{r}
 ggplot(data=colleges, mapping=aes(x=adm_rate, y=c150_4_pooled)) +
   geom_point(na.rm = T)+
   geom_smooth(method=lm, se=T)
 ```
+
+This is what professor's key had:
+```{r}
+colleges %>% 
+  ggplot(aes(x=costt4_a, y=c150_4_pooled))+
+  geom_point(na.rm=T)+
+  geom_smooth(method=lm, se=F, na.rm=T)
+```
+
+
 <style>
 div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
 </style>
@@ -216,5 +262,20 @@ colleges_UCs_final %>%
   coord_flip()
 ```
 </div>
+
+What professor did:
+```{r}
+colleges_UCs_final %>% 
+  select(campus, pcip26) %>% 
+  arrange(pcip26)
+```
+
+```{r}
+colleges_UCs_final %>% 
+  ggplot(aes(x=reorder(campus, pcip26), y=pcip26))+
+  geom_col()
+```
+
+
 
 ## Knit Your Output and Post to [GitHub](https://github.com/FRS417-DataScienceBiologists)

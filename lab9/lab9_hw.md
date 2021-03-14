@@ -1,7 +1,7 @@
 ---
 title: "Lab 9 Homework"
 author: "Berlin DeGroen"
-date: "2021-02-15"
+date: "2021-03-14"
 output:
   html_document: 
     theme: spacelab
@@ -53,18 +53,18 @@ colleges
 
 ```
 ## # A tibble: 341 x 10
-##    INSTNM CITY  STABBR ZIP   ADM_RATE SAT_AVG PCIP26 COSTT4_A C150_4_POOLED
-##    <chr>  <chr> <chr>  <chr>    <dbl>   <dbl>  <dbl>    <dbl>         <dbl>
-##  1 Gross… El C… CA     9202…       NA      NA 0.0016     7956        NA    
-##  2 Colle… Visa… CA     9327…       NA      NA 0.0066     8109        NA    
-##  3 Colle… San … CA     9440…       NA      NA 0.0038     8278        NA    
-##  4 Ventu… Vent… CA     9300…       NA      NA 0.0035     8407        NA    
-##  5 Oxnar… Oxna… CA     9303…       NA      NA 0.0085     8516        NA    
-##  6 Moorp… Moor… CA     9302…       NA      NA 0.0151     8577        NA    
-##  7 Skyli… San … CA     9406…       NA      NA 0          8580         0.233
-##  8 Glend… Glen… CA     9120…       NA      NA 0.002      9181        NA    
-##  9 Citru… Glen… CA     9174…       NA      NA 0.0021     9281        NA    
-## 10 Fresn… Fres… CA     93741       NA      NA 0.0324     9370        NA    
+##    INSTNM     CITY   STABBR ZIP   ADM_RATE SAT_AVG PCIP26 COSTT4_A C150_4_POOLED
+##    <chr>      <chr>  <chr>  <chr>    <dbl>   <dbl>  <dbl>    <dbl>         <dbl>
+##  1 Grossmont… El Ca… CA     9202…       NA      NA 0.0016     7956        NA    
+##  2 College o… Visal… CA     9327…       NA      NA 0.0066     8109        NA    
+##  3 College o… San M… CA     9440…       NA      NA 0.0038     8278        NA    
+##  4 Ventura C… Ventu… CA     9300…       NA      NA 0.0035     8407        NA    
+##  5 Oxnard Co… Oxnard CA     9303…       NA      NA 0.0085     8516        NA    
+##  6 Moorpark … Moorp… CA     9302…       NA      NA 0.0151     8577        NA    
+##  7 Skyline C… San B… CA     9406…       NA      NA 0          8580         0.233
+##  8 Glendale … Glend… CA     9120…       NA      NA 0.002      9181        NA    
+##  9 Citrus Co… Glend… CA     9174…       NA      NA 0.0021     9281        NA    
+## 10 Fresno Ci… Fresno CA     93741       NA      NA 0.0324     9370        NA    
 ## # … with 331 more rows, and 1 more variable: PFTFTUG1_EF <dbl>
 ```
 
@@ -90,18 +90,18 @@ colleges
 
 ```
 ## # A tibble: 341 x 10
-##    instnm city  stabbr zip   adm_rate sat_avg pcip26 costt4_a c150_4_pooled
-##    <chr>  <chr> <chr>  <chr>    <dbl>   <dbl>  <dbl>    <dbl>         <dbl>
-##  1 Gross… El C… CA     9202…       NA      NA 0.0016     7956        NA    
-##  2 Colle… Visa… CA     9327…       NA      NA 0.0066     8109        NA    
-##  3 Colle… San … CA     9440…       NA      NA 0.0038     8278        NA    
-##  4 Ventu… Vent… CA     9300…       NA      NA 0.0035     8407        NA    
-##  5 Oxnar… Oxna… CA     9303…       NA      NA 0.0085     8516        NA    
-##  6 Moorp… Moor… CA     9302…       NA      NA 0.0151     8577        NA    
-##  7 Skyli… San … CA     9406…       NA      NA 0          8580         0.233
-##  8 Glend… Glen… CA     9120…       NA      NA 0.002      9181        NA    
-##  9 Citru… Glen… CA     9174…       NA      NA 0.0021     9281        NA    
-## 10 Fresn… Fres… CA     93741       NA      NA 0.0324     9370        NA    
+##    instnm     city   stabbr zip   adm_rate sat_avg pcip26 costt4_a c150_4_pooled
+##    <chr>      <chr>  <chr>  <chr>    <dbl>   <dbl>  <dbl>    <dbl>         <dbl>
+##  1 Grossmont… El Ca… CA     9202…       NA      NA 0.0016     7956        NA    
+##  2 College o… Visal… CA     9327…       NA      NA 0.0066     8109        NA    
+##  3 College o… San M… CA     9440…       NA      NA 0.0038     8278        NA    
+##  4 Ventura C… Ventu… CA     9300…       NA      NA 0.0035     8407        NA    
+##  5 Oxnard Co… Oxnard CA     9303…       NA      NA 0.0085     8516        NA    
+##  6 Moorpark … Moorp… CA     9302…       NA      NA 0.0151     8577        NA    
+##  7 Skyline C… San B… CA     9406…       NA      NA 0          8580         0.233
+##  8 Glendale … Glend… CA     9120…       NA      NA 0.002      9181        NA    
+##  9 Citrus Co… Glend… CA     9174…       NA      NA 0.0021     9281        NA    
+## 10 Fresno Ci… Fresno CA     93741       NA      NA 0.0324     9370        NA    
 ## # … with 331 more rows, and 1 more variable: pftftug1_ef <dbl>
 ```
 
@@ -113,16 +113,16 @@ glimpse(colleges)
 ```
 ## Rows: 341
 ## Columns: 10
-## $ instnm        <chr> "Grossmont College", "College of the Sequoias", "Colleg…
-## $ city          <chr> "El Cajon", "Visalia", "San Mateo", "Ventura", "Oxnard"…
-## $ stabbr        <chr> "CA", "CA", "CA", "CA", "CA", "CA", "CA", "CA", "CA", "…
-## $ zip           <chr> "92020-1799", "93277-2214", "94402-3784", "93003-3872",…
-## $ adm_rate      <dbl> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
-## $ sat_avg       <dbl> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
-## $ pcip26        <dbl> 0.0016, 0.0066, 0.0038, 0.0035, 0.0085, 0.0151, 0.0000,…
-## $ costt4_a      <dbl> 7956, 8109, 8278, 8407, 8516, 8577, 8580, 9181, 9281, 9…
-## $ c150_4_pooled <dbl> NA, NA, NA, NA, NA, NA, 0.2334, NA, NA, NA, NA, 0.1704,…
-## $ pftftug1_ef   <dbl> 0.3546, 0.5413, 0.3567, 0.3824, 0.2753, 0.4286, 0.2307,…
+## $ instnm        <chr> "Grossmont College", "College of the Sequoias", "College…
+## $ city          <chr> "El Cajon", "Visalia", "San Mateo", "Ventura", "Oxnard",…
+## $ stabbr        <chr> "CA", "CA", "CA", "CA", "CA", "CA", "CA", "CA", "CA", "C…
+## $ zip           <chr> "92020-1799", "93277-2214", "94402-3784", "93003-3872", …
+## $ adm_rate      <dbl> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …
+## $ sat_avg       <dbl> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …
+## $ pcip26        <dbl> 0.0016, 0.0066, 0.0038, 0.0035, 0.0085, 0.0151, 0.0000, …
+## $ costt4_a      <dbl> 7956, 8109, 8278, 8407, 8516, 8577, 8580, 9181, 9281, 93…
+## $ c150_4_pooled <dbl> NA, NA, NA, NA, NA, NA, 0.2334, NA, NA, NA, NA, 0.1704, …
+## $ pftftug1_ef   <dbl> 0.3546, 0.5413, 0.3567, 0.3824, 0.2753, 0.4286, 0.2307, …
 ```
 
 
@@ -244,6 +244,31 @@ colleges %>%
 ```
 </div>
 
+What professor's key had:
+
+```r
+colleges %>% 
+  count(city) %>% 
+  arrange(desc(n))
+```
+
+```
+## # A tibble: 161 x 2
+##    city              n
+##    <chr>         <int>
+##  1 Los Angeles      24
+##  2 San Diego        18
+##  3 San Francisco    15
+##  4 Sacramento       10
+##  5 Berkeley          9
+##  6 Oakland           9
+##  7 Claremont         7
+##  8 Pasadena          6
+##  9 Fresno            5
+## 10 Irvine            5
+## # … with 151 more rows
+```
+
 
 3. Based on your answer to #2, make a plot that shows the number of colleges in the top 10 cities.
 
@@ -257,7 +282,7 @@ colleges %>%
   coord_flip()
 ```
 
-![](lab9_hw_files/figure-html/unnamed-chunk-9-1.png)<!-- -->
+![](lab9_hw_files/figure-html/unnamed-chunk-10-1.png)<!-- -->
 <style>
 div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
 </style>
@@ -297,6 +322,34 @@ colleges %>%
 
 Claremont has the highest rated cost, and it's located in CA.
 
+This is what the professor's key had:
+
+```r
+colleges %>% 
+  group_by(city) %>% 
+  summarize(mean_cost_yr=mean(costt4_a, na.rm=TRUE),
+            total=n()) %>% 
+  arrange(desc(mean_cost_yr))
+```
+
+```
+## # A tibble: 161 x 3
+##    city                mean_cost_yr total
+##    <chr>                      <dbl> <int>
+##  1 Claremont                  66498     7
+##  2 Malibu                     66152     1
+##  3 Valencia                   64686     1
+##  4 Orange                     64501     3
+##  5 Redlands                   61542     1
+##  6 Moraga                     61095     1
+##  7 Atherton                   56035     1
+##  8 Thousand Oaks              54373     1
+##  9 Rancho Palos Verdes        50758     1
+## 10 La Verne                   50603     1
+## # … with 151 more rows
+```
+
+
 5. Based on your answer to #4, make a plot that compares the cost of the individual colleges in the most expensive city. Bonus! Add UC Davis here to see how it compares :>).
 
 ```r
@@ -308,8 +361,21 @@ colleges %>%
   coord_flip()
 ```
 
-![](lab9_hw_files/figure-html/unnamed-chunk-11-1.png)<!-- -->
+![](lab9_hw_files/figure-html/unnamed-chunk-13-1.png)<!-- -->
 </div>
+
+This is what the professor's key had:
+
+```r
+colleges %>% 
+  filter(instnm== "University of California-Davis" | city=="Claremont" & costt4_a!="NA") %>% 
+  ggplot(aes(x=instnm, y=costt4_a)) + 
+  geom_col()+
+  coord_flip()
+```
+
+![](lab9_hw_files/figure-html/unnamed-chunk-14-1.png)<!-- -->
+
 
 6. The column `ADM_RATE` is the admissions rate by college and `C150_4_POOLED` is the four-year completion rate. Use a scatterplot to show the relationship between these two variables. What do you think this means?
 
@@ -318,9 +384,25 @@ ggplot(data=colleges, mapping=aes(x=adm_rate, y=c150_4_pooled))+
   geom_point(na.rm=T)
 ```
 
-![](lab9_hw_files/figure-html/unnamed-chunk-12-1.png)<!-- -->
+![](lab9_hw_files/figure-html/unnamed-chunk-15-1.png)<!-- -->
 
 There is a negative correlation between the admission rates into colleges and how many students complete their 4 year admission rate.
+
+This is what the professor's key had:
+
+```r
+colleges %>% 
+  ggplot(aes(x=adm_rate, y=c150_4_pooled))+
+  geom_point(na.rm=T)+
+  geom_smooth(method=lm, se=F, na.rm=T)
+```
+
+```
+## `geom_smooth()` using formula 'y ~ x'
+```
+
+![](lab9_hw_files/figure-html/unnamed-chunk-16-1.png)<!-- -->
+
 
 7. Is there a relationship between cost and four-year completion rate? (You don't need to do the stats, just produce a plot). What do you think this means?
 
@@ -338,7 +420,24 @@ ggplot(data=colleges, mapping=aes(x=adm_rate, y=c150_4_pooled)) +
 ## Warning: Removed 251 rows containing non-finite values (stat_smooth).
 ```
 
-![](lab9_hw_files/figure-html/unnamed-chunk-13-1.png)<!-- -->
+![](lab9_hw_files/figure-html/unnamed-chunk-17-1.png)<!-- -->
+
+This is what professor's key had:
+
+```r
+colleges %>% 
+  ggplot(aes(x=costt4_a, y=c150_4_pooled))+
+  geom_point(na.rm=T)+
+  geom_smooth(method=lm, se=F, na.rm=T)
+```
+
+```
+## `geom_smooth()` using formula 'y ~ x'
+```
+
+![](lab9_hw_files/figure-html/unnamed-chunk-18-1.png)<!-- -->
+
+
 <style>
 div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
 </style>
@@ -354,18 +453,18 @@ colleges_UCs
 
 ```
 ## # A tibble: 10 x 10
-##    instnm city  stabbr zip   adm_rate sat_avg pcip26 costt4_a c150_4_pooled
-##    <chr>  <chr> <chr>  <chr>    <dbl>   <dbl>  <dbl>    <dbl>         <dbl>
-##  1 Unive… La J… CA     92093    0.357    1324  0.216    31043         0.872
-##  2 Unive… Irvi… CA     92697    0.406    1206  0.107    31198         0.876
-##  3 Unive… Rive… CA     92521    0.663    1078  0.149    31494         0.73 
-##  4 Unive… Los … CA     9009…    0.180    1334  0.155    33078         0.911
-##  5 Unive… Davis CA     9561…    0.423    1218  0.198    33904         0.850
-##  6 Unive… Sant… CA     9506…    0.578    1201  0.193    34608         0.776
-##  7 Unive… Berk… CA     94720    0.169    1422  0.105    34924         0.916
-##  8 Unive… Sant… CA     93106    0.358    1281  0.108    34998         0.816
-##  9 Unive… San … CA     9410…   NA          NA NA           NA        NA    
-## 10 Unive… San … CA     9414…   NA          NA NA           NA        NA    
+##    instnm     city   stabbr zip   adm_rate sat_avg pcip26 costt4_a c150_4_pooled
+##    <chr>      <chr>  <chr>  <chr>    <dbl>   <dbl>  <dbl>    <dbl>         <dbl>
+##  1 Universit… La Jo… CA     92093    0.357    1324  0.216    31043         0.872
+##  2 Universit… Irvine CA     92697    0.406    1206  0.107    31198         0.876
+##  3 Universit… River… CA     92521    0.663    1078  0.149    31494         0.73 
+##  4 Universit… Los A… CA     9009…    0.180    1334  0.155    33078         0.911
+##  5 Universit… Davis  CA     9561…    0.423    1218  0.198    33904         0.850
+##  6 Universit… Santa… CA     9506…    0.578    1201  0.193    34608         0.776
+##  7 Universit… Berke… CA     94720    0.169    1422  0.105    34924         0.916
+##  8 Universit… Santa… CA     93106    0.358    1281  0.108    34998         0.816
+##  9 Universit… San F… CA     9410…   NA          NA NA           NA        NA    
+## 10 Universit… San F… CA     9414…   NA          NA NA           NA        NA    
 ## # … with 1 more variable: pftftug1_ef <dbl>
 ```
 
@@ -387,16 +486,16 @@ colleges_UCs_final
 
 ```
 ## # A tibble: 8 x 10
-##   instnm city  stabbr zip   adm_rate sat_avg pcip26 costt4_a c150_4_pooled
-##   <chr>  <chr> <chr>  <chr>    <dbl>   <dbl>  <dbl>    <dbl>         <dbl>
-## 1 Unive… La J… CA     92093    0.357    1324  0.216    31043         0.872
-## 2 Unive… Irvi… CA     92697    0.406    1206  0.107    31198         0.876
-## 3 Unive… Rive… CA     92521    0.663    1078  0.149    31494         0.73 
-## 4 Unive… Los … CA     9009…    0.180    1334  0.155    33078         0.911
-## 5 Unive… Davis CA     9561…    0.423    1218  0.198    33904         0.850
-## 6 Unive… Sant… CA     9506…    0.578    1201  0.193    34608         0.776
-## 7 Unive… Berk… CA     94720    0.169    1422  0.105    34924         0.916
-## 8 Unive… Sant… CA     93106    0.358    1281  0.108    34998         0.816
+##   instnm      city   stabbr zip   adm_rate sat_avg pcip26 costt4_a c150_4_pooled
+##   <chr>       <chr>  <chr>  <chr>    <dbl>   <dbl>  <dbl>    <dbl>         <dbl>
+## 1 University… La Jo… CA     92093    0.357    1324  0.216    31043         0.872
+## 2 University… Irvine CA     92697    0.406    1206  0.107    31198         0.876
+## 3 University… River… CA     92521    0.663    1078  0.149    31494         0.73 
+## 4 University… Los A… CA     9009…    0.180    1334  0.155    33078         0.911
+## 5 University… Davis  CA     9561…    0.423    1218  0.198    33904         0.850
+## 6 University… Santa… CA     9506…    0.578    1201  0.193    34608         0.776
+## 7 University… Berke… CA     94720    0.169    1422  0.105    34924         0.916
+## 8 University… Santa… CA     93106    0.358    1281  0.108    34998         0.816
 ## # … with 1 more variable: pftftug1_ef <dbl>
 ```
 
@@ -410,16 +509,16 @@ colleges_UCs_final
 
 ```
 ## # A tibble: 8 x 11
-##   university campus city  stabbr zip   adm_rate sat_avg pcip26 costt4_a
-##   <chr>      <chr>  <chr> <chr>  <chr>    <dbl>   <dbl>  <dbl>    <dbl>
-## 1 Universit… San D… La J… CA     92093    0.357    1324  0.216    31043
-## 2 Universit… Irvine Irvi… CA     92697    0.406    1206  0.107    31198
-## 3 Universit… River… Rive… CA     92521    0.663    1078  0.149    31494
-## 4 Universit… Los A… Los … CA     9009…    0.180    1334  0.155    33078
-## 5 Universit… Davis  Davis CA     9561…    0.423    1218  0.198    33904
-## 6 Universit… Santa… Sant… CA     9506…    0.578    1201  0.193    34608
-## 7 Universit… Berke… Berk… CA     94720    0.169    1422  0.105    34924
-## 8 Universit… Santa… Sant… CA     93106    0.358    1281  0.108    34998
+##   university     campus   city    stabbr zip    adm_rate sat_avg pcip26 costt4_a
+##   <chr>          <chr>    <chr>   <chr>  <chr>     <dbl>   <dbl>  <dbl>    <dbl>
+## 1 University of… San Die… La Jol… CA     92093     0.357    1324  0.216    31043
+## 2 University of… Irvine   Irvine  CA     92697     0.406    1206  0.107    31198
+## 3 University of… Riversi… Rivers… CA     92521     0.663    1078  0.149    31494
+## 4 University of… Los Ang… Los An… CA     90095…    0.180    1334  0.155    33078
+## 5 University of… Davis    Davis   CA     95616…    0.423    1218  0.198    33904
+## 6 University of… Santa C… Santa … CA     95064…    0.578    1201  0.193    34608
+## 7 University of… Berkeley Berkel… CA     94720     0.169    1422  0.105    34924
+## 8 University of… Santa B… Santa … CA     93106     0.358    1281  0.108    34998
 ## # … with 2 more variables: c150_4_pooled <dbl>, pftftug1_ef <dbl>
 ```
 
@@ -461,7 +560,7 @@ colleges_UCs_final %>%
   coord_flip()
 ```
 
-![](lab9_hw_files/figure-html/unnamed-chunk-18-1.png)<!-- -->
+![](lab9_hw_files/figure-html/unnamed-chunk-23-1.png)<!-- -->
 
 10. If you wanted to get a degree in biological or biomedical sciences, which campus confers the majority of these degrees? Produce a numerical summary and an appropriate plot.
 
@@ -497,7 +596,40 @@ colleges_UCs_final %>%
   coord_flip()
 ```
 
-![](lab9_hw_files/figure-html/unnamed-chunk-20-1.png)<!-- -->
+![](lab9_hw_files/figure-html/unnamed-chunk-25-1.png)<!-- -->
 </div>
+
+What professor did:
+
+```r
+colleges_UCs_final %>% 
+  select(campus, pcip26) %>% 
+  arrange(pcip26)
+```
+
+```
+## # A tibble: 8 x 2
+##   campus        pcip26
+##   <chr>          <dbl>
+## 1 Berkeley       0.105
+## 2 Irvine         0.107
+## 3 Santa Barbara  0.108
+## 4 Riverside      0.149
+## 5 Los Angeles    0.155
+## 6 Santa Cruz     0.193
+## 7 Davis          0.198
+## 8 San Diego      0.216
+```
+
+
+```r
+colleges_UCs_final %>% 
+  ggplot(aes(x=reorder(campus, pcip26), y=pcip26))+
+  geom_col()
+```
+
+![](lab9_hw_files/figure-html/unnamed-chunk-27-1.png)<!-- -->
+
+
 
 ## Knit Your Output and Post to [GitHub](https://github.com/FRS417-DataScienceBiologists)

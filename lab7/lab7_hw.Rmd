@@ -1,6 +1,6 @@
 ---
 title: "Lab 7 Homework"
-author: "Please Add Your Name Here"
+author: "Berlin DeGroen"
 date: "`r Sys.Date()`"
 output:
   html_document: 
@@ -73,9 +73,10 @@ summary(amniota_no_nas)
 
 ```{r}
 #Trying to figure out what -30258.71100 is
-amniota_no_nas %>%
-  filter(female_maturity_d >= 50) %>%
-  tabyl(female_maturity_d)
+#amniota_no_nas %>%
+#  filter(female_maturity_d >= 50) %>%
+#  tabyl(female_maturity_d)
+#Hashtagged this out because the output was way too long
 #this might be what you were trying to do?
 ```
 ```{r}
@@ -102,16 +103,7 @@ glimpse(amphibio)
 
 The data for the amphibio dataset seems to be represented by NAs.
 
-```{r}
-hist(amphibio$Aqu)
-```
 
-Uh oh...
-
-<style>
-div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
-</style>
-<div class = "blue">
 
 ```{r}
 naniar::miss_var_summary(amphibio)
@@ -125,16 +117,59 @@ amniota %>%
   summarize(number_nas = sum(is.na(amniota)))
 ```
 No, the values don't make sense for amniota.
+
+(Answer on Professor's key: For such a large data set, it is unlikely that there are no NA's. It appears that NA's are represented by "-999".)
+
+
 ```{r}
 amphibio %>% 
   summarize(number_nas = sum(is.na(amphibio)))
 ```
-Yes, in the case of amphibio. (Or it might be a bit big for the dataset? There were 0s in that and someone on Discord suggested the 0s were included as literally "not applicable" values as well)
+Yes, in the case of amphibio.
 
-**5. Make any necessary replacements in the data such that all NA's appear as "NA".**   
+(Answer on Professor's key: In this data set, NA's are represented by NA and not values.)
+
+**5. Make any necessary replacements in the data such that all NA's appear as "NA".**  
+
+For some reason I only did amphibio beforehand:
+```{r}
+#amphibio_na <- amphibio %>%
+#  na_if("0")
+#amphibio_na %>% 
+#  summarize(number_nas = sum(is.na(amphibio_na)))
+```
+
+
+The following is mostly following professor's key:
+```{r}
+amniota_na_b <- amniota %>%
+  na_if("-999")
+```
+
+```{r}
+amniota_na_b %>% 
+  summarize(number_nas = sum(is.na(amniota_na_b)))
+```
+```{r}
+amniota_na_b %>% 
+  filter(female_maturity_d=="-30258.711") 
+```
+
+```{r}
+names(amniota_na_b)
+```
+
+```{r}
+amniota_na_b %>% 
+  select(genus, species, female_maturity_d) %>% 
+  mutate(female_maturity_d2=ifelse(female_maturity_d<0, NA, female_maturity_d))%>% 
+  arrange(female_maturity_d2)
+```
+
+
 ```{r}
 #What Min-Yao suggested for getting rid of that one negative value:
-amniota_na <- amniota %>% 
+amniota_na_my <- amniota %>% 
   na_if("-999") %>% #converts all -999 values to NA
   mutate(female_maturity_d_new = ifelse(female_maturity_d < 0, NA, female_maturity_d)) %>% 
   select(-female_maturity_d)
@@ -143,22 +178,17 @@ amniota_na %>%
   summarize(number_nas = sum(is.na(amniota_na)))
 ```
 
-```{r}
-amphibio_na <- amphibio %>%
-  na_if("0")
-amphibio_na %>% 
-  summarize(number_nas = sum(is.na(amphibio_na)))
-```
-
 **6. Use the package `naniar` to produce a summary, including percentages, of missing data in each column for the `amniota` data.**  
 ```{r}
-naniar::miss_var_summary(amniota_na)
+naniar::miss_var_summary(amniota_na_b)
 ```
 
 **7. Use the package `naniar` to produce a summary, including percentages, of missing data in each column for the `amphibio` data.**
 ```{r}
-naniar::miss_var_summary(amphibio_na)
+naniar::miss_var_summary(amphibio)
 ```
+
+## I think for the most part I followed the key from here. I had used amphibio_na for the next few problems when it wasn't needed, so I replaced it with the original amphibio dataset, as no alterations were needed.
 
 **8. For the `amniota` data, calculate the number of NAs in the `egg_mass_g` column sorted by taxonomic class; i.e. how many NA's are present in the `egg_mass_g` column in birds, mammals, and reptiles? Does this results make sense biologically? How do these results affect your interpretation of NA's?**  
 
@@ -174,7 +204,7 @@ amniota_na %>%
 amphibio
 ```
 ```{r}
-amphibio_na %>% 
+amphibio %>% 
   select(Fos, Ter, Aqu, Arb) %>%
   naniar::miss_var_summary(order=T)
 ```

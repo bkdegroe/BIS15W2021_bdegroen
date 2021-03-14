@@ -1,7 +1,7 @@
 ---
 title: "Lab 8 Homework"
-author: "Please Add Your Name Here"
-date: "2021-02-08"
+author: "Berlin DeGroen"
+date: "2021-03-14"
 output:
   html_document: 
     theme: spacelab
@@ -33,6 +33,13 @@ The package `here` is a nice option for keeping directories clear when loading f
 For this homework, we will use a data set compiled by the Office of Environment and Heritage in New South Whales, Australia. It contains the enterococci counts in water samples obtained from Sydney beaches as part of the Beachwatch Water Quality Program. Enterococci are bacteria common in the intestines of mammals; they are rarely present in clean water. So, enterococci values are a measurement of pollution. `cfu` stands for colony forming units and measures the number of viable bacteria in a sample [cfu](https://en.wikipedia.org/wiki/Colony-forming_unit).   
 
 This homework loosely follows the tutorial of [R Ladies Sydney](https://rladiessydney.org/). If you get stuck, check it out!  
+
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "blue">
+
+Disclaimer: I'm pretty sure I mostly just followed the key here. Completed it for the sake of future reference.
 
 1. Start by loading the data `sydneybeaches`. Do some exploratory analysis to get an idea of the data structure.
 
@@ -108,14 +115,22 @@ sydneybeaches <-read_csv(here("lab8", "data", "sydneybeaches.csv")) %>% janitor:
 ```
 
 2. Are these data "tidy" per the definitions of the tidyverse? How do you know? Are they in wide or long format?
-(1) each variable has its own column
+
+(1) Each variable has its own column. 
 Yes(?)
-(2) each observation has its own row
+
+(2) Each observation has its own row. 
 No, because each observation is grouped by BeachId
-(3) each value has its own cell
+
+(3) Each value has its own cell. 
 Yes.
 
 They are in wide format.
+
+Professor's answer:
+The data appear to be tidy. Each variable has its own column, each observation has its own row, and each cell has its own value. Because the sites are repeated based on their observation date, the data are in long format.
+
+
 
 3. We are only interested in the variables site, date, and enterococci_cfu_100ml. Make a new object focused on these variables only. Name the object `sydneybeaches_long`
 
@@ -154,22 +169,22 @@ sydneybeaches_wide
 
 ```
 ## # A tibble: 344 x 12
-##    date  `Clovelly Beach` `Coogee Beach` `Gordons Bay (E… `Little Bay Bea…
-##    <chr>            <dbl>          <dbl>            <dbl>            <dbl>
-##  1 02/0…               19             15               NA                9
-##  2 06/0…                3              4               NA                3
-##  3 12/0…                2             17               NA               72
-##  4 18/0…               13             18               NA                1
-##  5 30/0…                8             22               NA               44
-##  6 05/0…                7              2               NA                7
-##  7 11/0…               11            110               NA              150
-##  8 23/0…               97            630               NA              330
-##  9 07/0…                3             11               NA               31
-## 10 25/0…                0             82                4              420
-## # … with 334 more rows, and 7 more variables: `Malabar Beach` <dbl>, `Maroubra
-## #   Beach` <dbl>, `South Maroubra Beach` <dbl>, `South Maroubra
-## #   Rockpool` <dbl>, `Bondi Beach` <dbl>, `Bronte Beach` <dbl>, `Tamarama
-## #   Beach` <dbl>
+##    date     `Clovelly Beach` `Coogee Beach` `Gordons Bay (Eas… `Little Bay Beac…
+##    <chr>               <dbl>          <dbl>              <dbl>             <dbl>
+##  1 02/01/2…               19             15                 NA                 9
+##  2 06/01/2…                3              4                 NA                 3
+##  3 12/01/2…                2             17                 NA                72
+##  4 18/01/2…               13             18                 NA                 1
+##  5 30/01/2…                8             22                 NA                44
+##  6 05/02/2…                7              2                 NA                 7
+##  7 11/02/2…               11            110                 NA               150
+##  8 23/02/2…               97            630                 NA               330
+##  9 07/03/2…                3             11                 NA                31
+## 10 25/03/2…                0             82                  4               420
+## # … with 334 more rows, and 7 more variables: Malabar Beach <dbl>,
+## #   Maroubra Beach <dbl>, South Maroubra Beach <dbl>,
+## #   South Maroubra Rockpool <dbl>, Bondi Beach <dbl>, Bronte Beach <dbl>,
+## #   Tamarama Beach <dbl>
 ```
 
 
@@ -281,10 +296,9 @@ sydneybeaches_year_wide
 ## 4 2016           19.4           61.3            11.3            59.5
 ## 5 2017           13.2           16.8             7.93           20.7
 ## 6 2018           22.9           43.4            10.6            21.6
-## # … with 7 more variables: `Gordons Bay (East)` <dbl>, `Little Bay
-## #   Beach` <dbl>, `Malabar Beach` <dbl>, `Maroubra Beach` <dbl>, `South
-## #   Maroubra Beach` <dbl>, `South Maroubra Rockpool` <dbl>, `Tamarama
-## #   Beach` <dbl>
+## # … with 7 more variables: Gordons Bay (East) <dbl>, Little Bay Beach <dbl>,
+## #   Malabar Beach <dbl>, Maroubra Beach <dbl>, South Maroubra Beach <dbl>,
+## #   South Maroubra Rockpool <dbl>, Tamarama Beach <dbl>
 ```
 
 
@@ -317,6 +331,7 @@ sydneybeaches_mean %>%
 South Maroubra Rockpool is the most polluted beach.
 
 10. Please complete the class project survey at: [BIS 15L Group Project](https://forms.gle/H2j69Z3ZtbLH3efW6)
+</div>
 
 
 ## Push your final code to GitHub!

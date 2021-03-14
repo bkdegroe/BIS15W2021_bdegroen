@@ -1,6 +1,6 @@
 ---
 title: "Lab 8 Homework"
-author: "Please Add Your Name Here"
+author: "Berlin DeGroen"
 date: "`r Sys.Date()`"
 output:
   html_document: 
@@ -39,6 +39,8 @@ div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
 </style>
 <div class = "blue">
 
+Disclaimer: I'm pretty sure I mostly just followed the key here. Completed it for the sake of future reference.
+
 1. Start by loading the data `sydneybeaches`. Do some exploratory analysis to get an idea of the data structure.
 ```{r}
 sydneybeaches <- read_csv("data/sydneybeaches.csv")
@@ -56,14 +58,22 @@ sydneybeaches <-read_csv(here("lab8", "data", "sydneybeaches.csv")) %>% janitor:
 ```
 
 2. Are these data "tidy" per the definitions of the tidyverse? How do you know? Are they in wide or long format?
-(1) each variable has its own column
+
+(1) Each variable has its own column. 
 Yes(?)
-(2) each observation has its own row
+
+(2) Each observation has its own row. 
 No, because each observation is grouped by BeachId
-(3) each value has its own cell
+
+(3) Each value has its own cell. 
 Yes.
 
 They are in wide format.
+
+Professor's answer:
+The data appear to be tidy. Each variable has its own column, each observation has its own row, and each cell has its own value. Because the sites are repeated based on their observation date, the data are in long format.
+
+
 
 3. We are only interested in the variables site, date, and enterococci_cfu_100ml. Make a new object focused on these variables only. Name the object `sydneybeaches_long`
 ```{r}

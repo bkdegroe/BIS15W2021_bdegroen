@@ -89,6 +89,8 @@ for (i in 1:length(collar_data)){
 ```{r}
 collar_data_list <- lapply(collar_data, read_csv)
 ```
+# incorrect data list, should use collar_data_list inside bind_rows
+
 ```{r}
 collar_data_all <- bind_rows(collar_data_1)
 collar_data_all
@@ -214,7 +216,7 @@ summary(out.em_attempt)
 ```{r}
 max(out.em_attempt)
 ```
-
+# need to add `hyper` in order to show the linked plot of estimated QTL effects
 
 ```{r}
 out.em_attempt_scanone <- iplotScanone(out.em_attempt)

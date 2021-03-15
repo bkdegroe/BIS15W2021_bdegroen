@@ -70,6 +70,8 @@ Yes.
 
 They are in wide format.
 
+# long format
+
 Professor's answer:
 The data appear to be tidy. Each variable has its own column, each observation has its own row, and each cell has its own value. Because the sites are repeated based on their observation date, the data are in long format.
 

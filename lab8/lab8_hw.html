@@ -11,7 +11,7 @@
 
 <meta name="author" content="Berlin DeGroen" />
 
-<meta name="date" content="2021-03-14" />
+<meta name="date" content="2021-03-15" />
 
 <title>Lab 8 Homework</title>
 
@@ -167,7 +167,7 @@ pre code {
 
 <h1 class="title toc-ignore">Lab 8 Homework</h1>
 <h4 class="author">Berlin DeGroen</h4>
-<h4 class="date">2021-03-14</h4>
+<h4 class="date">2021-03-15</h4>
 
 </div>
 
@@ -201,7 +201,7 @@ div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
 </ol>
 <pre class="r"><code>sydneybeaches &lt;- read_csv(&quot;data/sydneybeaches.csv&quot;)</code></pre>
 <pre><code>## 
-## ── Column specification ────────────────────────────────────────────────────────
+## -- Column specification --------------------------------------------------------
 ## cols(
 ##   BeachId = col_double(),
 ##   Region = col_character(),
@@ -214,26 +214,26 @@ div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
 ## )</code></pre>
 <pre class="r"><code>sydneybeaches</code></pre>
 <pre><code>## # A tibble: 3,690 x 8
-##    BeachId Region    Council   Site   Longitude Latitude Date  `Enterococci (cf…
+##    BeachId Region    Council   Site   Longitude Latitude Date  `Enterococci (cf~
 ##      &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;      &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;             &lt;dbl&gt;
-##  1      25 Sydney C… Randwick… Clove…      151.    -33.9 02/0…                19
-##  2      25 Sydney C… Randwick… Clove…      151.    -33.9 06/0…                 3
-##  3      25 Sydney C… Randwick… Clove…      151.    -33.9 12/0…                 2
-##  4      25 Sydney C… Randwick… Clove…      151.    -33.9 18/0…                13
-##  5      25 Sydney C… Randwick… Clove…      151.    -33.9 30/0…                 8
-##  6      25 Sydney C… Randwick… Clove…      151.    -33.9 05/0…                 7
-##  7      25 Sydney C… Randwick… Clove…      151.    -33.9 11/0…                11
-##  8      25 Sydney C… Randwick… Clove…      151.    -33.9 23/0…                97
-##  9      25 Sydney C… Randwick… Clove…      151.    -33.9 07/0…                 3
-## 10      25 Sydney C… Randwick… Clove…      151.    -33.9 25/0…                 0
-## # … with 3,680 more rows</code></pre>
+##  1      25 Sydney C~ Randwick~ Clove~      151.    -33.9 02/0~                19
+##  2      25 Sydney C~ Randwick~ Clove~      151.    -33.9 06/0~                 3
+##  3      25 Sydney C~ Randwick~ Clove~      151.    -33.9 12/0~                 2
+##  4      25 Sydney C~ Randwick~ Clove~      151.    -33.9 18/0~                13
+##  5      25 Sydney C~ Randwick~ Clove~      151.    -33.9 30/0~                 8
+##  6      25 Sydney C~ Randwick~ Clove~      151.    -33.9 05/0~                 7
+##  7      25 Sydney C~ Randwick~ Clove~      151.    -33.9 11/0~                11
+##  8      25 Sydney C~ Randwick~ Clove~      151.    -33.9 23/0~                97
+##  9      25 Sydney C~ Randwick~ Clove~      151.    -33.9 07/0~                 3
+## 10      25 Sydney C~ Randwick~ Clove~      151.    -33.9 25/0~                 0
+## # ... with 3,680 more rows</code></pre>
 <p>If you want to try <code>here</code>, first notice the output when you load the <code>here</code> library. It gives you information on the current working directory. You can then use it to easily and intuitively load files.</p>
 <pre class="r"><code>library(here)</code></pre>
-<pre><code>## here() starts at /Users/Astrobeecal/Desktop/GitHub/BIS15W2021_bdegroen</code></pre>
+<pre><code>## here() starts at D:/TA files/Winter2021 BIS15L/students_rep/BIS15W2021_bdegroen</code></pre>
 <p>The quotes show the folder structure from the root directory.</p>
 <pre class="r"><code>sydneybeaches &lt;-read_csv(here(&quot;lab8&quot;, &quot;data&quot;, &quot;sydneybeaches.csv&quot;)) %&gt;% janitor::clean_names()</code></pre>
 <pre><code>## 
-## ── Column specification ────────────────────────────────────────────────────────
+## -- Column specification --------------------------------------------------------
 ## cols(
 ##   BeachId = col_double(),
 ##   Region = col_character(),
@@ -253,6 +253,8 @@ div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
 <li><p>Each value has its own cell. Yes.</p></li>
 </ol>
 <p>They are in wide format.</p>
+<div id="long-format" class="section level1">
+<h1>long format</h1>
 <p>Professor’s answer: The data appear to be tidy. Each variable has its own column, each observation has its own row, and each cell has its own value. Because the sites are repeated based on their observation date, the data are in long format.</p>
 <ol start="3" style="list-style-type: decimal">
 <li>We are only interested in the variables site, date, and enterococci_cfu_100ml. Make a new object focused on these variables only. Name the object <code>sydneybeaches_long</code></li>
@@ -273,7 +275,7 @@ sydneybeaches_long</code></pre>
 ##  8 Clovelly Beach 23/02/2013                    97
 ##  9 Clovelly Beach 07/03/2013                     3
 ## 10 Clovelly Beach 25/03/2013                     0
-## # … with 3,680 more rows</code></pre>
+## # ... with 3,680 more rows</code></pre>
 <ol start="4" style="list-style-type: decimal">
 <li>Pivot the data such that the dates are column names and each beach only appears once. Name the object <code>sydneybeaches_wide</code></li>
 </ol>
@@ -282,19 +284,19 @@ sydneybeaches_long</code></pre>
               values_from = &quot;enterococci_cfu_100ml&quot;)
 sydneybeaches_wide</code></pre>
 <pre><code>## # A tibble: 344 x 12
-##    date     `Clovelly Beach` `Coogee Beach` `Gordons Bay (Eas… `Little Bay Beac…
+##    date     `Clovelly Beach` `Coogee Beach` `Gordons Bay (Eas~ `Little Bay Beac~
 ##    &lt;chr&gt;               &lt;dbl&gt;          &lt;dbl&gt;              &lt;dbl&gt;             &lt;dbl&gt;
-##  1 02/01/2…               19             15                 NA                 9
-##  2 06/01/2…                3              4                 NA                 3
-##  3 12/01/2…                2             17                 NA                72
-##  4 18/01/2…               13             18                 NA                 1
-##  5 30/01/2…                8             22                 NA                44
-##  6 05/02/2…                7              2                 NA                 7
-##  7 11/02/2…               11            110                 NA               150
-##  8 23/02/2…               97            630                 NA               330
-##  9 07/03/2…                3             11                 NA                31
-## 10 25/03/2…                0             82                  4               420
-## # … with 334 more rows, and 7 more variables: Malabar Beach &lt;dbl&gt;,
+##  1 02/01/2~               19             15                 NA                 9
+##  2 06/01/2~                3              4                 NA                 3
+##  3 12/01/2~                2             17                 NA                72
+##  4 18/01/2~               13             18                 NA                 1
+##  5 30/01/2~                8             22                 NA                44
+##  6 05/02/2~                7              2                 NA                 7
+##  7 11/02/2~               11            110                 NA               150
+##  8 23/02/2~               97            630                 NA               330
+##  9 07/03/2~                3             11                 NA                31
+## 10 25/03/2~                0             82                  4               420
+## # ... with 334 more rows, and 7 more variables: Malabar Beach &lt;dbl&gt;,
 ## #   Maroubra Beach &lt;dbl&gt;, South Maroubra Beach &lt;dbl&gt;,
 ## #   South Maroubra Rockpool &lt;dbl&gt;, Bondi Beach &lt;dbl&gt;, Bronte Beach &lt;dbl&gt;,
 ## #   Tamarama Beach &lt;dbl&gt;</code></pre>
@@ -318,7 +320,7 @@ sydneybeaches_wide</code></pre>
 ##  8 02/01/2013 South Maroubra Rockpool                    12
 ##  9 02/01/2013 Bondi Beach                                 3
 ## 10 02/01/2013 Bronte Beach                                4
-## # … with 3,774 more rows</code></pre>
+## # ... with 3,774 more rows</code></pre>
 <ol start="6" style="list-style-type: decimal">
 <li>We haven’t dealt much with dates yet, but separate the date into columns day, month, and year. Do this on the <code>sydneybeaches_long</code> data.</li>
 </ol>
@@ -338,7 +340,7 @@ sydneybeaches_year</code></pre>
 ##  8 Clovelly Beach 23    02    2013                     97
 ##  9 Clovelly Beach 07    03    2013                      3
 ## 10 Clovelly Beach 25    03    2013                      0
-## # … with 3,680 more rows</code></pre>
+## # ... with 3,680 more rows</code></pre>
 <ol start="7" style="list-style-type: decimal">
 <li>What is the average <code>enterococci_cfu_100ml</code> by year for each beach. Think about which data you will use- long or wide.</li>
 </ol>
@@ -361,7 +363,7 @@ sydneybeaches_year</code></pre>
 ##  8 2013  Maroubra Beach                                  47.1 
 ##  9 2013  South Maroubra Beach                            39.3 
 ## 10 2013  South Maroubra Rockpool                         96.4 
-## # … with 56 more rows</code></pre>
+## # ... with 56 more rows</code></pre>
 <ol start="8" style="list-style-type: decimal">
 <li>Make the output from question 7 easier to read by pivoting it to wide format.</li>
 </ol>
@@ -379,7 +381,7 @@ sydneybeaches_year_wide</code></pre>
 ## 4 2016           19.4           61.3            11.3            59.5
 ## 5 2017           13.2           16.8             7.93           20.7
 ## 6 2018           22.9           43.4            10.6            21.6
-## # … with 7 more variables: Gordons Bay (East) &lt;dbl&gt;, Little Bay Beach &lt;dbl&gt;,
+## # ... with 7 more variables: Gordons Bay (East) &lt;dbl&gt;, Little Bay Beach &lt;dbl&gt;,
 ## #   Malabar Beach &lt;dbl&gt;, Maroubra Beach &lt;dbl&gt;, South Maroubra Beach &lt;dbl&gt;,
 ## #   South Maroubra Rockpool &lt;dbl&gt;, Tamarama Beach &lt;dbl&gt;</code></pre>
 <ol start="9" style="list-style-type: decimal">
@@ -407,6 +409,7 @@ sydneybeaches_year_wide</code></pre>
 <ol start="10" style="list-style-type: decimal">
 <li>Please complete the class project survey at: <a href="https://forms.gle/H2j69Z3ZtbLH3efW6">BIS 15L Group Project</a></li>
 </ol>
+</div>
 </div>
 </div>
 <div id="push-your-final-code-to-github" class="section level2">

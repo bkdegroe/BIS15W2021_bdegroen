@@ -1,7 +1,7 @@
 ---
 title: "Lab 8 Homework"
 author: "Berlin DeGroen"
-date: "2021-03-14"
+date: "2021-03-15"
 output:
   html_document: 
     theme: spacelab
@@ -49,7 +49,7 @@ sydneybeaches <- read_csv("data/sydneybeaches.csv")
 
 ```
 ## 
-## ── Column specification ────────────────────────────────────────────────────────
+## -- Column specification --------------------------------------------------------
 ## cols(
 ##   BeachId = col_double(),
 ##   Region = col_character(),
@@ -68,19 +68,19 @@ sydneybeaches
 
 ```
 ## # A tibble: 3,690 x 8
-##    BeachId Region    Council   Site   Longitude Latitude Date  `Enterococci (cf…
+##    BeachId Region    Council   Site   Longitude Latitude Date  `Enterococci (cf~
 ##      <dbl> <chr>     <chr>     <chr>      <dbl>    <dbl> <chr>             <dbl>
-##  1      25 Sydney C… Randwick… Clove…      151.    -33.9 02/0…                19
-##  2      25 Sydney C… Randwick… Clove…      151.    -33.9 06/0…                 3
-##  3      25 Sydney C… Randwick… Clove…      151.    -33.9 12/0…                 2
-##  4      25 Sydney C… Randwick… Clove…      151.    -33.9 18/0…                13
-##  5      25 Sydney C… Randwick… Clove…      151.    -33.9 30/0…                 8
-##  6      25 Sydney C… Randwick… Clove…      151.    -33.9 05/0…                 7
-##  7      25 Sydney C… Randwick… Clove…      151.    -33.9 11/0…                11
-##  8      25 Sydney C… Randwick… Clove…      151.    -33.9 23/0…                97
-##  9      25 Sydney C… Randwick… Clove…      151.    -33.9 07/0…                 3
-## 10      25 Sydney C… Randwick… Clove…      151.    -33.9 25/0…                 0
-## # … with 3,680 more rows
+##  1      25 Sydney C~ Randwick~ Clove~      151.    -33.9 02/0~                19
+##  2      25 Sydney C~ Randwick~ Clove~      151.    -33.9 06/0~                 3
+##  3      25 Sydney C~ Randwick~ Clove~      151.    -33.9 12/0~                 2
+##  4      25 Sydney C~ Randwick~ Clove~      151.    -33.9 18/0~                13
+##  5      25 Sydney C~ Randwick~ Clove~      151.    -33.9 30/0~                 8
+##  6      25 Sydney C~ Randwick~ Clove~      151.    -33.9 05/0~                 7
+##  7      25 Sydney C~ Randwick~ Clove~      151.    -33.9 11/0~                11
+##  8      25 Sydney C~ Randwick~ Clove~      151.    -33.9 23/0~                97
+##  9      25 Sydney C~ Randwick~ Clove~      151.    -33.9 07/0~                 3
+## 10      25 Sydney C~ Randwick~ Clove~      151.    -33.9 25/0~                 0
+## # ... with 3,680 more rows
 ```
 
 If you want to try `here`, first notice the output when you load the `here` library. It gives you information on the current working directory. You can then use it to easily and intuitively load files.
@@ -90,7 +90,7 @@ library(here)
 ```
 
 ```
-## here() starts at /Users/Astrobeecal/Desktop/GitHub/BIS15W2021_bdegroen
+## here() starts at D:/TA files/Winter2021 BIS15L/students_rep/BIS15W2021_bdegroen
 ```
 
 The quotes show the folder structure from the root directory.
@@ -101,7 +101,7 @@ sydneybeaches <-read_csv(here("lab8", "data", "sydneybeaches.csv")) %>% janitor:
 
 ```
 ## 
-## ── Column specification ────────────────────────────────────────────────────────
+## -- Column specification --------------------------------------------------------
 ## cols(
 ##   BeachId = col_double(),
 ##   Region = col_character(),
@@ -126,6 +126,8 @@ No, because each observation is grouped by BeachId
 Yes.
 
 They are in wide format.
+
+# long format
 
 Professor's answer:
 The data appear to be tidy. Each variable has its own column, each observation has its own row, and each cell has its own value. Because the sites are repeated based on their observation date, the data are in long format.
@@ -154,7 +156,7 @@ sydneybeaches_long
 ##  8 Clovelly Beach 23/02/2013                    97
 ##  9 Clovelly Beach 07/03/2013                     3
 ## 10 Clovelly Beach 25/03/2013                     0
-## # … with 3,680 more rows
+## # ... with 3,680 more rows
 ```
 
 
@@ -169,19 +171,19 @@ sydneybeaches_wide
 
 ```
 ## # A tibble: 344 x 12
-##    date     `Clovelly Beach` `Coogee Beach` `Gordons Bay (Eas… `Little Bay Beac…
+##    date     `Clovelly Beach` `Coogee Beach` `Gordons Bay (Eas~ `Little Bay Beac~
 ##    <chr>               <dbl>          <dbl>              <dbl>             <dbl>
-##  1 02/01/2…               19             15                 NA                 9
-##  2 06/01/2…                3              4                 NA                 3
-##  3 12/01/2…                2             17                 NA                72
-##  4 18/01/2…               13             18                 NA                 1
-##  5 30/01/2…                8             22                 NA                44
-##  6 05/02/2…                7              2                 NA                 7
-##  7 11/02/2…               11            110                 NA               150
-##  8 23/02/2…               97            630                 NA               330
-##  9 07/03/2…                3             11                 NA                31
-## 10 25/03/2…                0             82                  4               420
-## # … with 334 more rows, and 7 more variables: Malabar Beach <dbl>,
+##  1 02/01/2~               19             15                 NA                 9
+##  2 06/01/2~                3              4                 NA                 3
+##  3 12/01/2~                2             17                 NA                72
+##  4 18/01/2~               13             18                 NA                 1
+##  5 30/01/2~                8             22                 NA                44
+##  6 05/02/2~                7              2                 NA                 7
+##  7 11/02/2~               11            110                 NA               150
+##  8 23/02/2~               97            630                 NA               330
+##  9 07/03/2~                3             11                 NA                31
+## 10 25/03/2~                0             82                  4               420
+## # ... with 334 more rows, and 7 more variables: Malabar Beach <dbl>,
 ## #   Maroubra Beach <dbl>, South Maroubra Beach <dbl>,
 ## #   South Maroubra Rockpool <dbl>, Bondi Beach <dbl>, Bronte Beach <dbl>,
 ## #   Tamarama Beach <dbl>
@@ -211,7 +213,7 @@ sydneybeaches_wide %>%
 ##  8 02/01/2013 South Maroubra Rockpool                    12
 ##  9 02/01/2013 Bondi Beach                                 3
 ## 10 02/01/2013 Bronte Beach                                4
-## # … with 3,774 more rows
+## # ... with 3,774 more rows
 ```
 
 
@@ -237,7 +239,7 @@ sydneybeaches_year
 ##  8 Clovelly Beach 23    02    2013                     97
 ##  9 Clovelly Beach 07    03    2013                      3
 ## 10 Clovelly Beach 25    03    2013                      0
-## # … with 3,680 more rows
+## # ... with 3,680 more rows
 ```
 
 
@@ -272,7 +274,7 @@ sydneybeaches_mean
 ##  8 2013  Maroubra Beach                                  47.1 
 ##  9 2013  South Maroubra Beach                            39.3 
 ## 10 2013  South Maroubra Rockpool                         96.4 
-## # … with 56 more rows
+## # ... with 56 more rows
 ```
 
 
@@ -296,7 +298,7 @@ sydneybeaches_year_wide
 ## 4 2016           19.4           61.3            11.3            59.5
 ## 5 2017           13.2           16.8             7.93           20.7
 ## 6 2018           22.9           43.4            10.6            21.6
-## # … with 7 more variables: Gordons Bay (East) <dbl>, Little Bay Beach <dbl>,
+## # ... with 7 more variables: Gordons Bay (East) <dbl>, Little Bay Beach <dbl>,
 ## #   Malabar Beach <dbl>, Maroubra Beach <dbl>, South Maroubra Beach <dbl>,
 ## #   South Maroubra Rockpool <dbl>, Tamarama Beach <dbl>
 ```

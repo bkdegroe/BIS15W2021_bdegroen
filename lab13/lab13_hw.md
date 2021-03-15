@@ -1,7 +1,7 @@
 ---
 title: "Lab 13 Homework"
-author: "Please Add Your Name Here"
-date: "2021-03-03"
+author: "Berlin DeGroen"
+date: "2021-03-14"
 output:
   html_document: 
     theme: spacelab
@@ -212,6 +212,52 @@ server <- function(input, output, session) {
 shinyApp(ui, server)
 ```
 
+What professor did:
+
+```r
+ui <- dashboardPage(
+  dashboardHeader(title = "UC Campus Admissions by Ethnicity 2010-2019"),
+  dashboardSidebar(),
+  dashboardBody(
+  fluidRow(
+  box(title = "Plot Options", width = 3,
+  radioButtons("x", "Select Year", choices = c("2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019"), 
+              selected = "2010"),
+  selectInput("y", "Select Campus", choices = c("Davis", "Irvine", "Berkeley", "Irvine", "Los_Angeles", "Merced", "Riverside", "San_Diego", "Santa_Barbara", "Santa_Cruz"),
+              selected = "Davis"),
+  selectInput("z", "Select Admit Category", choices = c("Applicants", "Admits", "Enrollees"),
+              selected = "Applicants")
+  ), # close the first box
+  box(title = "UC Admissions", width = 7,
+  plotOutput("plot", width = "600px", height = "500px")
+  ) # close the second box
+  ) # close the row
+  ) # close the dashboard body
+) # close the ui
+server <- function(input, output, session) { 
+  
+  output$plot <- renderPlot({
+    UC_admit_no_all %>% 
+    filter(academic_yr==input$x & campus==input$y & category==input$z) %>% 
+    ggplot(aes(x=reorder(ethnicity, filtered_count_fr), y=filtered_count_fr)) + 
+      geom_col(color="black", fill="steelblue", alpha=0.75) +
+      theme_light(base_size = 18) +
+      theme(axis.text.x = element_text(angle = 60, hjust = 1))+
+      labs(x = "Ethnicity", y = "Number")
+  })
+  
+  # stop the app when we close it
+  session$onSessionEnded(stopApp)
+  }
+shinyApp(ui, server)
+```
+
+```
+## PhantomJS not found. You can install it with webshot::install_phantomjs(). If it is installed, please make sure the phantomjs executable can be found via the PATH variable.
+```
+
+`<div style="width: 100% ; height: 400px ; text-align: center; box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;" class="muted well">Shiny applications not supported in static R Markdown documents</div>`{=html}
+
 
 **3. Make alternate version of your app above by tracking enrollment at a campus over all of the represented years while allowing users to interact with campus, category, and ethnicity.**
 
@@ -232,7 +278,7 @@ UC_admit_no_all %>%
 ## Warning: Removed 1 rows containing missing values (geom_col).
 ```
 
-![](lab13_hw_files/figure-html/unnamed-chunk-15-1.png)<!-- -->
+![](lab13_hw_files/figure-html/unnamed-chunk-16-1.png)<!-- -->
 
 ```r
 #Not sure why X axis labels here are missing
@@ -280,6 +326,49 @@ server <- function(input, output, session) {
 
 shinyApp(ui, server)
 ```
+
+What professor did:
+
+```r
+UC_admit_no_all$academic_yr <- as.factor(UC_admit_no_all$academic_yr)
+ui <- dashboardPage(
+  dashboardHeader(title = "UC Campus Admissions by Year and Ethnicity"),
+  dashboardSidebar(),
+  dashboardBody(
+  fluidRow(
+  box(title = "Plot Options", width = 3,
+  selectInput("x", "Select Campus", choices = c("Davis", "Irvine", "Berkeley", "Irvine", "Los_Angeles", "Merced", "Riverside", "San_Diego", "Santa_Barbara", "Santa_Cruz"),
+              selected = "Davis"),
+  selectInput("z", "Select Admit Category", choices = c("Applicants", "Admits", "Enrollees"),
+              selected = "Applicants"),
+  radioButtons("y", "Select Ethnicity", choices = c("International", "Unknown", "White", "Asian", "Chicano/Latino", "American Indian", "African American"),
+              selected = "International")
+  ), # close the first box
+  box(title = "UC Admissions", width = 7,
+  plotOutput("plot", width = "600px", height = "500px")
+  ) # close the second box
+  ) # close the row
+  ) # close the dashboard body
+) # close the ui
+server <- function(input, output, session) { 
+  
+  output$plot <- renderPlot({
+    UC_admit_no_all %>% 
+    filter(campus==input$x & ethnicity==input$y & category==input$z) %>% 
+    ggplot(aes(x=academic_yr, y=filtered_count_fr)) + 
+      geom_col(color="black", fill="steelblue", alpha=0.75) +
+      theme_light(base_size = 18) +
+      theme(axis.text.x = element_text(angle = 60, hjust = 1))+
+      labs(x = "Year", y = "Enrollment")
+  })
+  
+  # stop the app when we close it
+  session$onSessionEnded(stopApp)
+  }
+shinyApp(ui, server)
+```
+
+`<div style="width: 100% ; height: 400px ; text-align: center; box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;" class="muted well">Shiny applications not supported in static R Markdown documents</div>`{=html}
 
 
 ## Push your final code to GitHub!

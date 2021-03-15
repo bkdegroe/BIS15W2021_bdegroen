@@ -9,9 +9,9 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Please Add Your Name Here" />
+<meta name="author" content="Berlin DeGroen" />
 
-<meta name="date" content="2021-03-03" />
+<meta name="date" content="2021-03-14" />
 
 <title>Lab 13 Homework</title>
 
@@ -166,8 +166,8 @@ pre code {
 
 
 <h1 class="title toc-ignore">Lab 13 Homework</h1>
-<h4 class="author">Please Add Your Name Here</h4>
-<h4 class="date">2021-03-03</h4>
+<h4 class="author">Berlin DeGroen</h4>
+<h4 class="date">2021-03-14</h4>
 
 </div>
 
@@ -289,6 +289,44 @@ server &lt;- function(input, output, session) {
   }
 
 shinyApp(ui, server)</code></pre>
+<p>What professor did:</p>
+<pre class="r"><code>ui &lt;- dashboardPage(
+  dashboardHeader(title = &quot;UC Campus Admissions by Ethnicity 2010-2019&quot;),
+  dashboardSidebar(),
+  dashboardBody(
+  fluidRow(
+  box(title = &quot;Plot Options&quot;, width = 3,
+  radioButtons(&quot;x&quot;, &quot;Select Year&quot;, choices = c(&quot;2010&quot;, &quot;2011&quot;, &quot;2012&quot;, &quot;2013&quot;, &quot;2014&quot;, &quot;2015&quot;, &quot;2016&quot;, &quot;2017&quot;, &quot;2018&quot;, &quot;2019&quot;), 
+              selected = &quot;2010&quot;),
+  selectInput(&quot;y&quot;, &quot;Select Campus&quot;, choices = c(&quot;Davis&quot;, &quot;Irvine&quot;, &quot;Berkeley&quot;, &quot;Irvine&quot;, &quot;Los_Angeles&quot;, &quot;Merced&quot;, &quot;Riverside&quot;, &quot;San_Diego&quot;, &quot;Santa_Barbara&quot;, &quot;Santa_Cruz&quot;),
+              selected = &quot;Davis&quot;),
+  selectInput(&quot;z&quot;, &quot;Select Admit Category&quot;, choices = c(&quot;Applicants&quot;, &quot;Admits&quot;, &quot;Enrollees&quot;),
+              selected = &quot;Applicants&quot;)
+  ), # close the first box
+  box(title = &quot;UC Admissions&quot;, width = 7,
+  plotOutput(&quot;plot&quot;, width = &quot;600px&quot;, height = &quot;500px&quot;)
+  ) # close the second box
+  ) # close the row
+  ) # close the dashboard body
+) # close the ui
+server &lt;- function(input, output, session) { 
+  
+  output$plot &lt;- renderPlot({
+    UC_admit_no_all %&gt;% 
+    filter(academic_yr==input$x &amp; campus==input$y &amp; category==input$z) %&gt;% 
+    ggplot(aes(x=reorder(ethnicity, filtered_count_fr), y=filtered_count_fr)) + 
+      geom_col(color=&quot;black&quot;, fill=&quot;steelblue&quot;, alpha=0.75) +
+      theme_light(base_size = 18) +
+      theme(axis.text.x = element_text(angle = 60, hjust = 1))+
+      labs(x = &quot;Ethnicity&quot;, y = &quot;Number&quot;)
+  })
+  
+  # stop the app when we close it
+  session$onSessionEnded(stopApp)
+  }
+shinyApp(ui, server)</code></pre>
+<pre><code>## PhantomJS not found. You can install it with webshot::install_phantomjs(). If it is installed, please make sure the phantomjs executable can be found via the PATH variable.</code></pre>
+<p><div style="width: 100% ; height: 400px ; text-align: center; box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;" class="muted well">Shiny applications not supported in static R Markdown documents</div></p>
 <p><strong>3. Make alternate version of your app above by tracking enrollment at a campus over all of the represented years while allowing users to interact with campus, category, and ethnicity.</strong></p>
 <pre class="r"><code>UC_admit_no_all %&gt;% 
   ggplot(aes(x=factor(academic_yr), y=filtered_count_fr, fill = factor(ethnicity)))+
@@ -338,6 +376,44 @@ server &lt;- function(input, output, session) {
   }
 
 shinyApp(ui, server)</code></pre>
+<p>What professor did:</p>
+<pre class="r"><code>UC_admit_no_all$academic_yr &lt;- as.factor(UC_admit_no_all$academic_yr)
+ui &lt;- dashboardPage(
+  dashboardHeader(title = &quot;UC Campus Admissions by Year and Ethnicity&quot;),
+  dashboardSidebar(),
+  dashboardBody(
+  fluidRow(
+  box(title = &quot;Plot Options&quot;, width = 3,
+  selectInput(&quot;x&quot;, &quot;Select Campus&quot;, choices = c(&quot;Davis&quot;, &quot;Irvine&quot;, &quot;Berkeley&quot;, &quot;Irvine&quot;, &quot;Los_Angeles&quot;, &quot;Merced&quot;, &quot;Riverside&quot;, &quot;San_Diego&quot;, &quot;Santa_Barbara&quot;, &quot;Santa_Cruz&quot;),
+              selected = &quot;Davis&quot;),
+  selectInput(&quot;z&quot;, &quot;Select Admit Category&quot;, choices = c(&quot;Applicants&quot;, &quot;Admits&quot;, &quot;Enrollees&quot;),
+              selected = &quot;Applicants&quot;),
+  radioButtons(&quot;y&quot;, &quot;Select Ethnicity&quot;, choices = c(&quot;International&quot;, &quot;Unknown&quot;, &quot;White&quot;, &quot;Asian&quot;, &quot;Chicano/Latino&quot;, &quot;American Indian&quot;, &quot;African American&quot;),
+              selected = &quot;International&quot;)
+  ), # close the first box
+  box(title = &quot;UC Admissions&quot;, width = 7,
+  plotOutput(&quot;plot&quot;, width = &quot;600px&quot;, height = &quot;500px&quot;)
+  ) # close the second box
+  ) # close the row
+  ) # close the dashboard body
+) # close the ui
+server &lt;- function(input, output, session) { 
+  
+  output$plot &lt;- renderPlot({
+    UC_admit_no_all %&gt;% 
+    filter(campus==input$x &amp; ethnicity==input$y &amp; category==input$z) %&gt;% 
+    ggplot(aes(x=academic_yr, y=filtered_count_fr)) + 
+      geom_col(color=&quot;black&quot;, fill=&quot;steelblue&quot;, alpha=0.75) +
+      theme_light(base_size = 18) +
+      theme(axis.text.x = element_text(angle = 60, hjust = 1))+
+      labs(x = &quot;Year&quot;, y = &quot;Enrollment&quot;)
+  })
+  
+  # stop the app when we close it
+  session$onSessionEnded(stopApp)
+  }
+shinyApp(ui, server)</code></pre>
+<p><div style="width: 100% ; height: 400px ; text-align: center; box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;" class="muted well">Shiny applications not supported in static R Markdown documents</div></p>
 </div>
 <div id="push-your-final-code-to-github" class="section level2">
 <h2>Push your final code to GitHub!</h2>
